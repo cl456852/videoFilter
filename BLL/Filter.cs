@@ -83,7 +83,7 @@ namespace BLL
 
                     //}
 
-                    if ((len*1.7>his.Size || extension.ToLower() == ".mds"&&his.Size<5000) && (r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
+                    if ((len*1.7>his.Size || (extension.ToLower() == ".mds"||extension.ToLower()==".iso")&&his.Size<3000) && (r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
                     {
                         flag = false;
                         break;

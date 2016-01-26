@@ -66,10 +66,13 @@
     <Compile Include="141javAnalysis.cs" />
     <Compile Include="18javAnaysis.cs" />
     <Compile Include="Analysis.cs" />
+    <Compile Include="BaseAnalysis.cs" />
     <Compile Include="BtdiggAnalysis.cs" />
     <Compile Include="FileBLL.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="HelloJavAnalysis.cs" />
+    <Compile Include="IAnalysis.cs" />
+    <Compile Include="JavBusAnalysis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sis001Analysis.cs" />
     <Compile Include="Tool.cs" />

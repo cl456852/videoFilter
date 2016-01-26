@@ -8,14 +8,14 @@ using System.Text.RegularExpressions;
 
 namespace BLL
 {
-    class Sis001Analysis
+    public class Sis001Analysis :BaseAnalysis
     {
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
         Regex sizeRegex=new Regex("size\\^\\^\\^.*");
         Regex imgRegex=new Regex("<img src=\".*?\"");
         Regex torrentLinkRegex=new Regex("attachment.php.*?\"");
-        Regex reg1 = new Regex("[A-Z]");
-        public ArrayList alys(string content, string path, string vid)
+
+        public override ArrayList alys(string content, string path, string vid)
         {
             ArrayList resList = new ArrayList();
             try
@@ -45,29 +45,8 @@ namespace BLL
                         his.Html += "<a href=\"" + torrentLink + "\">" + match.Value + "/></a><br>";
                     }
                 }
-
-                string letter = "";
-                string number = "";
-                bool isEndofLetter = false;
-                foreach (char c in his.Vid)
-                {
-                    if (reg1.IsMatch(c.ToString()))
-                    {
-                        if (isEndofLetter)
-                            break;
-                        else
-                            letter += c;
-                    }
-                    else
-                    {
-                        number += c;
-                        isEndofLetter = true;
-                    }
-                }
-                his.Html += "<a href=\"https://www.google.com.tw/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + his.Vid + "\"/>" + his.Vid + "</a><br>";
-                his.Html += his.Size + "<br>";
-                his.Html += "<a href=\"http://btdigg.org/search?info_hash=&q=" + letter + "+" + number + "\">" + his.Vid + "</a>\n";
-                his.Html += "<a href=\"http://www.javbus.com/" + letter + "-" + number + "\">" + his.Vid + "</a><br><br><br>\n";
+                his.HisTimeSpan = 3;
+                his.Html += this.getSearchHtml(his.Vid, his.Size);
                 resList.Add(his);
             }
             catch (Exception e)

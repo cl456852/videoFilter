@@ -239,3 +239,21 @@ C:\work\video filter - 副本 - 副本\UI1\obj\Debug\UI1.exe
 C:\work\video filter - 副本 - 副本\UI1\obj\Debug\UI1.pdb
 D:\document\new\work\video filter - 副本 - 副本\UI1\obj\Debug\UI1.csprojResolveAssemblyReference.cache
 D:\document\new\work\video filter - 副本 - 副本\UI1\obj\Debug\UI1.csproj.GenerateResource.Cache
+D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.exe
+D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.pdb
+D:\document\new\code\videoFilter\UI1\bin\Debug\UI1.exe
+D:\document\new\code\videoFilter\UI1\bin\Debug\UI1.pdb
+D:\document\new\code\videoFilter\UI1\bin\Debug\BLL.dll
+D:\document\new\code\videoFilter\UI1\bin\Debug\DAL.dll
+D:\document\new\code\videoFilter\UI1\bin\Debug\DB.dll
+D:\document\new\code\videoFilter\UI1\bin\Debug\MODEL.dll
+D:\document\new\code\videoFilter\UI1\bin\Debug\Jurassic.dll
+D:\document\new\code\videoFilter\UI1\bin\Debug\BLL.pdb
+D:\document\new\code\videoFilter\UI1\bin\Debug\DAL.pdb
+D:\document\new\code\videoFilter\UI1\bin\Debug\DB.pdb
+D:\document\new\code\videoFilter\UI1\bin\Debug\MODEL.pdb
+D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.csprojResolveAssemblyReference.cache
+D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.Form1.resources
+D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.Form2.resources
+D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.Properties.Resources.resources
+D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.csproj.GenerateResource.Cache

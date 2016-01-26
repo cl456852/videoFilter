@@ -63,19 +63,7 @@ namespace UI1
 
         private void Insert_Click(object sender, EventArgs e)
         {
-    
-            //List<MyFileInfo> duplicateList = new List<MyFileInfo>();
-            //duplicateList= FileBLL.InsertFiles(textBox1.Text.Replace("\\","\\\\"));
-            //if (duplicateList.Capacity > 0)
-            //{
-
-            //    Form2 f2 = new Form2(duplicateList);
-            //    f2.Show();
-            //}
-            //else
-            //    MessageBox.Show("seccuss CDID: "+FileDAL.getMaxCDID());
-            //refresh();
-            fb.process(textBox1.Text.Replace("\\", "\\\\"));
+            fb.process(textBox1.Text.Replace("\\", "\\\\"),new Sis001Analysis());
 
         }
 
@@ -161,6 +149,11 @@ namespace UI1
         {
             DBHelper.connstr = this.textBox3.Text;
             refresh();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new JavBusAnalysis());
         }
         
         

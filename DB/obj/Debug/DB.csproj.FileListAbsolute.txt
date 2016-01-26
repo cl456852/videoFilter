@@ -91,3 +91,10 @@ C:\work\video filter - 副本 - 副本\DB\obj\Debug\DB.csprojResolveAssemblyRefe
 C:\work\video filter - 副本 - 副本\DB\obj\Debug\DB.dll
 C:\work\video filter - 副本 - 副本\DB\obj\Debug\DB.pdb
 D:\document\new\work\video filter - 副本 - 副本\DB\obj\Debug\DB.csprojResolveAssemblyReference.cache
+D:\document\new\code\videoFilter\DB\bin\Debug\DB.dll
+D:\document\new\code\videoFilter\DB\bin\Debug\DB.pdb
+D:\document\new\code\videoFilter\DB\bin\Debug\MODEL.dll
+D:\document\new\code\videoFilter\DB\bin\Debug\MODEL.pdb
+D:\document\new\code\videoFilter\DB\obj\Debug\DB.csprojResolveAssemblyReference.cache
+D:\document\new\code\videoFilter\DB\obj\Debug\DB.dll
+D:\document\new\code\videoFilter\DB\obj\Debug\DB.pdb

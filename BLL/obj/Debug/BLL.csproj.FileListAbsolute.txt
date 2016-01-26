@@ -143,3 +143,14 @@ C:\work\video filter - 副本 - 副本\BLL\obj\Debug\BLL.csprojResolveAssemblyRe
 C:\work\video filter - 副本 - 副本\BLL\obj\Debug\BLL.dll
 C:\work\video filter - 副本 - 副本\BLL\obj\Debug\BLL.pdb
 D:\document\new\work\video filter - 副本 - 副本\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\document\new\code\videoFilter\BLL\bin\Debug\BLL.dll
+D:\document\new\code\videoFilter\BLL\bin\Debug\BLL.pdb
+D:\document\new\code\videoFilter\BLL\bin\Debug\DAL.dll
+D:\document\new\code\videoFilter\BLL\bin\Debug\DB.dll
+D:\document\new\code\videoFilter\BLL\bin\Debug\MODEL.dll
+D:\document\new\code\videoFilter\BLL\bin\Debug\DAL.pdb
+D:\document\new\code\videoFilter\BLL\bin\Debug\DB.pdb
+D:\document\new\code\videoFilter\BLL\bin\Debug\MODEL.pdb
+D:\document\new\code\videoFilter\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\document\new\code\videoFilter\BLL\obj\Debug\BLL.dll
+D:\document\new\code\videoFilter\BLL\obj\Debug\BLL.pdb

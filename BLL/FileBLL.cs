@@ -14,21 +14,12 @@ namespace BLL
     public class FileBLL
     {
 
-      //  Analysis ana;
-     //   _18javAnaysis ana;
-        //HelloJavAnalysis ana;
-      //  _141javAnalysisNew ana;
-      //  BtdiggAnalysis ana;
-        Sis001Analysis ana;
+
         Filter filter;
 
         public FileBLL()
         {
             filter = new Filter();
-           // ana = new Analysis();
-            // ana = new _141javAnalysisNew();
-            ana = new Sis001Analysis();
-        //    ana = new BtdiggAnalysis();
         }
 
         public List<MyFileInfo> getFileList()
@@ -36,7 +27,7 @@ namespace BLL
             return FileDAL.selectMyFileInfo("");
         }
 
-        public void process(string directoryStr)
+        public void process(string directoryStr, IAnalysis ana)
         {
             string invalidHTML="<html><body>";
             ArrayList htmlList = new ArrayList();
