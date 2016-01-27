@@ -16,10 +16,17 @@ namespace BLL
         List<MyFileInfo> list;
         Regex reg1 = new Regex("[a-z]");
         Regex reg2 = new Regex("[a-z].*");
+        Regex fiterListRegex = new Regex(@"[a-zA-Z]+[-_]?(\s){0,3}[0-9]+");
         public Filter()
         {
 
             list = getFileList();
+            for(int i=list.Count-1;i>=0;i--)
+            {
+                string fileName=Path.GetFileNameWithoutExtension(list[i].FileName);
+                if(!fiterListRegex.IsMatch( fileName)&&!fiterListRegex.IsMatch(fileName))
+                    list.Remove(list[i]);
+            }
         }
 
         public bool checkValid(His his)
@@ -76,12 +83,6 @@ namespace BLL
                     string directoryName = list[i].Directory.ToLower();
                     string extension = list[i].Extension;
                     double len = list[i].Length;
-                    //if (((fileName.Contains(searchStr[0]) && fileName.Contains(searchStr[1]) && checkDistance(fileName, searchStr[0], searchStr[1]) || directoryName.Contains(searchStr[0]) && directoryName.Contains(searchStr[1]) && checkDistance(directoryName, searchStr[0], searchStr[1])) && !fileName.Contains("incomplete")) && (len > 400||extension.ToLower()==".mds"))
-                    //{
-                    //    flag = false;
-                    //    break;
-
-                    //}
 
                     if ((len*1.7>his.Size || (extension.ToLower() == ".mds"||extension.ToLower()==".iso")&&his.Size<3000) && (r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
                     {
@@ -123,22 +124,5 @@ namespace BLL
         {
             return FileDAL.selectMyFileInfo("");
         }
-        //public bool checkDistance(string s, string s0, string s1)
-        //{
-        //    s = s.ToLower();
-        //    int dis = s.IndexOf(s1) - s.IndexOf(s0) - s0.Length;
-        //    if (dis < 5 && dis >= 0)
-        //        return true;
-        //    else
-        //        return false;
-        //}
-
-        //bool checkDistance(string s, string s0, string s1)
-        //{
-
-        //    Regex r = new Regex("[^a-z]" + s0 + @"(\s){0,3}[-_]?(\s){0,3}(0){0,3}" + s1 + "[^0-9]|^" + s0 + @"(\s){0,3}[-_]?(\s){0,3}(0){0,3}" + s1 + "$|[^a-z]" + s0 + @"(\s){0,3}[-_](\s){0,3}(0){0,3}" + s1 + "$|^" + s0 + @"(\s){0,3}[-_]?(\s){0,3}(0){0,3}" + s1 + "[^0-9]");
-        //    return r.IsMatch(s);
-
-        //}
     }
 }
