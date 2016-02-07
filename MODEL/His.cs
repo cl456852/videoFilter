@@ -86,5 +86,21 @@ namespace BLL
         {
             return this.vid.CompareTo(((His)obj).vid);
         }
+
+        string htmPath;
+
+        public string HtmPath
+        {
+            get { return htmPath; }
+            set { htmPath = value; }
+        }
+
+        string torrentPath;
+
+        public string TorrentPath
+        {
+            get { return torrentPath; }
+            set { torrentPath = value; }
+        }
     }
 }

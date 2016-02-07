@@ -155,6 +155,11 @@ namespace UI1
         {
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new JavBusAnalysis());
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new AkibaOnlineAnalysis());
+        }
         
         
 

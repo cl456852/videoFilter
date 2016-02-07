@@ -61,6 +61,12 @@ namespace BLL
             foreach (His his in hisList)
             {
                 resultHTML += his.Html;
+                if (his.TorrentPath != "")
+                {
+                    Tool.MoveFile("result", his.TorrentPath);
+                }
+                if (his.HtmPath != "")
+                    Tool.MoveFile("result", his.HtmPath);
             }
             resultHTML += "</body></html>";
             invalidHTML += "</body></html>";

@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{921EBE20-E9B1-440C-A1C4-178606343A36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{C1B6322C-6207-47DD-8FA5-05E326B08867}"
@@ -12,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{4E26CBE5-2830-4537-A280-E2A3960FA886}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI1", "UI1\UI1.csproj", "{51939127-8E88-48C1-AB3F-0EF5FF6B89C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BencodeLibrary", "BencodeLibrary\BencodeLibrary.csproj", "{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +87,16 @@ Global
 		{51939127-8E88-48C1-AB3F-0EF5FF6B89C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51939127-8E88-48C1-AB3F-0EF5FF6B89C3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{51939127-8E88-48C1-AB3F-0EF5FF6B89C3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Release|.NET.ActiveCfg = Release|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

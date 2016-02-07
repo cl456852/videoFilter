@@ -56,6 +56,34 @@ namespace BLL
             string[] searchStr = { letter, number };
             return searchStr;
         }
+
+        public static void MoveFile(string folderName, string path)
+        {
+            if (File.Exists(path))
+            {
+                string targetDir = Path.Combine(Path.GetDirectoryName(path), folderName);
+                if (!Directory.Exists(targetDir))
+                {
+                    Directory.CreateDirectory(targetDir);
+                }
+                try
+                {
+                    File.Move(path, Path.Combine(targetDir, Path.GetFileName(path)));
+                    if (File.Exists(path + ".htm"))
+                    {
+                        File.Move(path + ".htm", Path.Combine(targetDir, Path.GetFileName(path)) + ".htm");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("path too long    " + path);
+                    File.Move(path, Path.Combine(targetDir, Path.GetFileName(path)).Substring(0, 240) + ".torrent");
+                    File.Move(path + ".htm", Path.Combine(targetDir, Path.GetFileName(path)).Substring(0, 240) + ".htm");
+                    Console.WriteLine("path too long    " + Path.Combine(targetDir, Path.GetFileName(path)).Substring(0, 240) + ".torrent");
+                }
+                Console.WriteLine(folderName + " " + path);
+            }
+        }
     }
 
 }

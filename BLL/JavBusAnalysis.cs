@@ -10,7 +10,7 @@ namespace BLL
 {
     public class JavBusAnalysis:BaseAnalysis
     {
-        Regex imgRegex = new Regex("http://pics.javbus.com/cover.*?.jpg");
+        Regex imgRegex = new Regex("https://pics.javbus.com/cover.*?.jpg");
         Regex sizeRegex=new Regex(@"\s[1-9]([^\s])*?[0-9]GB|\s[1-9]([^\s])*?[0-9]MB");
         public override ArrayList alys(string content, string path, string vid)
         {
