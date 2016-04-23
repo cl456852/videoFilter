@@ -257,3 +257,5 @@ D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.Form1.resources
 D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.Form2.resources
 D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.Properties.Resources.resources
 D:\document\new\code\videoFilter\UI1\obj\Debug\UI1.csproj.GenerateResource.Cache
+D:\document\new\code\videoFilter\UI1\bin\Debug\BencodeLibrary.dll
+D:\document\new\code\videoFilter\UI1\bin\Debug\BencodeLibrary.pdb

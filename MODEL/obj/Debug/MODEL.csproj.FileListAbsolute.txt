@@ -53,3 +53,8 @@ C:\work\video filter - 副本 - 副本\MODEL\bin\Debug\MODEL.pdb
 C:\work\video filter - 副本 - 副本\MODEL\obj\Debug\MODEL.dll
 C:\work\video filter - 副本 - 副本\MODEL\obj\Debug\MODEL.pdb
 D:\document\new\work\video filter - 副本 - 副本\MODEL\obj\Debug\MODEL.csprojResolveAssemblyReference.cache
+D:\document\new\code\videoFilter\MODEL\bin\Debug\MODEL.dll
+D:\document\new\code\videoFilter\MODEL\bin\Debug\MODEL.pdb
+D:\document\new\code\videoFilter\MODEL\obj\Debug\MODEL.csprojResolveAssemblyReference.cache
+D:\document\new\code\videoFilter\MODEL\obj\Debug\MODEL.dll
+D:\document\new\code\videoFilter\MODEL\obj\Debug\MODEL.pdb

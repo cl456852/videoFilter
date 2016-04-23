@@ -154,3 +154,5 @@ D:\document\new\code\videoFilter\BLL\bin\Debug\MODEL.pdb
 D:\document\new\code\videoFilter\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 D:\document\new\code\videoFilter\BLL\obj\Debug\BLL.dll
 D:\document\new\code\videoFilter\BLL\obj\Debug\BLL.pdb
+D:\document\new\code\videoFilter\BLL\bin\Debug\BencodeLibrary.dll
+D:\document\new\code\videoFilter\BLL\bin\Debug\BencodeLibrary.pdb

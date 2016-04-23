@@ -24,7 +24,7 @@ namespace BLL
             for(int i=list.Count-1;i>=0;i--)
             {
                 string fileName=Path.GetFileNameWithoutExtension(list[i].FileName);
-                if(!fiterListRegex.IsMatch( fileName)&&!fiterListRegex.IsMatch(fileName))
+                if(!fiterListRegex.IsMatch( fileName)&&!fiterListRegex.IsMatch(list[i].Directory))
                     list.Remove(list[i]);
             }
         }
