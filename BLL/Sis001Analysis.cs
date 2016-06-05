@@ -45,7 +45,7 @@ namespace BLL
                         his.Html += "<a href=\"" + torrentLink + "\">" + match.Value + "/></a><br>";
                     }
                 }
-                his.HisTimeSpan = 3;
+                his.HisTimeSpan = 6;
                 his.Html += this.getSearchHtml(his.Vid, his.Size);
                 resList.Add(his);
             }
