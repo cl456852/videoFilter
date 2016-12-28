@@ -14,7 +14,7 @@ namespace BLL
         Regex sizeRegex = new Regex("容量.*<");
         Regex imgRegex = new Regex("http://.*jpg");
 
-        Regex torrentLinkRegex = new Regex("imc_attachad-ad.html\\?aid=.*&amp");
+        Regex torrentLinkRegex = new Regex("mod=attachment&aid=.*?=");
 
         public override ArrayList alys(string content, string path, string vid)
         {
@@ -23,6 +23,10 @@ namespace BLL
             {
 
                 MatchCollection mc = idRegex.Matches(Path.GetFileNameWithoutExtension(path.ToUpper()));
+                if (path.EndsWith(".htm.htm"))
+                {
+                    return resList;
+                }
                 if (mc.Count != 1)
                 {
                     String unknownPath = Path.Combine(Path.GetDirectoryName(path), "thzUnknown");
@@ -44,8 +48,10 @@ namespace BLL
                     sizeStr = sizeStr.Replace("MB", "");
                     his.Size = Convert.ToDouble(sizeStr);
                 }
-
-                string torrentLink = "http://thzbt.biz/forum.php?mod=attachment&aid=" + torrentLinkRegex.Match(content).Value.Replace("imc_attachad-ad.html?aid=", "").Replace("&amp", "");
+                StreamReader sr = new StreamReader(path+".htm");
+                string content1 = sr.ReadToEnd();
+                sr.Close();
+                string torrentLink = "http://taohuabt.info/forum.php?" + torrentLinkRegex.Match(content1).Value;
                 MatchCollection imgMc = imgRegex.Matches(content);
 
                 foreach (Match match in imgMc)
