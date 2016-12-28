@@ -15,7 +15,7 @@ namespace Test
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.jsTest2();
+            p.dictTest();
             Console.Read();
         }
 
@@ -46,6 +46,12 @@ namespace Test
             list.Sort();
             foreach (string a in list)
                 Console.WriteLine(a);
+        }
+
+        void dictTest()
+        {
+            SortedDictionary<string, string> dic = new SortedDictionary<string, string>();
+            dic.Remove("ddd");
         }
 
     }

@@ -160,6 +160,16 @@ namespace UI1
         {
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new AkibaOnlineAnalysis());
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new ThzAnalysis());
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
         
         
 

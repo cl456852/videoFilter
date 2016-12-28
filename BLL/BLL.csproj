@@ -76,6 +76,7 @@
     <Compile Include="JavBusAnalysis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sis001Analysis.cs" />
+    <Compile Include="ThzAnalysis.cs" />
     <Compile Include="Tool.cs" />
     <Compile Include="_141javNew.cs" />
   </ItemGroup>

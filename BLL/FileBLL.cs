@@ -57,17 +57,25 @@ namespace BLL
                 }
 
             }
-            hisList.Sort();
-            foreach (His his in hisList)
+                      SortedDictionary<String, His> dic = new SortedDictionary<string, His>();
+            foreach(His his in hisList)
             {
-                resultHTML += his.Html;
-                if (his.TorrentPath != "")
+                if(!dic.Keys.Contains(his.Vid)||dic[his.Vid].Size<his.Size)
                 {
-                    Tool.MoveFile("result", his.TorrentPath);
+                    dic.Remove(his.Vid);
+                    dic.Add(his.Vid,his);
                 }
-                if (his.HtmPath != "")
-                    Tool.MoveFile("result", his.HtmPath);
             }
+           foreach(His his in dic.Values)
+           {
+               resultHTML += his.Html;
+               if (his.TorrentPath != "")
+               {
+                   Tool.MoveFile("result", his.TorrentPath);
+               }
+               if (his.HtmPath != "")
+                   Tool.MoveFile("result", his.HtmPath);
+           }
             resultHTML += "</body></html>";
             invalidHTML += "</body></html>";
             FileStream fs = new FileStream(Path.Combine(directoryStr, "result.htm"), FileMode.Create);
