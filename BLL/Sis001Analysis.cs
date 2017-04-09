@@ -10,7 +10,7 @@ namespace BLL
 {
     public class Sis001Analysis :BaseAnalysis
     {
-        Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
+        Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}|[A-Z]{1,}[0-9]{1,}");
         Regex sizeRegex=new Regex("size\\^\\^\\^.*");
         Regex imgRegex=new Regex("<img src=\".*?\"");
         Regex torrentLinkRegex=new Regex("attachment.php.*?\"");
@@ -21,8 +21,14 @@ namespace BLL
             try
             {
                 
-                MatchCollection mc = idRegex.Matches(Path.GetFileNameWithoutExtension(path.ToUpper()));
-                if (mc.Count != 1)
+                MatchCollection mc = idRegex.Matches(Path.GetFileNameWithoutExtension(path.ToUpper()).Replace("S1",""));
+                bool hasS1=false;
+                foreach(Match m in mc)
+                {
+                    if (m.Value == "S1")
+                        hasS1 = true;
+                }
+                if (mc.Count >2||mc.Count==2&&!hasS1)
                 {
                     String unknownPath = Path.Combine(Path.GetDirectoryName(path), "sisUnknown");
                     if (!Directory.Exists(unknownPath))
@@ -30,24 +36,29 @@ namespace BLL
                     File.Move(path, Path.Combine(unknownPath, Path.GetFileNameWithoutExtension(path)) + ".htm");
                     return resList;
                 }
-                His his = new His();
-                his.Vid = mc[0].Value.Replace("-", "");
-                his.Size = Convert.ToDouble(sizeRegex.Match(path).Value.Replace("size^^^", "").Replace(".htm", ""));
-                his.Html = content.Split(new string[] { "count_add_one", "下载次数:" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value;
-
-                MatchCollection imgMc = imgRegex.Matches(his.Html);
-                his.Html = "";
-                foreach (Match match in imgMc)
+                foreach (Match m in mc)
                 {
-                    if (!match.Value.Contains("torrent.gif"))
+                    if (m.Value == "S1")
+                        continue;
+                    His his = new His();
+                    his.Vid = m.Value.Replace("-", "");
+                    his.Size = Convert.ToDouble(sizeRegex.Match(path).Value.Replace("size^^^", "").Replace(".htm", ""));
+                    his.Html = content.Split(new string[] { "count_add_one", "下载次数:" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value;
+
+                    MatchCollection imgMc = imgRegex.Matches(his.Html);
+                    his.Html = "";
+                    foreach (Match match in imgMc)
                     {
-                        his.Html += "<a href=\"" + torrentLink + "\">" + match.Value + "/></a><br>";
+                        if (!match.Value.Contains("torrent.gif"))
+                        {
+                            his.Html += "<a href=\"" + torrentLink + "\">" + match.Value + "/></a><br>";
+                        }
                     }
+                    his.HisTimeSpan = 100;
+                    his.Html += this.getSearchHtml(his.Vid, his.Size);
+                    resList.Add(his);
                 }
-                his.HisTimeSpan = 6;
-                his.Html += this.getSearchHtml(his.Vid, his.Size);
-                resList.Add(his);
             }
             catch (Exception e)
             {

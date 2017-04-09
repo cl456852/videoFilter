@@ -30,7 +30,6 @@ namespace BLL
         public void process(string directoryStr, IAnalysis ana)
         {
             string invalidHTML="<html><body>";
-            ArrayList htmlList = new ArrayList();
             ArrayList hisList = new ArrayList();
             string resultHTML = "<html><body>";
             String[] path = Directory.GetFiles(directoryStr, "*", SearchOption.TopDirectoryOnly);

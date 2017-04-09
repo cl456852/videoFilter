@@ -36,16 +36,17 @@ namespace BLL
                     return resList;
                 }
                 His his = new His();
+                his.HisTimeSpan = 12;
                 his.Vid = mc[0].Value.Replace("-", "");
                 string sizeStr = sizeRegex.Match(content).Value.Replace("容量：", "").Replace("<", "");
                 if (sizeStr.Contains("G"))
                 {
-                    sizeStr= sizeStr.Replace("GB", "");
+                    sizeStr= sizeStr.ToUpper().Replace("GB", "");
                     his.Size = Convert.ToDouble(sizeStr)*1024;
                 }
                 else
                 {
-                    sizeStr = sizeStr.Replace("MB", "");
+                    sizeStr = sizeStr.ToUpper().Replace("MB", "");
                     his.Size = Convert.ToDouble(sizeStr);
                 }
                 StreamReader sr = new StreamReader(path+".htm");
@@ -53,12 +54,16 @@ namespace BLL
                 sr.Close();
                 string torrentLink = "http://taohuabt.info/forum.php?" + torrentLinkRegex.Match(content1).Value;
                 MatchCollection imgMc = imgRegex.Matches(content);
-
+                int n = 0;
                 foreach (Match match in imgMc)
                 {
                     if (!match.Value.Contains("middle"))
                     {
-                        his.Html += "<a href=\"" + torrentLink + "\"><img src=\"" + match.Value + "\"/></a><br>";
+                        if(n==0)
+                            his.Html += "<a href=\"" + torrentLink + "\"><img src=\"" + match.Value + "\"/></a><br>";
+                        else
+                            his.Html += "<a href=\"" + torrentLink + "\"><img src=\"" + match.Value + "\" width=\"40%\"/></a><br>";
+                        n++;
                     }
                 }
                 
