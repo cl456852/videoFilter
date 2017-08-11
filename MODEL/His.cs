@@ -102,5 +102,13 @@ namespace BLL
             get { return torrentPath; }
             set { torrentPath = value; }
         }
+
+        public bool IsCheckSize
+        {
+            get { return isCheckSize; }
+            set { isCheckSize = value; }
+        }
+
+        private bool isCheckSize = true;
     }
 }

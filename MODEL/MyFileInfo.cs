@@ -88,8 +88,12 @@ namespace MODEL
             set { mark = value; }
         }
 
+        string vid;
+    
 
-
-
-    }
+public string Vid
+{
+  get { return vid; }
+  set { vid = value; }
+}}
 }

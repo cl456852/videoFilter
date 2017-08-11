@@ -83,11 +83,24 @@ namespace BLL
                     string directoryName = list[i].Directory.ToLower();
                     string extension = list[i].Extension;
                     double len = list[i].Length;
-
-                    if ((len*1.7>his.Size || (extension.ToLower() == ".mds"||extension.ToLower()==".iso")&&his.Size<3000) && (r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
+                    if (his.IsCheckSize)
                     {
-                        flag = false;
-                        break;
+                        if ((len*1.7 > his.Size ||
+                             (extension.ToLower() == ".mds" || extension.ToLower() == ".iso") && his.Size < 3000) &&
+                            (r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
+                        {
+                            flag = false;
+                            break;
+
+                        }
+                    }
+                    else
+                    {
+                        if((r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
+                        {
+                            flag = false;
+                            break;
+                        }
 
                     }
 

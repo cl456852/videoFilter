@@ -67,7 +67,7 @@ namespace DAL
         public static int Update(MyFileInfo fi)
         {
             int res;
-            string sql = "update files set fileName='"+fi.FileName+"',extension='"+fi.Extension+"', directoryName='"+fi.DirectoryName+"',directory='"+fi.Directory+"',length="+fi.Length+",lastAccessTime='"+fi.LastAccessTime+"',lastWriteTime='"+fi.LastWriteTime+"',mark='"+fi.Mark+"' where fileId="+fi.FileId;
+            string sql = "update files set fileName='"+fi.FileName+"',extension='"+fi.Extension+"', directoryName='"+fi.DirectoryName+"',directory='"+fi.Directory+"',length="+fi.Length+",lastAccessTime='"+fi.LastAccessTime+"',lastWriteTime='"+fi.LastWriteTime+"',mark='"+fi.Mark+"', vid='"+fi.Vid+"' where fileId="+fi.FileId;
             Console.WriteLine(sql);
             res= DBHelper.ExecuteSql(sql);
             return res;
@@ -143,6 +143,7 @@ namespace DAL
                 myFileInfo.FileId =Convert.ToInt32( sdr["fileId"]);
                 myFileInfo.Length = Convert.ToDouble(sdr["length"]);
                 myFileInfo.Mark = sdr["mark"].ToString();
+                myFileInfo.Vid = sdr["vid"].ToString();
                 MyFileInfoList.Add(myFileInfo);
 
             }
@@ -151,6 +152,12 @@ namespace DAL
             DBHelper.conn.Close();
             //DBHelper.conn.Dispose();
             return MyFileInfoList;
+        }
+
+        public static void UpdateVid(MyFileInfo fi)
+        {
+            string sql = "update files set vid='" + fi.Vid + "' where fileId=" + fi.FileId;
+             DBHelper.ExecuteSql(sql);
         }
 
         public static int getMaxCDID()
