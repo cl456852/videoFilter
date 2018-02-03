@@ -29,6 +29,7 @@ namespace BLL
 
         public void process(string directoryStr, IAnalysis ana)
         {
+            string invalidHtmlHis = "<html><body>";
             string invalidHTML="<html><body>";
             ArrayList hisList = new ArrayList();
             string resultHTML = "<html><body>";
@@ -49,10 +50,16 @@ namespace BLL
                 {
                     if (filter.checkValid(his))
                     {
+                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name);
                         hisList.Add(his);
                     }
                     else
-                        invalidHTML += his.Html;
+                    {
+                        if (his.FailReason == "file")
+                            invalidHTML += his.Html;
+                        else
+                            invalidHtmlHis += his.Html;
+                    }
                 }
 
             }
@@ -77,30 +84,15 @@ namespace BLL
            }
             resultHTML += "</body></html>";
             invalidHTML += "</body></html>";
-            FileStream fs = new FileStream(Path.Combine(directoryStr, "result.htm"), FileMode.Create);
-            //实例化一个StreamWriter-->与fs相关联  
-            StreamWriter sw = new StreamWriter(fs);
-            //开始写入  
-            sw.Write(resultHTML);
-            //清空缓冲区  
-            sw.Flush();
-            //关闭流  
-            sw.Close();
-            fs.Close();
+            invalidHtmlHis += "</body></html>";
 
-            FileStream fs1 = new FileStream(Path.Combine(directoryStr, "invalid.htm"), FileMode.Create);
-            //实例化一个StreamWriter-->与fs相关联  
-            StreamWriter sw1 = new StreamWriter(fs1);
-            //开始写入  
-            sw1.Write(invalidHTML);
-            //清空缓冲区  
-            sw1.Flush();
-            //关闭流  
-            sw1.Close();
-            fs1.Close();
-
+            Tool.WriteFile(Path.Combine(directoryStr, "result.htm"), resultHTML);
+            Tool.WriteFile(Path.Combine(directoryStr, "invalid.htm"), invalidHTML);
+            Tool.WriteFile(Path.Combine(directoryStr, "invalidHis.htm"), invalidHtmlHis);
 
         }
+
+        
 
        
     }

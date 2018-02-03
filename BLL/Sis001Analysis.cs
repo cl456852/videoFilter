@@ -56,7 +56,6 @@ namespace BLL
                         }
                     }
                     his.HisTimeSpan = 100;
-                    his.Html += this.getSearchHtml(his.Vid, his.Size);
                     resList.Add(his);
                 }
             }

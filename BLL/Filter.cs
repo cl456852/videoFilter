@@ -21,10 +21,10 @@ namespace BLL
         {
 
             list = getFileList();
-            for(int i=list.Count-1;i>=0;i--)
+            for (int i = list.Count - 1; i >= 0; i--)
             {
-                string fileName=Path.GetFileNameWithoutExtension(list[i].FileName);
-                if(!fiterListRegex.IsMatch( fileName)&&!fiterListRegex.IsMatch(list[i].Directory))
+                string fileName = Path.GetFileNameWithoutExtension(list[i].FileName);
+                if (!fiterListRegex.IsMatch(fileName) && !fiterListRegex.IsMatch(list[i].Directory))
                     list.Remove(list[i]);
             }
         }
@@ -32,7 +32,7 @@ namespace BLL
         public bool checkValid(His his)
         {
             string id = his.Vid;
-            if (id==null|| id == "")
+            if (id == null || id == "")
             {
                 return true;
             }
@@ -48,7 +48,7 @@ namespace BLL
                         break;
                     }
                 }
-        
+
             }
             else
             {
@@ -85,7 +85,7 @@ namespace BLL
                     double len = list[i].Length;
                     if (his.IsCheckSize)
                     {
-                        if ((len*1.7 > his.Size ||
+                        if ((len * 1.7 > his.Size ||
                              (extension.ToLower() == ".mds" || extension.ToLower() == ".iso") && his.Size < 3000) &&
                             (r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
                         {
@@ -96,7 +96,7 @@ namespace BLL
                     }
                     else
                     {
-                        if((r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
+                        if ((r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
                         {
                             flag = false;
                             break;
@@ -106,22 +106,27 @@ namespace BLL
 
 
                 }
-
-                }
-
-                if (flag)
+                if (!flag)
                 {
-                    flag = checkHis(his);
+                    his.FailReason = "file";
                 }
+            }
+
+            if (flag)
+            {
+                flag = checkHis(his);
+                if (!flag)
+                    his.FailReason = "his";
+            } 
+          
 
 
 
+            if (flag)
+            {
+                DBHelper.insertHis(his);
+            }
 
-                if (flag)
-                {
-                    DBHelper.insertHis(his);
-                }
-            
             return flag;
         }
 

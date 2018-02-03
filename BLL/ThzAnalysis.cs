@@ -36,10 +36,11 @@ namespace BLL
                     return resList;
                 }
                 His his = new His();
-                his.HisTimeSpan = 12;
                 his.Vid = mc[0].Value.Replace("-", "");
+                string name= path.Split(new char[] { ']', '.' })[1];
+                his.Name = name;
                 string sizeStr = sizeRegex.Match(content).Value.Replace("容量：", "").Replace("<", "");
-                if (sizeStr.Contains("G"))
+                if (sizeStr.ToUpper().Contains("G"))
                 {
                     sizeStr= sizeStr.ToUpper().Replace("GB", "");
                     his.Size = Convert.ToDouble(sizeStr)*1024;
@@ -66,9 +67,8 @@ namespace BLL
                         n++;
                     }
                 }
-                
+                his.Html= his.Html.Replace("onclick=\"", "");
                 his.HisTimeSpan = 10;
-                his.Html += this.getSearchHtml(his.Vid, his.Size);
                 resList.Add(his);
             }
             catch (Exception e)

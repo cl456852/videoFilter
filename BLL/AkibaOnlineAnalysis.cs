@@ -47,7 +47,7 @@ namespace BLL
                     }
                 }
             }
-            his.Html="<div class=\"messageContent\">"+ content.Split(new string[] { "<div class=\"messageContent\">", "<div class=\"editDate\">" }, StringSplitOptions.RemoveEmptyEntries)[1]+"<br>\n";
+            his.Html="<div class=\"messageContent\">"+ content.Split(new string[] { "class=\"messageContent\">", "class=\"messageMeta ToggleTriggerAnchor\">" }, StringSplitOptions.RemoveEmptyEntries)[1]+"<br>\n";
             MatchCollection srcMC = srcRegex.Matches(his.Html);
             foreach (Match match in srcMC)
             {
@@ -65,7 +65,6 @@ namespace BLL
                 }
             }
 
-            his.Html += getSearchHtml(his.Vid, his.Size);
             resList.Add(his);
             return resList;
         }

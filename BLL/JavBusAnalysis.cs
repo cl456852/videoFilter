@@ -48,11 +48,11 @@ namespace BLL
                         eachSize = Convert.ToDouble(sizeStr.Replace("MB", ""));
                     size = eachSize > size ? eachSize : size;
                 }
-                his.HisTimeSpan = 8;
+                his.HisTimeSpan = 4;
+                his.IsCHeckHisSize = false;
                 his.Html += "<img src=\"" + img + "\"/><br>\n<table>";
                 his.Html += magContent + "</table><br>\n";
                 his.Size = size;
-                his.Html += this.getSearchHtml(his.Vid, his.Size);
                 list.Add(his);
         
             }

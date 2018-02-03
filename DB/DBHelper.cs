@@ -9,9 +9,10 @@ namespace DB
 {
     public class DBHelper
     {
-        static string seachHisSql = "select * from his1 where LOWER(vid)=LOWER('{0}') and size*1.1>{1} and DATEDIFF(M,createtime,GETDATE())<{2}";
+        static string searchHisSql = "select * from his1 where LOWER(vid)=LOWER('{0}') and size*1.1>{1} and DATEDIFF(M,createtime,GETDATE())<{2}";
+        static string searchHisSqlWithoutSize = "select * from his1 where LOWER(vid)=LOWER('{0}') and DATEDIFF(M,createtime,GETDATE())<{1}";
         static string insertHisSql = "insert into his1 values('{0}',{1},'{2}',{3},'{4}',getdate())";
-        public static string connstr = @"server=localhost;uid=sa;pwd=a;database=cd";
+        public static string connstr = @"server=localhost;uid=sa;pwd=iamjack'scolon;database=cd";
         //static string connstr = "server=MICROSOF-8335F8\\SQLEXPRESS;uid=sa;pwd=a;database=cd";
         public static SqlConnection conn = new SqlConnection(connstr);
         //static string connstr = "server=.;uid=sa;pwd=a;database=cd";
@@ -74,8 +75,15 @@ namespace DB
             string sql="";
             if (his.Size > 0)
             {
+                if ( his.IsCHeckHisSize)
+                {
 
-                sql = string.Format(seachHisSql, his.Vid, his.Size,his.HisTimeSpan);
+                    sql = string.Format(searchHisSql, his.Vid, his.Size, his.HisTimeSpan);
+                }
+                else
+                {
+                    sql = string.Format(searchHisSqlWithoutSize, his.Vid, his.HisTimeSpan);
+                }
             }
             else
                 return 0;

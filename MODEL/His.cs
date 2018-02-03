@@ -110,5 +110,30 @@ namespace BLL
         }
 
         private bool isCheckSize = true;
+
+        private bool isCHeckHisSize=true;
+
+        public bool IsCHeckHisSize
+        {
+            get { return isCHeckHisSize; }
+            set { isCHeckHisSize = value; }
+        }
+
+        private string failReason = "";
+
+        public string FailReason
+        {
+            get { return failReason; }
+            set { failReason = value; }
+        }
+
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
     }
 }
