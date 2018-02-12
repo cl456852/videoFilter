@@ -22,7 +22,7 @@ namespace BLL
         }
 
         static Regex reg1 = new Regex("[A-Z]");
-        public static string getSearchHtml(string vid, double size, string name)
+        public static string getSearchHtml(string vid, double size, string name,bool getKiki)
         {
             vid= vid.Replace("-", "").ToUpper();
             string html="";
@@ -54,7 +54,8 @@ namespace BLL
             html += size + "<br>";
             html += "<a href=\"http://www.btanx.com/search/" + letter + "%20" + number + "-size-desc-1\"/>" +vid + "</a><br>\n";
             html += "<a href=\"http://www.javbus.com/" + letter + "-" + number + "\">" + vid + "</a><br>\n";
-            html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
+            if(getKiki)
+                html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
             html += ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
             return html;
         }

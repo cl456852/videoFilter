@@ -8,12 +8,13 @@ using System.Text.RegularExpressions;
 
 namespace BLL
 {
-    public class Sis001Analysis :BaseAnalysis
+    public class Sis001Analysis : BaseAnalysis
     {
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}|[A-Z]{1,}[0-9]{1,}");
-        Regex sizeRegex=new Regex("size\\^\\^\\^.*");
-        Regex imgRegex=new Regex("<img src=\".*?\"");
-        Regex torrentLinkRegex=new Regex("attachment.php.*?\"");
+        Regex sizeRegex = new Regex("size\\^\\^\\^.*");
+        Regex imgRegex = new Regex("<img src=\".*?\"");
+        Regex torrentLinkRegex = new Regex("attachment.php.*?\"");
+        Regex reg1 = new Regex("[a-z]");
 
         public override ArrayList alys(string content, string path, string vid)
         {
@@ -23,12 +24,57 @@ namespace BLL
                 
                 MatchCollection mc = idRegex.Matches(Path.GetFileNameWithoutExtension(path.ToUpper()).Replace("S1",""));
                 bool hasS1=false;
+                //foreach(Match m in mc)
+                //{
+                //    if (m.Value == "S1")
+                //        hasS1 = true;
+                //}
+                //if (mc.Count >2||mc.Count==2&&!hasS1)
+                //{
+                //    String unknownPath = Path.Combine(Path.GetDirectoryName(path), "sisUnknown");
+                //    if (!Directory.Exists(unknownPath))
+                //        Directory.CreateDirectory(unknownPath);
+                //    File.Move(path, Path.Combine(unknownPath, Path.GetFileNameWithoutExtension(path)) + ".htm");
+                //    return resList;
+                //}
+
+                string idLetter="";
+                string idNumber="";
                 foreach(Match m in mc)
                 {
-                    if (m.Value == "S1")
-                        hasS1 = true;
+                    string id = m.Value.Replace("-","").ToLower();
+                    string letter = "";
+                    string number = "";
+                    bool isEndofLetter = false;
+                    for (int i = 0; i < id.Length; i++)                        
+                        if (reg1.IsMatch(id[i].ToString()))
+                        {
+                            if (isEndofLetter)
+                                break;
+                            else
+                                letter += id[i];
+                        }
+                        else
+                        {
+                            number += id[i];
+                            isEndofLetter = true;
+                        }
+                    if(number.Length>1&&letter.Length>1)
+                    {
+                        if (letter.Length > idLetter.Length)
+                        {
+                            idLetter = letter;
+                            idNumber = number;
+                        }
+                        else if(letter.Length==idLetter.Length&&number.Length>idNumber.Length)
+                        {
+                            idLetter = letter;
+                            idNumber = number;
+                        }
+                    }
                 }
-                if (mc.Count >2||mc.Count==2&&!hasS1)
+                string id1 = idLetter + idNumber;
+                if(String.IsNullOrEmpty(id1))
                 {
                     String unknownPath = Path.Combine(Path.GetDirectoryName(path), "sisUnknown");
                     if (!Directory.Exists(unknownPath))
@@ -36,28 +82,24 @@ namespace BLL
                     File.Move(path, Path.Combine(unknownPath, Path.GetFileNameWithoutExtension(path)) + ".htm");
                     return resList;
                 }
-                foreach (Match m in mc)
-                {
-                    if (m.Value == "S1")
-                        continue;
-                    His his = new His();
-                    his.Vid = m.Value.Replace("-", "");
-                    his.Size = Convert.ToDouble(sizeRegex.Match(path).Value.Replace("size^^^", "").Replace(".htm", ""));
-                    his.Html = content.Split(new string[] { "count_add_one", "下载次数:" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value;
+                His his = new His();
+                his.Vid = id1;
+                his.Size = Convert.ToDouble(sizeRegex.Match(path).Value.Replace("size^^^", "").Replace(".htm", ""));
+                his.Html = content.Split(new string[] { "count_add_one", "下载次数:" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value;
 
-                    MatchCollection imgMc = imgRegex.Matches(his.Html);
-                    his.Html = "";
-                    foreach (Match match in imgMc)
+                MatchCollection imgMc = imgRegex.Matches(his.Html);
+                his.Html = "";
+                foreach (Match match in imgMc)
+                {
+                    if (!match.Value.Contains("torrent.gif"))
                     {
-                        if (!match.Value.Contains("torrent.gif"))
-                        {
-                            his.Html += "<a href=\"" + torrentLink + "\">" + match.Value + "/></a><br>";
-                        }
+                        his.Html += "<a href=\"" + torrentLink + "\">" + match.Value + "/></a><br>";
                     }
-                    his.HisTimeSpan = 100;
-                    resList.Add(his);
                 }
+                his.HisTimeSpan = 100;
+                resList.Add(his);
+                
             }
             catch (Exception e)
             {

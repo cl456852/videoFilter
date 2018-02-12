@@ -50,11 +50,12 @@ namespace BLL
                 {
                     if (filter.checkValid(his))
                     {
-                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name);
+                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name,true);
                         hisList.Add(his);
                     }
                     else
                     {
+                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, false);
                         if (his.FailReason == "file")
                             invalidHTML += his.Html;
                         else
