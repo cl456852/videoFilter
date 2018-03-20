@@ -27,7 +27,7 @@ namespace BLL
             return FileDAL.selectMyFileInfo("");
         }
 
-        public void process(string directoryStr, IAnalysis ana)
+        public void process(string directoryStr, IAnalysis ana, bool ifCheckHis)
         {
             string invalidHtmlHis = "<html><body>";
             string invalidHTML="<html><body>";
@@ -45,7 +45,7 @@ namespace BLL
                 string vid="";
                 if (strs.Length > 4)
                     vid = strs[4];
-                ArrayList list = ana.alys(content, p, vid);
+                ArrayList list = ana.alys(content, p, vid, ifCheckHis);
                 foreach (His his in list)
                 {
                     if (filter.checkValid(his))

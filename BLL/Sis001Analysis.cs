@@ -10,13 +10,13 @@ namespace BLL
 {
     public class Sis001Analysis : BaseAnalysis
     {
-        Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}|[A-Z]{1,}[0-9]{1,}");
+        Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}|[A-Z]{1,}[0-9]{1,}|[A-Z]{1,}‐[0-9]{1,}");
         Regex sizeRegex = new Regex("size\\^\\^\\^.*");
         Regex imgRegex = new Regex("<img src=\".*?\"");
         Regex torrentLinkRegex = new Regex("attachment.php.*?\"");
         Regex reg1 = new Regex("[a-z]");
 
-        public override ArrayList alys(string content, string path, string vid)
+        public override ArrayList alys(string content, string path, string vid,bool isCheckHis)
         {
             ArrayList resList = new ArrayList();
             try
@@ -42,7 +42,7 @@ namespace BLL
                 string idNumber="";
                 foreach(Match m in mc)
                 {
-                    string id = m.Value.Replace("-","").ToLower();
+                    string id = m.Value.Replace("-", "").ToLower().Replace("‐","");
                     string letter = "";
                     string number = "";
                     bool isEndofLetter = false;
@@ -86,6 +86,7 @@ namespace BLL
                 his.Vid = id1;
                 his.Size = Convert.ToDouble(sizeRegex.Match(path).Value.Replace("size^^^", "").Replace(".htm", ""));
                 his.Html = content.Split(new string[] { "count_add_one", "下载次数:" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Split(new string[] { "SIZE^^^" }, StringSplitOptions.RemoveEmptyEntries)[0];
                 string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value;
 
                 MatchCollection imgMc = imgRegex.Matches(his.Html);
@@ -98,6 +99,7 @@ namespace BLL
                     }
                 }
                 his.HisTimeSpan = 100;
+                his.IsCHeckHisSize = isCheckHis;
                 resList.Add(his);
                 
             }

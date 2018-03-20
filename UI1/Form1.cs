@@ -63,7 +63,7 @@ namespace UI1
 
         private void Insert_Click(object sender, EventArgs e)
         {
-            fb.process(textBox1.Text.Replace("\\", "\\\\"),new Sis001Analysis());
+            fb.process(textBox1.Text.Replace("\\", "\\\\"),new Sis001Analysis(),checkBox1.Checked);
 
         }
 
@@ -153,17 +153,17 @@ namespace UI1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            fb.process(textBox1.Text.Replace("\\", "\\\\"), new JavBusAnalysis());
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new JavBusAnalysis(), checkBox1.Checked);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            fb.process(textBox1.Text.Replace("\\", "\\\\"), new AkibaOnlineAnalysis());
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new AkibaOnlineAnalysis(), checkBox1.Checked);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            fb.process(textBox1.Text.Replace("\\", "\\\\"), new ThzAnalysis());
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new ThzAnalysis(), checkBox1.Checked);
         }
 
         private void button1_Click_1(object sender, EventArgs e)

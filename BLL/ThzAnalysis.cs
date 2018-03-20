@@ -16,7 +16,7 @@ namespace BLL
 
         Regex torrentLinkRegex = new Regex("mod=attachment&aid=.*?=");
 
-        public override ArrayList alys(string content, string path, string vid)
+        public override ArrayList alys(string content, string path, string vid, bool isCheckHis)
         {
             ArrayList resList = new ArrayList();
             try
@@ -69,6 +69,7 @@ namespace BLL
                 }
                 his.Html= his.Html.Replace("onclick=\"", "");
                 his.HisTimeSpan = 10;
+                his.IsCHeckHisSize = isCheckHis;
                 resList.Add(his);
             }
             catch (Exception e)

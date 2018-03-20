@@ -8,6 +8,6 @@ namespace BLL
 {
     public interface IAnalysis
     {
-       ArrayList alys(string content, string path, string vid);
+       ArrayList alys(string content, string path, string vid,bool isCheckHis);
     }
 }

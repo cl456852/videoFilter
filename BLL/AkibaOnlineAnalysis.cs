@@ -13,7 +13,7 @@ namespace BLL
         Regex srcRegex=new Regex("src=\".*\"");
         Regex hrefRegex=new Regex("href=\".*\"");
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
-        public override ArrayList alys(string content, string path, string vid)
+        public override ArrayList alys(string content, string path, string vid,bool isCheckHis)
         {
             ArrayList resList = new ArrayList();
             if (!path.EndsWith("htm"))
@@ -64,7 +64,7 @@ namespace BLL
                     his.Html = his.Html.Replace(match.Value, match.Value.Replace("href=\"", "href=\"https://www.akiba-online.com/"));
                 }
             }
-
+            his.IsCHeckHisSize=isCheckHis;
             resList.Add(his);
             return resList;
         }

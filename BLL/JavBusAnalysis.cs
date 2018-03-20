@@ -12,8 +12,9 @@ namespace BLL
     {
         Regex imgRegex = new Regex("https://pics.javbus.com/cover.*?.jpg");
         Regex sizeRegex = new Regex(@"\s[1-9]([^\s])*?[0-9]GB|\s[1-9]([^\s])*?[0-9]MB");
+        Regex nameRegex = new Regex("<h3>.*</h3>");
 
-        public override ArrayList alys(string content, string path, string vid)
+        public override ArrayList alys(string content, string path, string vid, bool isCheckHis)
         {
             ArrayList list = new ArrayList();
             try
@@ -48,8 +49,11 @@ namespace BLL
                         eachSize = Convert.ToDouble(sizeStr.Replace("MB", ""));
                     size = eachSize > size ? eachSize : size;
                 }
-                his.HisTimeSpan = 4;
-                his.IsCHeckHisSize = false;
+                Match matchName= nameRegex.Match(content);
+                his.Name= matchName.Value.Replace("<h3>","").Replace("</h3>","");
+                
+                his.HisTimeSpan = 120;
+                his.IsCHeckHisSize = isCheckHis;
                 his.Html += "<img src=\"" + img + "\"/><br>\n<table>";
                 his.Html += magContent + "</table><br>\n";
                 his.Size = size;
