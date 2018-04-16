@@ -20,19 +20,19 @@ namespace DB
         {
             int i = 0;
             //using (SqlConnection conn = new SqlConnection(connstr))
-           // {
-                Console.WriteLine(sql);
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                i = cmd.ExecuteNonQuery();
-                conn.Close();
+            // {
+            Console.WriteLine(sql);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            i = cmd.ExecuteNonQuery();
+            conn.Close();
 
-                //conn.Dispose();
+            //conn.Dispose();
             //}
-            
+
             return i;
         }
-       
+
         public static SqlDataReader SearchSql(string sql)
         {
             conn = new SqlConnection(connstr);
@@ -41,52 +41,49 @@ namespace DB
             SqlDataReader sda = cmd.ExecuteReader();
 
             //conn.Close();
-            
+
             return sda;
         }
 
         public static int ExecuteInsert_SP(string spName, MyFileInfo fi)
         {
-           // using (SqlConnection conn = new SqlConnection(connstr))
+            // using (SqlConnection conn = new SqlConnection(connstr))
             //{
-                SqlCommand objCommand = new SqlCommand(spName, conn);
-                objCommand.CommandType = CommandType.StoredProcedure;
-                objCommand.Parameters.Add("@fileName", SqlDbType.VarChar, 300).Value=fi.FileName;
-                objCommand.Parameters.Add(	"@extension", SqlDbType.VarChar,50 ).Value=fi.Extension;
-	            objCommand.Parameters.Add("@directoryName" ,SqlDbType.VarChar,500).Value=fi.DirectoryName;
-	            objCommand.Parameters.Add("@directory", SqlDbType.VarChar,500).Value=fi.Directory;
-	            objCommand.Parameters.Add("@length" ,SqlDbType.Float).Value=fi.Length;
-	            objCommand.Parameters.Add("@lastAccessTime" , SqlDbType.VarChar,50).Value=fi.LastAccessTime; 
-	            objCommand.Parameters.Add("@lastWriteTime", SqlDbType.VarChar,50 ).Value=fi.LastWriteTime;
-                objCommand.Parameters.Add("@mark", SqlDbType.Text).Value=fi.Mark;
-                conn.Open();
-                int i = objCommand.ExecuteNonQuery();
-                conn.Close();
+            SqlCommand objCommand = new SqlCommand(spName, conn);
+            objCommand.CommandType = CommandType.StoredProcedure;
+            objCommand.Parameters.Add("@fileName", SqlDbType.VarChar, 300).Value = fi.FileName;
+            objCommand.Parameters.Add("@extension", SqlDbType.VarChar, 50).Value = fi.Extension;
+            objCommand.Parameters.Add("@directoryName", SqlDbType.VarChar, 500).Value = fi.DirectoryName;
+            objCommand.Parameters.Add("@directory", SqlDbType.VarChar, 500).Value = fi.Directory;
+            objCommand.Parameters.Add("@length", SqlDbType.Float).Value = fi.Length;
+            objCommand.Parameters.Add("@lastAccessTime", SqlDbType.VarChar, 50).Value = fi.LastAccessTime;
+            objCommand.Parameters.Add("@lastWriteTime", SqlDbType.VarChar, 50).Value = fi.LastWriteTime;
+            objCommand.Parameters.Add("@mark", SqlDbType.Text).Value = fi.Mark;
+            conn.Open();
+            int i = objCommand.ExecuteNonQuery();
+            conn.Close();
 
-                //conn.Dispose();
-                return i;
-                
+            //conn.Dispose();
+            return i;
+
             //}
         }
 
         public static int searchHis(His his)
         {
             int res;
-            string sql="";
-            if (his.Size > 0)
-            {
-                if ( his.IsCHeckHisSize)
-                {
+            string sql = "";
 
-                    sql = string.Format(searchHisSql, his.Vid, his.Size, his.HisTimeSpan);
-                }
-                else
-                {
-                    sql = string.Format(searchHisSqlWithoutSize, his.Vid, his.HisTimeSpan);
-                }
+            if (his.IsCHeckHisSize && his.Size > 0)
+            {
+
+                sql = string.Format(searchHisSql, his.Vid, his.Size, his.HisTimeSpan);
             }
             else
-                return 0;
+            {
+                sql = string.Format(searchHisSqlWithoutSize, his.Vid, his.HisTimeSpan);
+            }
+
             using (SqlConnection conn = new SqlConnection(connstr))
             {
                 conn.Open();
@@ -100,7 +97,7 @@ namespace DB
         {
             if (his.Actress.Length > 250)
                 his.Actress = his.Actress.Substring(0, 248);
-            string sql = string.Format(insertHisSql, his.Vid, his.Size,his.Actress.Replace("'","''"), his.FileCount, his.Files.Replace("'","''"));
+            string sql = string.Format(insertHisSql, his.Vid, his.Size, his.Actress.Replace("'", "''"), his.FileCount, his.Files.Replace("'", "''"));
             using (SqlConnection conn = new SqlConnection(connstr))
             {
                 conn.Open();
@@ -109,6 +106,32 @@ namespace DB
                 sc.ExecuteNonQuery();
             }
 
+        }
+
+        public static void insertBLackList(His his)
+        {
+            string insert = "INSERT INTO [dbo].[blackList] ([vid],[size],[actress],[fileCount],[files],[createtime]) VALUES('{0}',{1},'{2}',{3},'{4}',getdate())";
+            string sql= string.Format(insert, his.Vid, his.Size, his.Actress, his.FileCount, his.Files);
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                SqlCommand sc = new SqlCommand(sql, conn);
+                sc.CommandTimeout = 120000;
+                sc.ExecuteNonQuery();
+            }
+        }
+
+        public static int getBlackListHis(His his)
+        {
+            string sql = "select count(*) from blackList where vid='" + his.Vid+"'";
+            int res;
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                SqlCommand sc = new SqlCommand(sql, conn);
+                res = Convert.ToInt32(sc.ExecuteScalar());
+            }
+            return res;
         }
     }
 }

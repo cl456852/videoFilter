@@ -29,6 +29,11 @@ namespace BLL
             }
         }
 
+        public bool CheckBlackList(His his)
+        {
+            return DBHelper.getBlackListHis(his)>0;
+        }
+
         public bool checkValid(His his)
         {
             string id = his.Vid;
@@ -79,7 +84,7 @@ namespace BLL
 
                     flag = true;
 
-                    string fileName = Path.GetFileNameWithoutExtension(list[i].FileName.ToLower());
+                    string fileName = Path.GetFileNameWithoutExtension(list[i].FileName.ToLower()).Replace("_","-");
                     string directoryName = list[i].Directory.ToLower();
                     string extension = list[i].Extension;
                     double len = list[i].Length;

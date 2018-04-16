@@ -8,6 +8,7 @@ using System.Collections;
 using MODEL;
 using System.Text.RegularExpressions;
 using BLL;
+using DB;
 
 namespace BLL
 {
@@ -31,6 +32,7 @@ namespace BLL
         {
             string invalidHtmlHis = "<html><body>";
             string invalidHTML="<html><body>";
+            string blackListHTML= "<html><body>";
             ArrayList hisList = new ArrayList();
             string resultHTML = "<html><body>";
             String[] path = Directory.GetFiles(directoryStr, "*", SearchOption.TopDirectoryOnly);
@@ -48,6 +50,18 @@ namespace BLL
                 ArrayList list = ana.alys(content, p, vid, ifCheckHis);
                 foreach (His his in list)
                 {
+                    his.Vid = his.Vid.Replace("-", "").Replace("_", "");
+                    if (his.IsBlack)
+                    {
+                        DBHelper.insertBLackList(his);
+                        blackListHTML += his.Html;
+                        continue;
+                    }
+                    if(filter.CheckBlackList(his))
+                    {
+                        blackListHTML += his.Html;
+                        continue;
+                    }
                     if (filter.checkValid(his))
                     {
                         his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name,true);
@@ -86,10 +100,12 @@ namespace BLL
             resultHTML += "</body></html>";
             invalidHTML += "</body></html>";
             invalidHtmlHis += "</body></html>";
+            blackListHTML+= "</body></html>";
 
             Tool.WriteFile(Path.Combine(directoryStr, "result.htm"), resultHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "invalid.htm"), invalidHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "invalidHis.htm"), invalidHtmlHis);
+            Tool.WriteFile(Path.Combine(directoryStr, "blackList.htm"), blackListHTML);
 
         }
 

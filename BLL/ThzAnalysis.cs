@@ -54,6 +54,7 @@ namespace BLL
                 string content1 = sr.ReadToEnd();
                 sr.Close();
                 string torrentLink = "http://taohuabt.info/forum.php?" + torrentLinkRegex.Match(content1).Value;
+                content= content.Split(new string[] { "发新帖" },StringSplitOptions.RemoveEmptyEntries)[1];
                 MatchCollection imgMc = imgRegex.Matches(content);
                 int n = 0;
                 foreach (Match match in imgMc)

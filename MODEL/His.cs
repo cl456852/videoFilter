@@ -135,5 +135,9 @@ namespace BLL
             set { name = value; }
         }
 
+        public bool IsBlack { get => isBlack; set => isBlack = value; }
+
+        private Boolean isBlack;
+
     }
 }

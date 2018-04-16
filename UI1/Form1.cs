@@ -25,8 +25,7 @@ namespace UI1
         public void refresh()
         {
             list = fb.getFileList();
-            dataGridView1.DataSource = list;
-            dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 20;
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -40,15 +39,7 @@ namespace UI1
             {
                 
                 int row = e.RowIndex;
-                myFileInfo.FileId = Convert.ToInt32(dataGridView1["FileId", row].Value);
-                myFileInfo.FileName = dataGridView1["FileName", row].Value.ToString();
-                myFileInfo.Directory = dataGridView1["Directory", row].Value.ToString();
-                myFileInfo.DirectoryName = dataGridView1["DirectoryName", row].Value.ToString();
-                myFileInfo.Extension = dataGridView1["Extension", row].Value.ToString();
-                myFileInfo.LastAccessTime = dataGridView1["LastAccessTime", row].Value.ToString();
-                myFileInfo.LastWriteTime = dataGridView1["LastWriteTime", row].Value.ToString();
-                myFileInfo.Length = Convert.ToInt32(dataGridView1["length", row].Value);
-                myFileInfo.Mark = dataGridView1["mark", row].Value.ToString();
+
             }
             catch(Exception ex)
             {
@@ -84,66 +75,9 @@ namespace UI1
         private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             List<MyFileInfo> sortList = new List<MyFileInfo>();
-            sortList = (List<MyFileInfo>)dataGridView1.DataSource;
-            string dataclick = dataGridView1.Columns[e.ColumnIndex].DataPropertyName;
-            //List<MyFileInfo> listNow;
-            //if (dataClicked == dataGridView1.Columns[e.ColumnIndex].DataPropertyName)
-            //{
-                
-            //    listNow= (List<MyFileInfo>)dataGridView1.DataSource;
-            //    listNow.Reverse();
-            //    dataGridView1.DataSource = listNow;
-            //}
-            //else
-            //    dataGridView1.DataSource = FileDAL.selectMyFileInfo(dataGridView1.Columns[e.ColumnIndex].DataPropertyName);
-            //dataClicked = dataGridView1.Columns[e.ColumnIndex].DataPropertyName;
-            //dataGridView1.Refresh();
-            //dataGridView1.Columns[e.ColumnIndex].HeaderCell.Style.
-            if (flag = true && dataclick == dataClicked)
-            {
-                sortList.Reverse();
-
-            }
-            else
-            {
-               // sortList = fb.Sort(list, dataclick);
-
-            }
-            dataGridView1.DataSource = sortList;
-            dataGridView1.Refresh();
-            flag = true;
-            dataClicked = dataclick;
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            string[] searchStr = textBox2.Text.ToLower().Split(' ');
-            bool flag = true;
-            List<MyFileInfo> newList=new List<MyFileInfo>();
-            for (int i = 0; i < list.Count; i++)
-            {
-
-                flag = true;
-                for (int j = 0; j < searchStr.Length; j++)
-                {
-                    if (!(list[i].DirectoryName.ToLower().Contains(searchStr[j]) || list[i].FileName.ToLower().Contains(searchStr[j]) || list[i].Mark.ToLower().Contains(searchStr[j])))
-                    {
-                        flag = false;
-                        break;
-                        
-                    }
-                    
-                    
-                }
-                if (flag)
-                    newList.Add(list[i]);
-                
-            }
-            this.dataGridView1.DataSource = newList;
-            //list = newList;
-            dataGridView1.Refresh();
 
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -168,6 +102,18 @@ namespace UI1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new JavTorrentsAnalysis(), checkBox1.Checked);
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new YouivAnalysis(), checkBox1.Checked);
 
         }
         
