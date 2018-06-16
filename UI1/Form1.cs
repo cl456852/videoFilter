@@ -11,6 +11,9 @@ using MODEL;
 using BLL;
 using DAL;
 using DB;
+using System.IO;
+using System.Text.RegularExpressions;
+
 namespace UI1
 {
     public partial class Form1 : Form
@@ -114,10 +117,52 @@ namespace UI1
         private void button6_Click(object sender, EventArgs e)
         {
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new YouivAnalysis(), checkBox1.Checked);
+            addKiki();
+        }
+
+        MegFinder megFinder;
+        void addKiki()
+        {
+            megFinder = new MegFinder();
+            megFinder.addKiki(Path.Combine(textBox1.Text.Replace("\\", "\\\\"), "result.htm"),webBrowser1);
+        }
+        Kiki kiki;
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            
+            kiki.NavigateHandle(webBrowser1, e, textBox1.Text.Replace("\\", "\\\\"));
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            kiki = new Kiki();
+            Regex regex = new Regex("<a href=\" http://kikibt.co/search/.*/>");
+            StreamReader sr = new StreamReader(Path.Combine(textBox1.Text.Replace("\\", "\\\\"), "result.htm"));
+            string content = sr.ReadToEnd();
+            string[] htmlStrs= content.Split(new string[] { Tool.splitter },StringSplitOptions.RemoveEmptyEntries);
+            foreach(string html in htmlStrs)
+            {
+                if (html == "\r\n ")
+                    continue;
+                string url= regex.Match(html).Value.Trim().Replace("<a href=\"","").Replace("\"/>","").Trim();
+                if(String.IsNullOrEmpty(url))
+                {
+                    kiki.Empty += html + Tool.splitter+"\n";
+                    continue;
+                }
+                KikiDO kikiDO = new KikiDO();
+                kikiDO.Url = url;
+                kikiDO.Html = html;
+                kiki.BlockingQueue.Enqueue(kikiDO);
+                kiki.DictionarySearch.Add(url, kikiDO);
+
+            }
+            KikiDO kikiDO1 = kiki.BlockingQueue.Peek();
+            webBrowser1.Navigate(kikiDO1.Url);
 
         }
-        
-        
+
+
 
         //private void SortRows(DataGridViewColumn sortColumn, bool orderToggle)
         //{

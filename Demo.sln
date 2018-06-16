@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{921EBE20-E9B1-440C-A1C4-178606343A36}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI1", "UI1\UI1.csproj", "{51939127-8E88-48C1-AB3F-0EF5FF6B89C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BencodeLibrary", "BencodeLibrary\BencodeLibrary.csproj", "{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{B5524285-ECA1-49F6-8755-96298FF31D4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,8 +99,23 @@ Global
 		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0305B6F5-8BAF-4B97-8BB5-50550C1C6F3C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Debug|.NET.Build.0 = Debug|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Release|.NET.ActiveCfg = Release|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Release|.NET.Build.0 = Release|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B5524285-ECA1-49F6-8755-96298FF31D4C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1901D08D-28FE-4299-B252-274356D035D3}
 	EndGlobalSection
 EndGlobal

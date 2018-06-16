@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="His.cs" />
+    <Compile Include="KikiDO.cs" />
     <Compile Include="MyFileInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

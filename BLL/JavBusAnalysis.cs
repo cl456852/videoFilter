@@ -52,7 +52,7 @@ namespace BLL
                 Match matchName= nameRegex.Match(content);
                 his.Name= matchName.Value.Replace("<h3>","").Replace("</h3>","");
                 
-                his.HisTimeSpan = 120;
+                his.HisTimeSpan = 6;
                 his.IsCHeckHisSize = isCheckHis;
                 his.Html += "<img src=\"" + img + "\"/><br>\n<table>";
                 his.Html += magContent + "</table><br>\n";

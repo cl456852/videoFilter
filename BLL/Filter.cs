@@ -36,6 +36,8 @@ namespace BLL
 
         public bool checkValid(His his)
         {
+            if (!String.IsNullOrEmpty(his.FailReason))
+                return false;
             string id = his.Vid;
             if (id == null || id == "")
             {

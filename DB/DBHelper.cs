@@ -71,7 +71,7 @@ namespace DB
 
         public static int searchHis(His his)
         {
-            int res;
+            int res=0;
             string sql = "";
 
             if (his.IsCHeckHisSize && his.Size > 0)
@@ -88,7 +88,14 @@ namespace DB
             {
                 conn.Open();
                 SqlCommand sc = new SqlCommand(sql, conn);
-                res = Convert.ToInt32(sc.ExecuteScalar());
+                try
+                {
+                    res = Convert.ToInt32(sc.ExecuteScalar());
+                } 
+                catch(Exception e)
+                {
+                    searchHis(his);
+                }
             }
             return res;
         }

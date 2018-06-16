@@ -87,6 +87,10 @@ namespace BLL
                 his.Size = Convert.ToDouble(sizeRegex.Match(path).Value.Replace("size^^^", "").Replace(".htm", ""));
                 his.Html = content.Split(new string[] { "count_add_one", "下载次数:" }, StringSplitOptions.RemoveEmptyEntries)[1];
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Split(new string[] { "SIZE^^^" }, StringSplitOptions.RemoveEmptyEntries)[0];
+                if(his.Name.StartsWith("[FHD"))
+                {
+                    his.FailReason = "44x";
+                }
                 string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value;
 
                 MatchCollection imgMc = imgRegex.Matches(his.Html);

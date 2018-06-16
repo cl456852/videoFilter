@@ -17,8 +17,8 @@ namespace Test
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.CmdTest();
-            //Console.Read();
+            p.dictionaryTest();
+            Console.Read();
         }
 
         void jsTest()
@@ -160,6 +160,28 @@ namespace Test
 
 
             Console.WriteLine(output);
+        }
+
+        public void dictionaryTest()
+        {
+
+            Dictionary<string, KikiDO> dictionarySearch = new Dictionary<string, KikiDO>();
+            KikiDO kikiDO = new KikiDO();
+            kikiDO.Url = "a";
+            dictionarySearch.Add("a",kikiDO);
+            dictionarySearch.Add("b", kikiDO);
+            KikiDO k= dictionarySearch["a"];
+            k.Url = "d";
+            foreach (var item in dictionarySearch)
+
+            {
+
+                Console.WriteLine(item.Key +" "+ item.Value.Url);
+
+            }
+
+
+
         }
 
     }

@@ -9,6 +9,8 @@ using MODEL;
 using System.Text.RegularExpressions;
 using BLL;
 using DB;
+using System.Threading;
+using System.Diagnostics;
 
 namespace BLL
 {
@@ -28,10 +30,44 @@ namespace BLL
             return FileDAL.selectMyFileInfo("");
         }
 
+        void curlCheck()
+        {
+            while (true)
+            {
+                Process[] processes = Process.GetProcesses();
+
+                foreach (Process p in processes)
+                {
+
+                    try
+                    {
+                        if (p.ProcessName.Contains("curl"))
+                        {
+                            Console.WriteLine(String.Format("{0} {1} {2} {3}", p.Id, p.ProcessName, p.BasePriority, p.StartTime));
+                            if ((DateTime.Now - p.StartTime).Seconds > 30)
+                            {
+                                p.Kill();
+                                Console.WriteLine("curl killed");
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                Thread.Sleep(30000);
+            }
+        }
+
         public void process(string directoryStr, IAnalysis ana, bool ifCheckHis)
         {
+            Thread th = new Thread(curlCheck);
+            th.Start();
+
             string invalidHtmlHis = "<html><body>";
             string invalidHTML="<html><body>";
+            string invalidHTML44x = "<html><body>";
             string blackListHTML= "<html><body>";
             ArrayList hisList = new ArrayList();
             string resultHTML = "<html><body>";
@@ -64,7 +100,7 @@ namespace BLL
                     }
                     if (filter.checkValid(his))
                     {
-                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name,true);
+                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, true);
                         hisList.Add(his);
                     }
                     else
@@ -72,8 +108,12 @@ namespace BLL
                         his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, false);
                         if (his.FailReason == "file")
                             invalidHTML += his.Html;
-                        else
+                        else if (his.FailReason == "his")
                             invalidHtmlHis += his.Html;
+                        else if (his.FailReason == "44x")
+                        {
+                            invalidHTML44x += his.Html;
+                        }
                     }
                 }
 
@@ -101,11 +141,12 @@ namespace BLL
             invalidHTML += "</body></html>";
             invalidHtmlHis += "</body></html>";
             blackListHTML+= "</body></html>";
-
+            invalidHTML44x+= "</body></html>";
             Tool.WriteFile(Path.Combine(directoryStr, "result.htm"), resultHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "invalid.htm"), invalidHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "invalidHis.htm"), invalidHtmlHis);
             Tool.WriteFile(Path.Combine(directoryStr, "blackList.htm"), blackListHTML);
+            Tool.WriteFile(Path.Combine(directoryStr, "44x.htm"), invalidHTML44x);
 
         }
 
