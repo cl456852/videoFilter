@@ -162,6 +162,11 @@ namespace UI1
 
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new _168x(), checkBox1.Checked);
+        }
+
 
 
         //private void SortRows(DataGridViewColumn sortColumn, bool orderToggle)
