@@ -67,7 +67,7 @@ namespace BLL
 
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Replace(mc[0].Value, "");
 
-                string sizeStr = sizeRegex.Match(content).Value.Replace("容量：", "").Replace("<", "");
+                string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("<", "").Replace(":","").Replace("：","");
                 if (sizeStr.ToUpper().Contains("G"))
                 {
                     sizeStr = sizeStr.ToUpper().Replace("GB", "");
@@ -83,7 +83,7 @@ namespace BLL
                 MatchCollection picMc = picRegex.Matches(content);
                 foreach (Match m in picMc)
                 {
-                    his.Html += "<a href=\"" + torrentLink + "\"><img src=\"" + m.Value + "\"/></a><br>";
+                    his.Html += "<a href=\"" + torrentLink + "\"><img " + m.Value + "/></a><br>";
                 }
 
                 his.HisTimeSpan = 10;
@@ -93,7 +93,7 @@ namespace BLL
             }
             catch
             {
-                String unknownPath = Path.Combine(Path.GetDirectoryName(path), "thzUnknown");
+                String unknownPath = Path.Combine(Path.GetDirectoryName(path), "168xUnknown");
                 if (!Directory.Exists(unknownPath))
                     Directory.CreateDirectory(unknownPath);
                 File.Move(path, Path.Combine(unknownPath, Path.GetFileNameWithoutExtension(path)) + ".htm");
