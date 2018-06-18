@@ -58,7 +58,7 @@ namespace BLL
                 }
                 if (mc.Count != 1)
                 {
-                    String unknownPath = Path.Combine(Path.GetDirectoryName(path), "thzUnknown");
+                    String unknownPath = Path.Combine(Path.GetDirectoryName(path), "huaSeUnknown");
                     if (!Directory.Exists(unknownPath))
                         Directory.CreateDirectory(unknownPath);
                     File.Move(path, Path.Combine(unknownPath, Path.GetFileNameWithoutExtension(path)) + ".htm");

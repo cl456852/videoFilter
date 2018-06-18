@@ -71,6 +71,7 @@
     <Compile Include="18javAnaysis.cs" />
     <Compile Include="AkibaOnlineAnalysis.cs" />
     <Compile Include="Analysis.cs" />
+    <Compile Include="BailuAnalysis.cs" />
     <Compile Include="BaseAnalysis.cs" />
     <Compile Include="BtdiggAnalysis.cs" />
     <Compile Include="FileBLL.cs" />
