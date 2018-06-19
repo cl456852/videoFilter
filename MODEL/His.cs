@@ -103,14 +103,6 @@ namespace BLL
             set { torrentPath = value; }
         }
 
-        public bool IsCheckSize
-        {
-            get { return isCheckSize; }
-            set { isCheckSize = value; }
-        }
-
-        private bool isCheckSize = true;
-
         private bool isCHeckHisSize=true;
 
         public bool IsCHeckHisSize
@@ -136,8 +128,12 @@ namespace BLL
         }
 
         public bool IsBlack { get => isBlack; set => isBlack = value; }
+        public bool IfExistSmaller { get => ifExistSmaller; set => ifExistSmaller = value; }
 
         private Boolean isBlack;
+
+        private bool ifExistSmaller;
+
 
     }
 }

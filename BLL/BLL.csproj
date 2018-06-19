@@ -100,6 +100,10 @@
       <Project>{921EBE20-E9B1-440C-A1C4-178606343A36}</Project>
       <Name>DB</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{B5524285-ECA1-49F6-8755-96298FF31D4C}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{5309E5B6-D7F7-4C9A-8AD0-AF9638439E58}</Project>
       <Name>MODEL</Name>

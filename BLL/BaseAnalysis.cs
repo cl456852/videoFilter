@@ -22,7 +22,7 @@ namespace BLL
         }
 
         static Regex reg1 = new Regex("[A-Z]");
-        public static string getSearchHtml(string vid, double size, string name,bool getKiki)
+        public static string getSearchHtml(string vid, double size, string name,bool getKiki,His his)
         {
             vid= vid.Replace("-", "").ToUpper();
             string html="";
@@ -59,7 +59,9 @@ namespace BLL
             html += "<a href=\"http://www.javbus.com/" + letter + "-" + number + "\">" + vid + "</a><br>\n";
             if(getKiki)
                 html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
-            html += ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
+            if (his.IfExistSmaller)
+                html += "ExistSmaller<br>\n";
+            html += ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><br>\n";
             return html;
         }
 

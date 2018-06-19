@@ -100,12 +100,12 @@ namespace BLL
                     }
                     if (filter.checkValid(his))
                     {
-                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, true);
+                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, true,his);
                         hisList.Add(his);
                     }
                     else
                     {
-                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, false);
+                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, false,his);
                         if (his.FailReason == "file")
                             invalidHTML += his.Html;
                         else if (his.FailReason == "his")

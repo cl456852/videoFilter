@@ -16,15 +16,29 @@ namespace BLL
         Regex imgRegex = new Regex("http://.*jpg");
         Regex torrentRegex = new Regex("forum.php\\?mod=attachment&amp;aid=.*?\"");
         Regex picRegex = new Regex("src=\"http.*?\"");
+        Regex sizeRegex1 = new Regex("\\[FHD.*\\]");
         public override ArrayList alys(string content, string path, string vid, bool ifCheckHis)
         {
             ArrayList resList = new ArrayList();
             try
             {
-                MatchCollection mc = idRegex.Matches(Path.GetFileNameWithoutExtension(path.ToUpper()));
+                string fileName = Path.GetFileNameWithoutExtension(path.ToUpper());
+                string sizeStr;
+                if (fileName.StartsWith("[FHD"))
+                {
+                    sizeStr = sizeRegex1.Match(fileName).Value.Replace("[FHD","").Replace("]","");
+                    fileName = fileName.Substring(4);
+                    
+
+                }
+                else
+                {
+                    sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("<", "").Replace(":", "").Replace("：", "");
+                }
+                MatchCollection mc = idRegex.Matches(fileName);
             if (mc.Count != 1)
             {
-                String unknownPath = Path.Combine(Path.GetDirectoryName(path), "thzUnknown");
+                String unknownPath = Path.Combine(Path.GetDirectoryName(path), "BailuUnknown");
                 if (!Directory.Exists(unknownPath))
                     Directory.CreateDirectory(unknownPath);
                 File.Move(path, Path.Combine(unknownPath, Path.GetFileNameWithoutExtension(path)) + ".htm");
@@ -33,8 +47,6 @@ namespace BLL
             His his = new His();
             his.Vid = mc[0].Value.Replace("-", "");
             his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Replace(mc[0].Value, "");
-
-            string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("<", "").Replace(":", "").Replace("：", "");
             if (sizeStr.ToUpper().Contains("G"))
             {
                 sizeStr = sizeStr.ToUpper().Replace("GB", "");
@@ -45,16 +57,26 @@ namespace BLL
                 sizeStr = sizeStr.ToUpper().Replace("MB", "");
                 his.Size = Convert.ToDouble(sizeStr);
             }
-
-            string torrentLink = "http://168x.me/" + torrentRegex.Match(content);
+                string torrentLink;
+            MatchCollection matchCollection= torrentRegex.Matches(content);
+                if (matchCollection.Count > 1)
+                {
+                    torrentLink = "http://www.474hd.com/" + matchCollection[1];
+                    his.Html= "<a href=\"" + torrentLink + "\"><img src=\"" + "http://www.474hd.com/" + matchCollection[0].Value.Replace("amp;","") + "/></a><br>"; 
+                }
+                else
+                {
+                    torrentLink = "http://www.474hd.com/" + matchCollection[0];
+                }
 
             MatchCollection picMc = picRegex.Matches(content);
+                
             foreach (Match m in picMc)
             {
                 his.Html += "<a href=\"" + torrentLink + "\"><img " + m.Value + "/></a><br>";
             }
 
-            his.HisTimeSpan = 10;
+            his.HisTimeSpan = 1000;
             his.IsCHeckHisSize = ifCheckHis;
             resList.Add(his);
         }

@@ -13,6 +13,7 @@ using DAL;
 using DB;
 using System.IO;
 using System.Text.RegularExpressions;
+using Framework;
 
 namespace UI1
 {
@@ -170,6 +171,11 @@ namespace UI1
         private void button8_Click(object sender, EventArgs e)
         {
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new BailuAnalysis(), checkBox1.Checked);
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.isCheckSize = this.checkBox2.Checked;
         }
 
 

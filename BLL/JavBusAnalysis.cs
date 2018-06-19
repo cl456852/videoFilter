@@ -25,7 +25,6 @@ namespace BLL
                 string id = Path.GetFileNameWithoutExtension(path);
                 string img = imgRegex.Match(content).Value;
                 His his = new His();
-                his.IsCheckSize = false;
                 string[] strings = id.Split('-');
                 if (strings.Length == 1)
                 {

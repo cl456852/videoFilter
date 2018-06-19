@@ -63,7 +63,6 @@ namespace BLL
             }
             his.HisTimeSpan = 999;
             his.IsCHeckHisSize = ifCheckHis;
-            his.IsCheckSize = false;
             his.Name = path.Split(new char[] { ']', '.' })[1];
             resList.Add(his);
             return resList;
