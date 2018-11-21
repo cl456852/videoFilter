@@ -95,11 +95,12 @@ namespace BLL
                         if ((r.IsMatch(fileName) || r.IsMatch(directoryName)) && !fileName.Contains("incomplete"))
                         {
                             his.IfExistSmaller = true;
-                            if((len * 1.7 > his.Size ||
+                            if ((len * 1.7 > his.Size ||
                              (extension.ToLower() == ".mds" || extension.ToLower() == ".iso") && his.Size < 3000))
+                            {
                                 flag = false;
                                 break;
-
+                            }
                         }
                     }
                     else
@@ -122,9 +123,12 @@ namespace BLL
 
             if (flag)
             {
-                flag = checkHis(his);
-                if (!flag)
-                    his.FailReason = "his";
+                if (!his.IfExistSmaller)  //如果有小文件 说明要下载
+                {
+                    flag = checkHis(his);
+                    if (!flag)
+                        his.FailReason = "his";
+                }
             } 
           
 

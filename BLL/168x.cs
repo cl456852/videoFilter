@@ -15,7 +15,8 @@ namespace BLL
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
         Regex idRegex1 = new Regex("[A-Z]{1,}[0-9]{1,}");
         Regex sizeRegex = new Regex("容量.*<");
-        Regex picRegex = new Regex("src=\"http.*?\"");
+        //Regex picRegex = new Regex("src=\"http.*?\"");
+        Regex picRegex = new Regex(" file=\".*?\"");
         Regex torrentRegex = new Regex("forum.php\\?mod=attachment&amp;aid=.*?\"");
 
         public override ArrayList alys(string content, string path, string vid, bool isCheckHis)
@@ -67,7 +68,7 @@ namespace BLL
 
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Replace(mc[0].Value, "");
 
-                string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("<", "").Replace(":","").Replace("：","");
+                string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("</font>","").Replace("<", "").Replace(":","").Replace("：","");
                 if (sizeStr.ToUpper().Contains("G"))
                 {
                     sizeStr = sizeStr.ToUpper().Replace("GB", "");
@@ -78,12 +79,16 @@ namespace BLL
                     sizeStr = sizeStr.ToUpper().Replace("MB", "");
                     his.Size = Convert.ToDouble(sizeStr);
                 }
-                string torrentLink = "http://168x.me/" + torrentRegex.Match(content);
+                MatchCollection matchCollection = torrentRegex.Matches(content);
+                string torrentLink;
+                
+                torrentLink = "http://dsdjssel.com/" + matchCollection[matchCollection.Count-1];
+                
 
                 MatchCollection picMc = picRegex.Matches(content);
                 foreach (Match m in picMc)
                 {
-                    his.Html += "<a href=\"" + torrentLink + "\"><img " + m.Value + "/></a><br>";
+                    his.Html += "<a href=\"" + torrentLink + "><img src=\"" + m.Value.Replace("file=\"","") + " /></a><br>";
                 }
 
                 his.HisTimeSpan = 10;

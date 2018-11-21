@@ -12,7 +12,7 @@ namespace BLL
     public class BailuAnalysis : BaseAnalysis
     {
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
-        Regex sizeRegex = new Regex("容量.*<");
+        Regex sizeRegex = new Regex("(?-i)容量.*?B");
         Regex imgRegex = new Regex("http://.*jpg");
         Regex torrentRegex = new Regex("forum.php\\?mod=attachment&amp;aid=.*?\"");
         Regex picRegex = new Regex("src=\"http.*?\"");
@@ -24,16 +24,17 @@ namespace BLL
             {
                 string fileName = Path.GetFileNameWithoutExtension(path.ToUpper());
                 string sizeStr;
-                if (fileName.StartsWith("[FHD"))
-                {
-                    sizeStr = sizeRegex1.Match(fileName).Value.Replace("[FHD","").Replace("]","");
-                    fileName = fileName.Substring(4);
+                //if (fileName.StartsWith("[FHD"))
+                //{
+                //    sizeStr = sizeRegex1.Match(fileName).Value.Replace("[FHD","").Replace("]","");
+                //    fileName = fileName.Substring(4);
                     
 
-                }
-                else
+                //}
+                //else
                 {
-                    sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("<", "").Replace(":", "").Replace("：", "");
+                    //容量：</div></td><td>812.71 MB</td></tr><tr><td><div
+                    sizeStr = sizeRegex.Match(content).Value.Replace("容量：</div></td><td>", "").Replace("容量：","").Replace(" ","");
                 }
                 MatchCollection mc = idRegex.Matches(fileName);
             if (mc.Count != 1)
@@ -46,7 +47,7 @@ namespace BLL
             }
             His his = new His();
             his.Vid = mc[0].Value.Replace("-", "");
-            his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Replace(mc[0].Value, "");
+            his.Name = Path.GetFileNameWithoutExtension(path.ToUpper());
             if (sizeStr.ToUpper().Contains("G"))
             {
                 sizeStr = sizeStr.ToUpper().Replace("GB", "");
@@ -61,12 +62,12 @@ namespace BLL
             MatchCollection matchCollection= torrentRegex.Matches(content);
                 if (matchCollection.Count > 1)
                 {
-                    torrentLink = "http://www.474hd.com/" + matchCollection[1];
-                    his.Html= "<a href=\"" + torrentLink + "\"><img src=\"" + "http://www.474hd.com/" + matchCollection[0].Value.Replace("amp;","") + "/></a><br>"; 
+                    torrentLink = "http://www.100aa.pw/" + matchCollection[1].Value.Replace("amp;","").Replace("\"", "");
+                    his.Html= "<a href=\"" + torrentLink + "\"><img src=\"" + "http://www.100aa.pw/" + matchCollection[0].Value.Replace("amp;","") + "/></a><br>"; 
                 }
                 else
                 {
-                    torrentLink = "http://www.474hd.com/" + matchCollection[0];
+                    torrentLink = "http://www.100aa.pw/" + matchCollection[0].Value.Replace("amp;", "").Replace("\"",""); 
                 }
 
             MatchCollection picMc = picRegex.Matches(content);

@@ -39,16 +39,23 @@ namespace BLL
                 his.Vid = mc[0].Value.Replace("-", "");
                 string name= path.Split(new char[] { ']', '.' })[1];
                 his.Name = name;
-                string sizeStr = sizeRegex.Match(content).Value.Replace("容量：", "").Replace("<", "");
-                if (sizeStr.ToUpper().Contains("G"))
+                try
                 {
-                    sizeStr= sizeStr.ToUpper().Replace("GB", "");
-                    his.Size = Convert.ToDouble(sizeStr)*1024;
+                    string sizeStr = sizeRegex.Match(content).Value.Replace("容量：", "").Replace("<", "");
+                    if (sizeStr.ToUpper().Contains("G"))
+                    {
+                        sizeStr = sizeStr.ToUpper().Replace("GB", "");
+                        his.Size = Convert.ToDouble(sizeStr) * 1024;
+                    }
+                    else
+                    {
+                        sizeStr = sizeStr.ToUpper().Replace("MB", "");
+                        his.Size = Convert.ToDouble(sizeStr);
+                    }
                 }
-                else
+                catch(Exception e)
                 {
-                    sizeStr = sizeStr.ToUpper().Replace("MB", "");
-                    his.Size = Convert.ToDouble(sizeStr);
+                    Console.WriteLine("Size Error " + e.Message);
                 }
                 StreamReader sr = new StreamReader(path+".htm");
                 string content1 = sr.ReadToEnd();
