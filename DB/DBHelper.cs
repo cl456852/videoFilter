@@ -9,7 +9,7 @@ namespace DB
 {
     public class DBHelper
     {
-        static string searchHisSql = "select * from his1 where LOWER(vid)=LOWER('{0}') and size*1.1>{1} and DATEDIFF(M,createtime,GETDATE())<{2}";
+        static string searchHisSql = "select * from his1 where LOWER(vid)=LOWER('{0}') and size*1.4>{1} and DATEDIFF(M,createtime,GETDATE())<{2}";
         static string searchHisSqlWithoutSize = "select * from his1 where LOWER(vid)=LOWER('{0}') and DATEDIFF(M,createtime,GETDATE())<{1}";
         static string insertHisSql = "insert into his1 values('{0}',{1},'{2}',{3},'{4}',getdate())";
         public static string connstr = @"server=localhost;uid=sa;pwd=iamjack'scolon;database=cd";
