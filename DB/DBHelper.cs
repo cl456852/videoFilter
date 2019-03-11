@@ -140,5 +140,44 @@ namespace DB
             }
             return res;
         }
+
+        public static SqlDataReader EuroAndAmericaList()
+        {
+            string sql = "select * from files where length>500 and len(fileName)>20 and fileName not like  '%-%'";
+            
+                conn.Open();
+                SqlCommand sc = new SqlCommand(sql, conn);
+
+                return sc.ExecuteReader();
+             
+                    
+            
+
+        }
+
+        public static void UpdateType(int fileId)
+        {
+            string sql = "update files set type =1 where fileId=" + fileId;
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                SqlCommand sc = new SqlCommand(sql, conn);
+                sc.ExecuteNonQuery();
+            }
+
+        }
+
+
+        public static void UpdateTypeBatch(string fileId)
+        {
+            string sql = "update files set type =1 where fileId in(  " + fileId+")";
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                SqlCommand sc = new SqlCommand(sql, conn);
+                sc.ExecuteNonQuery();
+            }
+
+        }
     }
 }

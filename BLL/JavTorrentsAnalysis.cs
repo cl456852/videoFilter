@@ -13,6 +13,8 @@ namespace BLL
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
         Regex imgRegex=new Regex("<img src=.* class=\"s-full\">");
         Regex sizeRegex = new Regex("class=\"dl-link.*?</a>");
+        Regex sizeRegex1 = new Regex("DL -.*?GB|DL -.*?MB");
+        Regex sizeRegex2 = new Regex("HD -.*?GB|HD -.*?MB");
 
         public override System.Collections.ArrayList alys(string content, string path, string vid, bool ifCheckHis)
         {
@@ -28,18 +30,32 @@ namespace BLL
                 his.Vid = Path.GetFileNameWithoutExtension(path.ToUpper()).Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries)[0];
                 MatchCollection sizeMc = sizeRegex.Matches(content);
                 double size = 0;
-                foreach (Match match in sizeMc)
+                bool isGB = true ;
+                string size2 = sizeRegex2.Match(content).Value;
+                if (!String.IsNullOrEmpty(size2))
                 {
-                    //class="dl-link DL" target="_blank">DL - 881.8 MB</a>
-                    //class="dl-link HD" target="_blank">HD - 3.49 GB</a>
-
-                    string sizeString = match.Value.Replace("class=\"dl-link DL\" target=\"_blank\">DL - ", "").Replace("class=\"dl-link HD\" target=\"_blank\">HD - ", "");
-                    if (sizeString.Contains("MB"))
-                        size = Convert.ToDouble(sizeString.Replace("MB</a>", "").Trim());
-                    else
-                        size = Convert.ToDouble(sizeString.Replace("GB</a>", "").Trim()) * 1024;
+                    if (size2.EndsWith("MB"))
+                        isGB = false;
+                    size2 = size2.Replace("HD", "").Replace("GB", "").Replace("-", "").Replace("MB","").Trim();
+                    size = Convert.ToDouble(size2);
+                    if (isGB)
+                        size = size * 1024;
+                }
+                if (size == 0)
+                {
+                    string size1 = sizeRegex1.Match(content).Value;
+                    if (!String.IsNullOrEmpty(size1))
+                    {
+                        if (size2.EndsWith("MB"))
+                            isGB = false;
+                        size1 = size1.Replace("DL", "").Replace("GB", "").Replace("-", "").Replace("MB", "").Trim();
+                        size = Convert.ToDouble(size1);
+                        if (isGB)
+                            size = size * 1024;
+                    }
 
                 }
+
                 his.Size = size;
                 his.HisTimeSpan = 999;
                 his.Html = "<img src=\"" + imgUrl + "\"/><br>";

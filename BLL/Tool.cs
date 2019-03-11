@@ -86,6 +86,24 @@ namespace BLL
                 Console.WriteLine(folderName + " " + path);
             }
         }
+
+        public static bool WordsIScn(string words)
+        {
+            string TmmP;
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                TmmP = words.Substring(i, 1);
+
+                byte[] sarr = System.Text.Encoding.GetEncoding("gb2312").GetBytes(TmmP);
+
+                if (sarr.Length == 2)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
 }

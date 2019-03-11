@@ -14,7 +14,7 @@ namespace BLL
         Regex reg1 = new Regex("[A-Z]");
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
         Regex idRegex1 = new Regex("[A-Z]{1,}[0-9]{1,}");
-        Regex sizeRegex = new Regex("容量.*<");
+        Regex sizeRegex = new Regex("容量.*<|影片大小.*?<");
         //Regex picRegex = new Regex("src=\"http.*?\"");
         Regex picRegex = new Regex(" file=\".*?\"");
         Regex torrentRegex = new Regex("forum.php\\?mod=attachment&amp;aid=.*?\"");
@@ -68,7 +68,7 @@ namespace BLL
 
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Replace(mc[0].Value, "");
 
-                string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("</font>","").Replace("<", "").Replace(":","").Replace("：","");
+                string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("</font>","").Replace("<", "").Replace(":","").Replace("：","").Replace("影片大小】","").Replace("：","");
                 if (sizeStr.ToUpper().Contains("G"))
                 {
                     sizeStr = sizeStr.ToUpper().Replace("GB", "");

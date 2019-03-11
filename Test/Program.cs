@@ -9,6 +9,9 @@ using MODEL;
 using System.Reflection;
 using System.Collections;
 using System.Text.RegularExpressions;
+using DB;
+using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace Test
 {
@@ -17,7 +20,7 @@ namespace Test
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.dictionaryTest();
+            p.getEuroTest();
             Console.Read();
         }
 
@@ -182,6 +185,47 @@ namespace Test
 
 
 
+        }
+
+        public void getEuroTest()
+        {
+            //DBHelper.UpdateType(105715);
+            string ids="";
+            String pattern = "[A-Z]{2,}-[0-9]{2,}|[A-Z]{2,}[0-9]{2,}|[A-Z]{2,}_[0-9]{2,}";
+            Regex regex = new Regex(pattern);
+            SqlDataReader sqlDataReader = DBHelper.EuroAndAmericaList();
+            while( sqlDataReader.Read())
+            {
+                string filename = sqlDataReader["fileName"].ToString();
+                if (!Tool.WordsIScn(filename))
+                {
+
+                    filename = filterName(filename);
+                    if (!Regex.IsMatch(filename, pattern, RegexOptions.IgnoreCase))
+                    {
+                        ids += "," + sqlDataReader["fileId"].ToString();
+                        Trace.WriteLine(filename);
+                    }
+                    else
+                        Trace.WriteLine("=============================================================================================================== " + filename);
+                }
+
+            }
+            DBHelper.UpdateTypeBatch(ids.Substring(1));
+        }
+
+        public static string filterName(string fileName)
+        {
+            string filterString = "3d,2k,1k,_avc_hd,_avc,_hd,480p,720p,1080p,1440p,2160p,_,480,720,1080,2160,\\[,\\],.,2000,4000,8000,12000,6000,1500, ,540,qhd,fullhd,-,high,low,sd,$$,rarbg,com,ktr,xxx,%22,%20,YAPG,PROPER,6500,4500,3000,1200,.com,mp4,4k,KLEENEX,GAGViD";
+
+       
+            string[] strs = filterString.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in strs)
+            {
+                Regex.Replace(fileName, s, "", RegexOptions.IgnoreCase);
+
+            }
+            return fileName;
         }
 
     }

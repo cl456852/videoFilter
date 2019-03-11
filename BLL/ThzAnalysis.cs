@@ -57,10 +57,20 @@ namespace BLL
                 {
                     Console.WriteLine("Size Error " + e.Message);
                 }
-                StreamReader sr = new StreamReader(path+".htm");
-                string content1 = sr.ReadToEnd();
-                sr.Close();
-                string torrentLink = "http://taohuabt.info/forum.php?" + torrentLinkRegex.Match(content1).Value;
+                string torrentLink="";
+                try
+                {
+
+
+                    StreamReader sr = new StreamReader(path + ".htm");
+                    string content1 = sr.ReadToEnd();
+                    sr.Close();
+                    torrentLink = "http://taohuabt.info/forum.php?" + torrentLinkRegex.Match(content1).Value;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(".htm.htm異常" + path);
+                }
                 content= content.Split(new string[] { "alt=\"发新帖\"" },StringSplitOptions.RemoveEmptyEntries)[1];
                 MatchCollection imgMc = imgRegex.Matches(content);
                 int n = 0;
