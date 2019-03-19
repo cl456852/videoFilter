@@ -91,7 +91,7 @@ namespace BLL
                 //{
                 //    his.FailReason = "44x";
                 //}
-                string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value;
+                string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value+ "&clickDownload=1";
 
                 MatchCollection imgMc = imgRegex.Matches(his.Html);
                 his.Html = "";
