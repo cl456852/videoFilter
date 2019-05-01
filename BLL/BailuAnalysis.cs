@@ -62,12 +62,12 @@ namespace BLL
             MatchCollection matchCollection= torrentRegex.Matches(content);
                 if (matchCollection.Count > 1)
                 {
-                    torrentLink = "http://www.100aa.pw/" + matchCollection[1].Value.Replace("amp;","").Replace("\"", "");
-                    his.Html= "<a href=\"" + torrentLink + "\"><img src=\"" + "http://www.100aa.pw/" + matchCollection[0].Value.Replace("amp;","") + "/></a><br>"; 
+                    torrentLink = "http://www.100kke.info/" + matchCollection[1].Value.Replace("amp;","").Replace("\"", "");
+                    his.Html= "<a href=\"" + torrentLink + "\"><img src=\"" + "http://www.100kke.info/" + matchCollection[0].Value.Replace("amp;","") + "/></a><br>"; 
                 }
                 else
                 {
-                    torrentLink = "http://www.100aa.pw/" + matchCollection[0].Value.Replace("amp;", "").Replace("\"",""); 
+                    torrentLink = "http://www.100kke.info/" + matchCollection[0].Value.Replace("amp;", "").Replace("\"",""); 
                 }
 
             MatchCollection picMc = picRegex.Matches(content);
