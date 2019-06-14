@@ -10,5 +10,7 @@ namespace Framework
     public class Config
     {
         public static bool isCheckSize = true;
+
+        public static bool isCheck168xC = false;
     }
 }

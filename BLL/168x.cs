@@ -82,7 +82,7 @@ namespace BLL
                 MatchCollection matchCollection = torrentRegex.Matches(content);
                 string torrentLink;
                 
-                torrentLink = "http://dsdjssel.com/" + matchCollection[matchCollection.Count-1];
+                torrentLink = "https://www.sht1236.me/" + matchCollection[matchCollection.Count-1];
                 
 
                 MatchCollection picMc = picRegex.Matches(content);
@@ -91,7 +91,7 @@ namespace BLL
                     his.Html += "<a href=\"" + torrentLink + "><img src=\"" + m.Value.Replace("file=\"","") + " /></a><br>";
                 }
 
-                his.HisTimeSpan = 10;
+                his.HisTimeSpan = 999;
                 his.IsCHeckHisSize = isCheckHis;
                 resList.Add(his);
 

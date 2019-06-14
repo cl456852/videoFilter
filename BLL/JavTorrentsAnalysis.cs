@@ -46,7 +46,7 @@ namespace BLL
                     string size1 = sizeRegex1.Match(content).Value;
                     if (!String.IsNullOrEmpty(size1))
                     {
-                        if (size2.EndsWith("MB"))
+                        if (size1.EndsWith("MB"))
                             isGB = false;
                         size1 = size1.Replace("DL", "").Replace("GB", "").Replace("-", "").Replace("MB", "").Trim();
                         size = Convert.ToDouble(size1);

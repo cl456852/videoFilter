@@ -61,6 +61,8 @@ namespace BLL
                 html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
             if (his.IfExistSmaller)
                 html += "ExistSmaller<br>\n";
+            if(his.Is168xC)
+                html+= "Exist168xC<br>\n";
             html += ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><br>\n";
             return html;
         }

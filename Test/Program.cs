@@ -20,8 +20,7 @@ namespace Test
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.getEuroTest();
-            Console.Read();
+            p.findUrl();
         }
 
         void jsTest()
@@ -226,6 +225,24 @@ namespace Test
 
             }
             return fileName;
+        }
+
+
+        public void findUrl()
+        {
+            HashSet<string> set = new HashSet<string>();
+            StreamReader sr = new StreamReader("D:\\result.csv");
+            string content = sr.ReadToEnd();
+            Regex r=new Regex("\".*?\"\"");
+            MatchCollection mc= r.Matches(content);
+            foreach(Match match in mc)
+            {
+                set.Add(match.Value.Replace("\"", "").Replace(",", ""));
+            }
+            foreach(string s in set)
+            {
+                Console.WriteLine(s);
+            }
         }
 
     }

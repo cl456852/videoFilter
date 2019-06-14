@@ -91,7 +91,7 @@ namespace BLL
                 //{
                 //    his.FailReason = "44x";
                 //}
-                string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value+ "&clickDownload=1";
+                string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value.Replace("\"","")+ "&clickDownload=1";
 
                 MatchCollection imgMc = imgRegex.Matches(his.Html);
                 his.Html = "";
@@ -102,7 +102,7 @@ namespace BLL
                         his.Html += "<a href=\"" + torrentLink + "\">" + match.Value + "/></a><br>";
                     }
                 }
-                his.HisTimeSpan = 100;
+                his.HisTimeSpan = 999;
                 his.IsCHeckHisSize = isCheckHis;
                 resList.Add(his);
                 

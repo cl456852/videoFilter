@@ -9,6 +9,8 @@ namespace BLL
     {
         string id="";
 
+        bool is168xC;
+
         public string Id
         {
             get { return id; }
@@ -129,6 +131,7 @@ namespace BLL
 
         public bool IsBlack { get => isBlack; set => isBlack = value; }
         public bool IfExistSmaller { get => ifExistSmaller; set => ifExistSmaller = value; }
+        public bool Is168xC { get => is168xC; set => is168xC = value; }
 
         private Boolean isBlack;
 

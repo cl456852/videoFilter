@@ -118,6 +118,16 @@ namespace BLL
                 if (!flag)
                 {
                     his.FailReason = "file";
+                    if(Config.isCheck168xC)
+                    {
+                        if( DBHelper.Check168xC(letter +"-"+ number)>0)
+                        {
+                            return false;
+                        }
+                        his.FailReason = "";
+                        his.Is168xC = true;
+                        return true;
+                    }
                 }
             }
 

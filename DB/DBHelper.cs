@@ -179,5 +179,18 @@ namespace DB
             }
 
         }
+
+        public static int Check168xC(string vid)
+        {
+
+            string sql = "SELECT count(*) FROM [cd].[dbo].[files] where directoryName like '%" + vid + "-C' and length>1000";
+            SqlDataReader sdr = DBHelper.SearchSql(sql);
+            sdr.Read();
+            int count = (int)sdr[0];
+            sdr.Close();
+            sdr.Dispose();
+            DBHelper.conn.Close();
+            return count;
+        }
     }
 }

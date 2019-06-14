@@ -137,7 +137,7 @@ namespace UI1
         private void button2_Click_1(object sender, EventArgs e)
         {
             kiki = new Kiki();
-            Regex regex = new Regex("<a href=\" http://kikibt.co/search/.*/>");
+            Regex regex = new Regex("<a href=\" http://kikibt.ws/search/.*/>");
             StreamReader sr = new StreamReader(Path.Combine(textBox1.Text.Replace("\\", "\\\\"), "result.htm"));
             string content = sr.ReadToEnd();
             string[] htmlStrs= content.Split(new string[] { Tool.splitter },StringSplitOptions.RemoveEmptyEntries);
@@ -165,6 +165,7 @@ namespace UI1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            Config.isCheck168xC = checkBox3.Checked;
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new _168x(), checkBox1.Checked);
         }
 
