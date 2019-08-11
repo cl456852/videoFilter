@@ -69,6 +69,7 @@
     <Compile Include="141javAnalysis.cs" />
     <Compile Include="168x.cs" />
     <Compile Include="18javAnaysis.cs" />
+    <Compile Include="52iv.cs" />
     <Compile Include="AkibaOnlineAnalysis.cs" />
     <Compile Include="Analysis.cs" />
     <Compile Include="BailuAnalysis.cs" />

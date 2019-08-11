@@ -16,8 +16,8 @@ namespace UI1
         string[] htmlList;
         int index;
         int itemIndex;
-        Regex regex=new Regex("<a href=\" http://kikibt.co/search/.*/>");
-        Regex itemRegex = new Regex("http://kikibt.co/item/.*.html");
+        Regex regex=new Regex("<a href=\" http://kikibt.ws/search/.*/>");
+        Regex itemRegex = new Regex("http://kikibt.ws/item/.*.html");
         Regex megRegex = new Regex("<a href='magnet:\\?xt=.*?'>");
         MatchCollection mc;
         Dictionary<string, string> dictionary = new Dictionary<string, string>();

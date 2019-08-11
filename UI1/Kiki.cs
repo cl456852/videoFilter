@@ -15,7 +15,7 @@ namespace UI1
     public class Kiki
     {
         string empty = "";
-        Regex itemRegex = new Regex("http://kikibt.co/item/.*.html");
+        Regex itemRegex = new Regex("http://kikibt.ws/item/.*.html");
         Regex megRegex = new Regex("<a href='magnet:\\?xt=.*?</a>");
         Regex itemSize = new Regex("文件大小：<b>2.06 GB</b>");
         BlockingQueue<KikiDO> blockingQueue = new BlockingQueue<KikiDO>();

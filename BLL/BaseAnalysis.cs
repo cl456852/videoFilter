@@ -111,7 +111,7 @@ namespace BLL
 
         public static string KikiBt(string keyword)
         {
-            string str = "d:\\curl http://kikibt.xyz -H \"Cookie: __cfduid=d84d7ed42600397ebc0617366fc2e02bc1477489552; a2204_times=13; CNZZDATA1260997767=915447713-1482412125-^%^7C1492937714; CNZZDATA1261675006=724777673-1492252758-^%^7C1492937311; UM_distinctid=15ed86daa300-0f615ded0eedfe-3a3e5c06-1fa400-15ed86daa34ba6; __atuvc=3^%^7C36^%^2C0^%^7C37^%^2C0^%^7C38^%^2C0^%^7C39^%^2C45^%^7C40; CNZZDATA1261857871=1481140133-1494768247-^%^7C1507030268; CNZZDATA1261841250=1785091964-1494766693-^%^7C1507028747; Hm_lvt_bd3d4db2c728324e870543c59e9e3b89=1504709377,1506869631; Hm_lpvt_bd3d4db2c728324e870543c59e9e3b89=1507031416; a5161_pages=1; a5161_times=10; Hm_lvt_f75b813e9c1ef4fb27eaa613c9f307b2=1504709378,1506869631; Hm_lpvt_f75b813e9c1ef4fb27eaa613c9f307b2=1507031416\" -H \"Origin: http://kikibt.net\" -H \"Accept-Encoding: gzip, deflate\" -H \"Accept-Language: zh-CN,zh;q=0.8,en;q=0.6,es;q=0.4\" -H \"Upgrade-Insecure-Requests: 1\" -H \"User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36\" -H \"Content-Type: application/x-www-form-urlencoded\" -H \"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\" -H \"Cache-Control: max-age=0\" -H \"Referer: http://kikibt.net/search/e7Zl9_O5DQA/1-0-0.html\" -H \"Connection: keep-alive\" --data \"keyword=" + keyword + "\" --compressed -vi --connect-timeout 10";
+            string str = "d:\\curl http://kikibt.ws -H \"Cookie: __cfduid=d84d7ed42600397ebc0617366fc2e02bc1477489552; a2204_times=13; CNZZDATA1260997767=915447713-1482412125-^%^7C1492937714; CNZZDATA1261675006=724777673-1492252758-^%^7C1492937311; UM_distinctid=15ed86daa300-0f615ded0eedfe-3a3e5c06-1fa400-15ed86daa34ba6; __atuvc=3^%^7C36^%^2C0^%^7C37^%^2C0^%^7C38^%^2C0^%^7C39^%^2C45^%^7C40; CNZZDATA1261857871=1481140133-1494768247-^%^7C1507030268; CNZZDATA1261841250=1785091964-1494766693-^%^7C1507028747; Hm_lvt_bd3d4db2c728324e870543c59e9e3b89=1504709377,1506869631; Hm_lpvt_bd3d4db2c728324e870543c59e9e3b89=1507031416; a5161_pages=1; a5161_times=10; Hm_lvt_f75b813e9c1ef4fb27eaa613c9f307b2=1504709378,1506869631; Hm_lpvt_f75b813e9c1ef4fb27eaa613c9f307b2=1507031416\" -H \"Origin: http://kikibt.net\" -H \"Accept-Encoding: gzip, deflate\" -H \"Accept-Language: zh-CN,zh;q=0.8,en;q=0.6,es;q=0.4\" -H \"Upgrade-Insecure-Requests: 1\" -H \"User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36\" -H \"Content-Type: application/x-www-form-urlencoded\" -H \"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\" -H \"Cache-Control: max-age=0\" -H \"Referer: http://kikibt.net/search/e7Zl9_O5DQA/1-0-0.html\" -H \"Connection: keep-alive\" --data \"keyword=" + keyword + "\" --compressed -vi --connect-timeout 10";
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
@@ -153,7 +153,7 @@ namespace BLL
 
             p.Close();
 
-            line = ("https://kikibt.me" + line).Replace(" ","");
+            line = ("https://kikibt.ws" + line).Replace(" ","");
             Console.WriteLine(line);
             return line;
         }
