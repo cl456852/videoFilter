@@ -179,6 +179,12 @@ namespace UI1
             Config.isCheckSize = this.checkBox2.Checked;
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new _52iv(), checkBox1.Checked);
+
+        }
+
 
 
         //private void SortRows(DataGridViewColumn sortColumn, bool orderToggle)

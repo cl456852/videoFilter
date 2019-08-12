@@ -33,7 +33,7 @@ namespace BLL
         {
             return DBHelper.getBlackListHis(his)>0;
         }
-
+        Regex numberRegex = new Regex("[0-9]*");
         public bool checkValid(His his)
         {
             if (!String.IsNullOrEmpty(his.FailReason))
@@ -76,7 +76,7 @@ namespace BLL
                         number += id[i];
                         isEndofLetter = true;
                     }
-
+                number = numberRegex.Match(number).Value;
                 string[] searchStr = { letter, number };
 
 

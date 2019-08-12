@@ -54,13 +54,6 @@ namespace BLL
                 string picUrl ="https://youiv.tv"+ m.Value.Replace("zoomfile=\".", "").Replace("\"","");
                 his.Html = "<img src=\"" + picUrl + "\"/><br>";
             }
-            if (content.Contains("filter=typeid&amp;typeid=432\">[U-15写真]</a>"))
-            {
-                Tool.MoveFile("U-15", path);
-                his.IsBlack = true;
-                resList.Add(his);
-                return resList;
-            }
             his.HisTimeSpan = 999;
             his.IsCHeckHisSize = ifCheckHis;
             his.Name = path.Split(new char[] { ']', '.' })[1];

@@ -87,20 +87,27 @@ namespace BLL
                 foreach (His his in list)
                 {
                     his.Vid = his.Vid.Replace("-", "").Replace("_", "");
-                    if (his.IsBlack)
+                    string allId = his.Vid;
+                    string[] vids = his.Vid.Split('#');
+                    bool isValid = true;
+        
+                    foreach(string id in vids)
                     {
-                        DBHelper.insertBLackList(his);
-                        blackListHTML += his.Html;
-                        continue;
+                        his.Vid = id;
+                        isValid = filter.checkValid(his);
+                        if(!isValid)
+                        {
+                            break;
+                        }
                     }
-                    if(filter.CheckBlackList(his))
+                    if (isValid)
                     {
-                        blackListHTML += his.Html;
-                        continue;
-                    }
-                    if (filter.checkValid(his))
-                    {
-                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, true,his);
+                        foreach(string id in vids)
+                        {
+                            his.Vid = id;
+                            his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, true, his);
+                        }
+                        
                         hisList.Add(his);
                     }
                     else
@@ -114,6 +121,14 @@ namespace BLL
                         {
                             invalidHTML44x += his.Html;
                         }
+                    }
+
+                    if (vids.Length > 1)
+                    {
+
+                        Console.WriteLine(allId);
+                        Console.WriteLine(isValid);
+                        Console.WriteLine(his.FailReason);
                     }
                 }
 
