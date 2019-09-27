@@ -44,7 +44,7 @@ namespace BLL
                 }
                 catch(Exception ex)
                 {
-                    Console.WriteLine("SIZE ERROR"+ ex.ToString());
+                    Console.WriteLine(his.Vid + " SIZE ERROR  "+ ex.ToString());
                 }
 
                 string picHtml = picRegex.Match(content).Value.Replace("zoomfile=\".","");

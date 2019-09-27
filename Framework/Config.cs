@@ -12,5 +12,9 @@ namespace Framework
         public static bool isCheckSize = true;
 
         public static bool isCheck168xC = false;
+
+        public static bool isXieZhen = false;
+
+        public static bool isKiki = true;
     }
 }

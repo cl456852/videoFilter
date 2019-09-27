@@ -1,4 +1,5 @@
 ﻿using BencodeLibrary;
+using Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,16 +50,18 @@ namespace BLL
 
             //html += "<a href=\"http://javscreens.com/" + vid.ToLower()[0]+"/"+idSplit[0] +"-"+idSplit[1]+ ".html\"/>" + vid + "</a><br>";
             //http://video-jav.net/wp-content/uploads/NMK-030_Video-JAV.net_.mp4.scrlist.jpg
-            html += "<a href=\"http://video-jav.net/wp-content/uploads/" + idSplit[0].ToUpper() + "-" + idSplit[1] + "_Video-JAV.net_.mp4.scrlist.jpg\"/>" +vid+"</a><br>";
+            //html += "<a href=\"http://video-jav.net/wp-content/uploads/" + idSplit[0].ToUpper() + "-" + idSplit[1] + "_Video-JAV.net_.mp4.scrlist.jpg\"/>" +vid+"</a><br>";
             html += "<a href=\"https://www.google.com.tw/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + vid + "\"/>" + vid + "</a><br>";
             if (!string.IsNullOrEmpty(name))
                 html += "<a href=\"https://www.google.com.tw/search?as_st=y&tbm=isch&hl=zh-CN&as_q=" + name + "&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=&safe=images&tbs=iar:t#imgrc=l5VFSis1_tEGOM:\"/>" + name + "</a><br>"; 
                // html += "<a href=\"https://www.google.com.tw/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + name + "\"/>" + name + "</a><br>";
             html += size + "<br>";
-            html += "<a href=\"http://www.btanx.com/search/" + letter + "%20" + number + "-size-desc-1\"/>" +vid + "</a><br>\n";
             html += "<a href=\"http://www.javbus.com/" + letter + "-" + number + "\">" + vid + "</a><br>\n";
-            if(getKiki)
-                html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
+            //if (Config.isKiki && getKiki)
+            //{
+            //    html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
+            //}
+            html+= "<a href=\"https://btdig.com/search?q=" +letter +"+"+number+ "\"/>" + vid + "</a><br>\n";
             if (his.IfExistSmaller)
                 html += "ExistSmaller<br>\n";
             if(his.Is168xC)
@@ -111,7 +114,8 @@ namespace BLL
 
         public static string KikiBt(string keyword)
         {
-            string str = "d:\\curl http://kikibt.ws -H \"Cookie: __cfduid=d84d7ed42600397ebc0617366fc2e02bc1477489552; a2204_times=13; CNZZDATA1260997767=915447713-1482412125-^%^7C1492937714; CNZZDATA1261675006=724777673-1492252758-^%^7C1492937311; UM_distinctid=15ed86daa300-0f615ded0eedfe-3a3e5c06-1fa400-15ed86daa34ba6; __atuvc=3^%^7C36^%^2C0^%^7C37^%^2C0^%^7C38^%^2C0^%^7C39^%^2C45^%^7C40; CNZZDATA1261857871=1481140133-1494768247-^%^7C1507030268; CNZZDATA1261841250=1785091964-1494766693-^%^7C1507028747; Hm_lvt_bd3d4db2c728324e870543c59e9e3b89=1504709377,1506869631; Hm_lpvt_bd3d4db2c728324e870543c59e9e3b89=1507031416; a5161_pages=1; a5161_times=10; Hm_lvt_f75b813e9c1ef4fb27eaa613c9f307b2=1504709378,1506869631; Hm_lpvt_f75b813e9c1ef4fb27eaa613c9f307b2=1507031416\" -H \"Origin: http://kikibt.net\" -H \"Accept-Encoding: gzip, deflate\" -H \"Accept-Language: zh-CN,zh;q=0.8,en;q=0.6,es;q=0.4\" -H \"Upgrade-Insecure-Requests: 1\" -H \"User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36\" -H \"Content-Type: application/x-www-form-urlencoded\" -H \"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\" -H \"Cache-Control: max-age=0\" -H \"Referer: http://kikibt.net/search/e7Zl9_O5DQA/1-0-0.html\" -H \"Connection: keep-alive\" --data \"keyword=" + keyword + "\" --compressed -vi --connect-timeout 10";
+            string str = "d:\\curl  http://kikibt.ws -H \"Cookie: __cfduid=df28b42002e95bbc39bf795fefc23767d1567238661; UM_distinctid=16ce6b42c7b3ee-05d092db89a79c-5373e62-1fa400-16ce6b42c7c29c; CNZZDATA1261857871=119832325-1567236534-%7C1567863891; CNZZDATA1277219225=709528008-1567233911-null%7C1567864631; Hm_lvt_bd3d4db2c728324e870543c59e9e3b89=1567690515,1567788403,1567858532,1567865481; Hm_lvt_f75b813e9c1ef4fb27eaa613c9f307b2=1567690515,1567788404,1567858533,1567865481; __atuvc=5%7C35%2C42%7C36; Hm_lpvt_bd3d4db2c728324e870543c59e9e3b89=1567867387; Hm_lpvt_f75b813e9c1ef4fb27eaa613c9f307b2=1567867387\" --data \"keyword=" + keyword + "\" --compressed -vi --connect-timeout 10";
+            //string str = "d:\\curl http://kikibt.ws -H \"Cookie: __cfduid=d84d7ed42600397ebc0617366fc2e02bc1477489552; a2204_times=13; CNZZDATA1260997767=915447713-1482412125-^%^7C1492937714; CNZZDATA1261675006=724777673-1492252758-^%^7C1492937311; UM_distinctid=15ed86daa300-0f615ded0eedfe-3a3e5c06-1fa400-15ed86daa34ba6; __atuvc=3^%^7C36^%^2C0^%^7C37^%^2C0^%^7C38^%^2C0^%^7C39^%^2C45^%^7C40; CNZZDATA1261857871=1481140133-1494768247-^%^7C1507030268; CNZZDATA1261841250=1785091964-1494766693-^%^7C1507028747; Hm_lvt_bd3d4db2c728324e870543c59e9e3b89=1504709377,1506869631; Hm_lpvt_bd3d4db2c728324e870543c59e9e3b89=1507031416; a5161_pages=1; a5161_times=10; Hm_lvt_f75b813e9c1ef4fb27eaa613c9f307b2=1504709378,1506869631; Hm_lpvt_f75b813e9c1ef4fb27eaa613c9f307b2=1507031416\" -H \"Origin: http://kikibt.net\" -H \"Accept-Encoding: gzip, deflate\" -H \"Accept-Language: zh-CN,zh;q=0.8,en;q=0.6,es;q=0.4\" -H \"Upgrade-Insecure-Requests: 1\" -H \"User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36\" -H \"Content-Type: application/x-www-form-urlencoded\" -H \"Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\" -H \"Cache-Control: max-age=0\" -H \"Referer: http://kikibt.net/search/e7Zl9_O5DQA/1-0-0.html\" -H \"Connection: keep-alive\" --data \"keyword=" + keyword + "\" --compressed -vi --connect-timeout 10";
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动

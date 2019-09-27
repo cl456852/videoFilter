@@ -132,10 +132,15 @@ namespace BLL
         public bool IsBlack { get => isBlack; set => isBlack = value; }
         public bool IfExistSmaller { get => ifExistSmaller; set => ifExistSmaller = value; }
         public bool Is168xC { get => is168xC; set => is168xC = value; }
+        public string SortBy { get => sortBy; set => sortBy = value; }
 
         private Boolean isBlack;
 
         private bool ifExistSmaller;
+
+        string sortBy;
+
+        
 
 
     }

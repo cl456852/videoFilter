@@ -11,6 +11,7 @@ using BLL;
 using DB;
 using System.Threading;
 using System.Diagnostics;
+using Framework;
 
 namespace BLL
 {
@@ -70,6 +71,7 @@ namespace BLL
             string invalidHTML44x = "<html><body>";
             string blackListHTML= "<html><body>";
             ArrayList hisList = new ArrayList();
+            ArrayList hisInvalidLIst = new ArrayList();
             string resultHTML = "<html><body>";
             String[] path = Directory.GetFiles(directoryStr, "*", SearchOption.TopDirectoryOnly);
             foreach (String p in path)
@@ -94,10 +96,18 @@ namespace BLL
                     foreach(string id in vids)
                     {
                         his.Vid = id;
-                        isValid = filter.checkValid(his);
-                        if(!isValid)
+                        if (Config.isXieZhen)
                         {
-                            break;
+                            isValid= filter.checkXieZhen(his);
+
+                        }
+                        else
+                        {
+                            isValid = filter.checkValid(his);
+                            if (!isValid)
+                            {
+                                break;
+                            }
                         }
                     }
                     if (isValid)
@@ -116,7 +126,7 @@ namespace BLL
                         if (his.FailReason == "file")
                             invalidHTML += his.Html;
                         else if (his.FailReason == "his")
-                            invalidHtmlHis += his.Html;
+                            hisInvalidLIst.Add(his);
                         else if (his.FailReason == "44x")
                         {
                             invalidHTML44x += his.Html;
@@ -133,17 +143,14 @@ namespace BLL
                 }
 
             }
-                      SortedDictionary<String, His> dic = new SortedDictionary<string, His>();
-            foreach(His his in hisList)
+            SortedDictionary<String, His> dic = Sort(hisList);
+            SortedDictionary<String, His> invalidDic = Sort(hisInvalidLIst);
+            foreach (His his in invalidDic.Values)
             {
-                if(!dic.Keys.Contains(his.Vid)||dic[his.Vid].Size<his.Size)
-                {
-                    dic.Remove(his.Vid);
-                    dic.Add(his.Vid,his);
-                }
+                invalidHtmlHis += his.Html;
             }
-           foreach(His his in dic.Values)
-           {
+            foreach (His his in dic.Values)
+            {
                resultHTML += his.Html;
                if (his.TorrentPath != "")
                {
@@ -151,7 +158,7 @@ namespace BLL
                }
                if (his.HtmPath != "")
                    Tool.MoveFile("result", his.HtmPath);
-           }
+            }
             resultHTML += "</body></html>";
             invalidHTML += "</body></html>";
             invalidHtmlHis += "</body></html>";
@@ -165,9 +172,24 @@ namespace BLL
 
         }
 
-        
 
-       
+        SortedDictionary<String, His> Sort(ArrayList hisList)
+        {
+            SortedDictionary<String, His> dic = new SortedDictionary<string, His>();
+            foreach (His his in hisList)
+            {
+                if (!dic.Keys.Contains(his.Vid) || dic[his.Vid].Size < his.Size)
+                {
+                    dic.Remove(his.Vid);
+                    if (String.IsNullOrEmpty(his.SortBy))
+                        dic.Add(his.Vid, his);
+                    else
+                        dic.Add(his.SortBy, his);
+                }
+            }
+            return dic;
+        }
+
     }
 }
 

@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="141javAnalysis.cs" />
     <Compile Include="168x.cs" />
+    <Compile Include="168xXieZhen.cs" />
     <Compile Include="18javAnaysis.cs" />
     <Compile Include="52iv.cs" />
     <Compile Include="AkibaOnlineAnalysis.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Sis001Analysis.cs" />
     <Compile Include="ThzAnalysis.cs" />
     <Compile Include="Tool.cs" />
+    <Compile Include="TorrentAnalysis.cs" />
     <Compile Include="YouivAnalysis.cs" />
     <Compile Include="_141javNew.cs" />
   </ItemGroup>

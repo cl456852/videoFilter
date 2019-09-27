@@ -62,21 +62,39 @@ namespace BLL
                 id = reg2.Match(id).Value;
                 string letter = "";
                 string number = "";
-                bool isEndofLetter = false;
-                for (int i = 0; i < id.Length; i++)                        //修改   对于出现KIDM235A  KIDM235B
-                    if (reg1.IsMatch(id[i].ToString()))
-                    {
-                        if (isEndofLetter)
-                            break;
+                if (id.StartsWith("mmr"))
+                {
+                    letter = "mmr";
+                    number = id.Replace("mmr", "");
+                }
+                else if(id.StartsWith("mbr"))
+                {
+                    letter = "mbr";
+                    number= id.Replace("mbr", "");
+                }
+                else if(id.StartsWith("mar"))
+                {
+                    letter = "mar";
+                    number = id.Replace("mar", "");
+                }
+                else
+                {
+                    bool isEndofLetter = false;
+                    for (int i = 0; i < id.Length; i++)                        //修改   对于出现KIDM235A  KIDM235B
+                        if (reg1.IsMatch(id[i].ToString()))
+                        {
+                            if (isEndofLetter)
+                                break;
+                            else
+                                letter += id[i];
+                        }
                         else
-                            letter += id[i];
-                    }
-                    else
-                    {
-                        number += id[i];
-                        isEndofLetter = true;
-                    }
-                number = numberRegex.Match(number).Value;
+                        {
+                            number += id[i];
+                            isEndofLetter = true;
+                        }
+                    number = numberRegex.Match(number).Value;
+                }
                 string[] searchStr = { letter, number };
 
 
@@ -163,6 +181,25 @@ namespace BLL
         public List<MyFileInfo> getFileList()
         {
             return FileDAL.selectMyFileInfo("");
+        }
+
+        public bool checkXieZhen(His his)
+        {
+            bool result;
+            if (DBHelper.CheckXieZhen(his.Vid) > 0)
+                result= false;
+            else
+            {
+                if (DBHelper.searchHis(his) > 0)
+                    result= false;
+                else
+                    result= true;
+            }
+            if(result)
+            {
+                DBHelper.insertHis(his);
+            }
+            return result;
         }
     }
 }

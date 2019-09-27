@@ -102,15 +102,26 @@ namespace DB
 
         public static void insertHis(His his)
         {
-            if (his.Actress.Length > 250)
-                his.Actress = his.Actress.Substring(0, 248);
-            string sql = string.Format(insertHisSql, his.Vid, his.Size, his.Actress.Replace("'", "''"), his.FileCount, his.Files.Replace("'", "''"));
-            using (SqlConnection conn = new SqlConnection(connstr))
+            string sql="";
+            try
             {
-                conn.Open();
-                SqlCommand sc = new SqlCommand(sql, conn);
-                sc.CommandTimeout = 120000;
-                sc.ExecuteNonQuery();
+
+
+                if (his.Actress.Length > 250)
+                    his.Actress = his.Actress.Substring(0, 248);
+                sql = string.Format(insertHisSql, his.Vid, his.Size, his.Actress.Replace("'", "''"), his.FileCount, his.Files.Replace("'", "''"));
+                using (SqlConnection conn = new SqlConnection(connstr))
+                {
+                    conn.Open();
+                    SqlCommand sc = new SqlCommand(sql, conn);
+                    sc.CommandTimeout = 120000;
+                    sc.ExecuteNonQuery();
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(sql);
+                Console.WriteLine(e.ToString());
             }
 
         }
@@ -192,5 +203,15 @@ namespace DB
             DBHelper.conn.Close();
             return count;
         }
+
+
+        public static int CheckXieZhen(string id)
+        {
+            string sql = "select count(*) from files where fileName='" + id + "'";
+            SqlDataReader sdr = DBHelper.SearchSql(sql);
+            sdr.Read();
+            return (int)sdr[0];
+        }
+
     }
 }

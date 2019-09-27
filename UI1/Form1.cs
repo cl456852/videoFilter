@@ -185,6 +185,19 @@ namespace UI1
 
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            
+                fb.process(textBox1.Text.Replace("\\", "\\\\"), new TorrentAnalysis(), checkBox1.Checked);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Config.isXieZhen = true;
+            Config.isKiki = false;
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new _168xXieZhen(), checkBox1.Checked);
+        }
+
 
 
         //private void SortRows(DataGridViewColumn sortColumn, bool orderToggle)
