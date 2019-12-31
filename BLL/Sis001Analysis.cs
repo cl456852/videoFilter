@@ -85,13 +85,28 @@ namespace BLL
                 His his = new His();
                 his.Vid = id1;
                 his.Size = Convert.ToDouble(sizeRegex.Match(path).Value.Replace("size^^^", "").Replace(".htm", ""));
-                his.Html = content.Split(new string[] { "count_add_one", "下载次数:" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                his.Html = content.Split(new string[] { "count_add_one", "查看评分记录" }, StringSplitOptions.RemoveEmptyEntries)[1];
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Split(new string[] { "SIZE^^^" }, StringSplitOptions.RemoveEmptyEntries)[0];
                 //if(his.Name.StartsWith("[FHD"))
                 //{
                 //    his.FailReason = "44x";
                 //}
-                string torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value.Replace("\"","")+ "&clickDownload=1";
+                MatchCollection matches = torrentLinkRegex.Matches(his.Html);
+                string torrentLink = "";
+                ArrayList list = new ArrayList();
+                if (matches.Count > 1)
+                {
+
+                    foreach (Match m in matches)
+                    {
+                        list.Add( "http://sis001.com/bbs/" + m.Value.Replace("\"", "") + "&clickDownload=1");
+
+                    }
+                }
+                else
+                {
+                    torrentLink = "http://sis001.com/bbs/" + torrentLinkRegex.Match(his.Html).Value.Replace("\"", "") + "&clickDownload=1";
+                }
 
                 MatchCollection imgMc = imgRegex.Matches(his.Html);
                 his.Html = "";
@@ -100,6 +115,13 @@ namespace BLL
                     if (!match.Value.Contains("torrent.gif"))
                     {
                         his.Html += "<a href=\"" + torrentLink + "\">" + match.Value + "/></a><br>";
+                    }
+                }
+                if(matches.Count>1)
+                {
+                    foreach(string s in list)
+                    {
+                        his.Html += "<a href=\"" + s + "\">torrent</a><br>";
                     }
                 }
                 his.HisTimeSpan = 999;

@@ -58,11 +58,20 @@ namespace BLL
 
                 his.Vid = id;
                 his.Name = id;
-
+                 
                 MatchCollection matchCollection = torrentRegex.Matches(content);
-                string torrentLink;
+                string torrentLink="";
 
-                torrentLink = "https://www.sht1236.me/" + matchCollection[matchCollection.Count - 1];
+                try
+                {
+
+
+                    torrentLink = "https://www.sht1236.me/" + matchCollection[matchCollection.Count - 1];
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
                 MatchCollection picMc = picRegex.Matches(content);
                 foreach (Match m in picMc)
                 {

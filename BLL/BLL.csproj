@@ -70,6 +70,7 @@
     <Compile Include="168x.cs" />
     <Compile Include="168xXieZhen.cs" />
     <Compile Include="18javAnaysis.cs" />
+    <Compile Include="456kAnalysis.cs" />
     <Compile Include="52iv.cs" />
     <Compile Include="AkibaOnlineAnalysis.cs" />
     <Compile Include="Analysis.cs" />
