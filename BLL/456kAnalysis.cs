@@ -11,7 +11,7 @@ namespace BLL
 {
     public class _456kAnalysis : BaseAnalysis
     {
-        Regex sizeRegex = new Regex("影片容量：.*?<br>");
+        Regex sizeRegex = new Regex("影片容量：.*?<br>|【影片大小】：.*?<br>");
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}|[A-Z]{1,}[0-9]{1,}|[A-Z]{1,}‐[0-9]{1,}");
         Regex picRegex = new Regex("http:.*?.jpg");
         Regex torrentRegex = new Regex("forum.php\\?mod=attachment&amp;aid=.*?\"");
@@ -24,7 +24,7 @@ namespace BLL
                 MatchCollection mc = idRegex.Matches(Path.GetFileNameWithoutExtension(path.ToUpper()));
                 his.Vid = mc[0].Value.Replace("-", "");
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper());
-                String sizeStr = sizeRegex.Match(content).Value.Replace("影片容量：", "").Replace("<br>", "");
+                String sizeStr = sizeRegex.Match(content).Value.Replace("影片容量：", "").Replace("【影片大小】：","").Replace("<br>", "");
                 //影片容量：9.34GB<br>
 
                 if (sizeStr.ToUpper().Contains("GB"))
