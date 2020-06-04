@@ -82,7 +82,7 @@ namespace BLL
                 MatchCollection matchCollection = torrentRegex.Matches(content);
                 string torrentLink;
                 
-                torrentLink = "https://www.sht1236.me/" + matchCollection[matchCollection.Count-1];
+                torrentLink = "https://www.sehuatang.net/" + matchCollection[matchCollection.Count-1];
                 
 
                 MatchCollection picMc = picRegex.Matches(content);

@@ -68,10 +68,12 @@ namespace BLL
 
             string invalidHtmlHis = "<html><body>";
             string invalidHTML="<html><body>";
-            string invalidHTML44x = "<html><body>";
+            string invalidHTMLSmaller = "<html><body>";
             string blackListHTML= "<html><body>";
             ArrayList hisList = new ArrayList();
             ArrayList hisInvalidLIst = new ArrayList();
+
+            ArrayList smallerList = new ArrayList();
             string resultHTML = "<html><body>";
             String[] path = Directory.GetFiles(directoryStr, "*", SearchOption.TopDirectoryOnly);
             foreach (String p in path)
@@ -117,8 +119,12 @@ namespace BLL
                             his.Vid = id;
                             his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, true, his);
                         }
-                        
-                        hisList.Add(his);
+                        if(his.IfExistSmaller)
+                        {
+                            smallerList.Add(his);
+                        }
+                        else
+                            hisList.Add(his);
                     }
                     else
                     {
@@ -127,10 +133,7 @@ namespace BLL
                             invalidHTML += his.Html;
                         else if (his.FailReason == "his")
                             hisInvalidLIst.Add(his);
-                        else if (his.FailReason == "44x")
-                        {
-                            invalidHTML44x += his.Html;
-                        }
+                
                     }
 
                     if (vids.Length > 1)
@@ -145,9 +148,14 @@ namespace BLL
             }
             SortedDictionary<String, His> dic = Sort(hisList);
             SortedDictionary<String, His> invalidDic = Sort(hisInvalidLIst);
+            SortedDictionary<String, His> smallerDic = Sort(smallerList);
             foreach (His his in invalidDic.Values)
             {
                 invalidHtmlHis += his.Html;
+            }
+            foreach (His his in smallerDic.Values)
+            {
+                invalidHTMLSmaller += his.Html;
             }
             foreach (His his in dic.Values)
             {
@@ -163,12 +171,12 @@ namespace BLL
             invalidHTML += "</body></html>";
             invalidHtmlHis += "</body></html>";
             blackListHTML+= "</body></html>";
-            invalidHTML44x+= "</body></html>";
+            invalidHTMLSmaller+= "</body></html>";
             Tool.WriteFile(Path.Combine(directoryStr, "result.htm"), resultHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "invalid.htm"), invalidHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "invalidHis.htm"), invalidHtmlHis);
             Tool.WriteFile(Path.Combine(directoryStr, "blackList.htm"), blackListHTML);
-            Tool.WriteFile(Path.Combine(directoryStr, "44x.htm"), invalidHTML44x);
+            Tool.WriteFile(Path.Combine(directoryStr, "Smaller.htm"), invalidHTMLSmaller);
 
         }
 

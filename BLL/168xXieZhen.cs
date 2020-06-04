@@ -66,7 +66,7 @@ namespace BLL
                 {
 
 
-                    torrentLink = "https://www.sht1236.me/" + matchCollection[matchCollection.Count - 1];
+                    torrentLink = "https://www.sehuatang.net/" + matchCollection[matchCollection.Count - 1];
                 }
                 catch(Exception e)
                 {
