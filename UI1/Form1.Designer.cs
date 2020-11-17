@@ -47,12 +47,13 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Insert
             // 
             this.Insert.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.Insert.Location = new System.Drawing.Point(577, 417);
+            this.Insert.Location = new System.Drawing.Point(560, 417);
             this.Insert.Name = "Insert";
             this.Insert.Size = new System.Drawing.Size(61, 23);
             this.Insert.TabIndex = 1;
@@ -63,7 +64,7 @@
             // textBox1
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.textBox1.Location = new System.Drawing.Point(431, 441);
+            this.textBox1.Location = new System.Drawing.Point(414, 441);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(126, 21);
             this.textBox1.TabIndex = 2;
@@ -72,7 +73,7 @@
             // textBox3
             // 
             this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.textBox3.Location = new System.Drawing.Point(1191, 439);
+            this.textBox3.Location = new System.Drawing.Point(1174, 439);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(84, 21);
             this.textBox3.TabIndex = 6;
@@ -247,11 +248,22 @@
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(376, 365);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 24;
+            this.button13.Text = "JavDB";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1318, 472);
+            this.ClientSize = new System.Drawing.Size(1284, 472);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
@@ -300,6 +312,7 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
     }
 }
 
