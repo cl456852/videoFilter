@@ -62,6 +62,8 @@ namespace BLL
             //    html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
             //}
             html+= "<a href=\"https://btdig.com/search?q=" +letter +"+"+number+ "\"/>" + vid + "</a><br>\n";
+            html += "<a href=\"https://javdb.com/search?f=all&q=" + letter + number + "\"/>" + vid + "</a><br>\r\n";
+
             //html += "<a href=\"https://btdb.io/?s=" + letter + "%20" + number + "\"/>" + vid + "</a><br>\n";
             if (his.IfExistSmaller)
                 html += "ExistSmaller<br>\n";

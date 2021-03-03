@@ -46,9 +46,15 @@ namespace BLL
                 {
                     Console.WriteLine(his.Vid + " SIZE ERROR  "+ ex.ToString());
                 }
-
-                string picHtml = picRegex.Match(content).Value.Replace("zoomfile=\".","");
-                his.Html = "<img src=\"https://www.52iv.tv" + picHtml + "/><br>\n";
+                try
+                {
+                    string picHtml = picRegex.Match(content).Value.Replace("zoomfile=\"", "");
+                    his.Html = "<img src=\"https://www.52iv.click/" + picHtml + "/><br>\n";
+                } 
+                catch(Exception e)
+                {
+                    Console.WriteLine(path + "  获取图片失败" +e.ToString());
+                }
                 his.IsCHeckHisSize = ifCheckHis;
                 resList.Add(his);
             }
