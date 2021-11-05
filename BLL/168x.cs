@@ -17,7 +17,9 @@ namespace BLL
         Regex sizeRegex = new Regex("容量.*<|影片大小.*?<");
         //Regex picRegex = new Regex("src=\"http.*?\"");
         Regex picRegex = new Regex(" file=\".*?\"");
-        Regex torrentRegex = new Regex("forum.php\\?mod=attachment&amp;aid=.*?\"");
+        //https://www.rysuanaaser.com/tupian/down.php?module=forum&amp;attachment=202108/25/110333wu4ekku3ik3ligjj.attach&amp;filename=venx-068.2021.08.14.4k.x264.acc-JapornX.mp4.torrent&amp;filesize=41522&amp;dateline=1629857012" target="_blank">venx-068.2021.08.14.4k.x264.acc-JapornX.mp4.torrent</a>
+        //https://www.rysuanaaser.com/tupian/down.php?module=forum&amp;attachment=202108/28/123747iikwkkv669vkzw3v.attach&amp;filename=mcsr-448.torrent&amp;filesize=36639&amp;dateline=1630125467
+        Regex torrentRegex = new Regex("<a href=\"https://www.rysuanaaser.com.*?\"");
 
         public override ArrayList alys(string content, string path, string vid, bool isCheckHis)
         {
@@ -69,26 +71,39 @@ namespace BLL
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Replace(mc[0].Value, "");
 
                 string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("</font>","").Replace("<", "").Replace(":","").Replace("：","").Replace("影片大小】","").Replace("：","");
-                if (sizeStr.ToUpper().Contains("G"))
+                if (sizeStr != "")
                 {
-                    sizeStr = sizeStr.ToUpper().Replace("GB", "");
-                    his.Size = Convert.ToDouble(sizeStr) * 1024;
-                }
-                else
-                {
-                    sizeStr = sizeStr.ToUpper().Replace("MB", "");
-                    his.Size = Convert.ToDouble(sizeStr);
+
+
+                    if (sizeStr.ToUpper().Contains("G"))
+                    {
+                        sizeStr = sizeStr.ToUpper().Replace("GB", "");
+                        his.Size = Convert.ToDouble(sizeStr) * 1024;
+                    }
+                    else
+                    {
+                        sizeStr = sizeStr.ToUpper().Replace("MB", "");
+                        his.Size = Convert.ToDouble(sizeStr);
+                    }
                 }
                 MatchCollection matchCollection = torrentRegex.Matches(content);
-                string torrentLink;
+                string torrentLink="";
                 
-                torrentLink = "https://www.sehuatang.net/" + matchCollection[matchCollection.Count-1];
+                for (int i=matchCollection.Count-1;i>=0;i--)
+                {
+                    if( matchCollection[i].Value.Contains("torrent"))
+                    {
+                        torrentLink = matchCollection[i].Value.Replace("<a href=\"", "").Replace("\"", "");
+                        break;
+                    }
+                }
+                
                 
 
                 MatchCollection picMc = picRegex.Matches(content);
                 foreach (Match m in picMc)
                 {
-                    his.Html += "<a href=\"" + torrentLink + "><img src=\"" + m.Value.Replace("file=\"","") + " /></a><br>";
+                    his.Html += "<a href=\"" + torrentLink + "\"><img src=\"" + m.Value.Replace("file=\"","") + " /></a><br>";
                 }
 
                 his.HisTimeSpan = 999;

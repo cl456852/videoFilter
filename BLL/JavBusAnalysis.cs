@@ -10,7 +10,7 @@ namespace BLL
 {
     public class JavBusAnalysis : BaseAnalysis
     {
-        Regex imgRegex = new Regex("https://pics.javbus.com/cover.*?.jpg");
+        Regex imgRegex = new Regex("/pics/cover/.*?\\.jpg");
         Regex sizeRegex = new Regex(@"\s[1-9]([^\s])*?[0-9]GB|\s[1-9]([^\s])*?[0-9]MB");
         Regex nameRegex = new Regex("<h3>.*</h3>");
 
@@ -23,7 +23,7 @@ namespace BLL
                     return new ArrayList();
         
                 string id = Path.GetFileNameWithoutExtension(path);
-                string img = imgRegex.Match(content).Value;
+                string img ="https://javbus.com"+ imgRegex.Match(content).Value;
                 His his = new His();
                 string[] strings = id.Split('-');
                 if (strings.Length == 1)

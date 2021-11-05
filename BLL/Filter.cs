@@ -48,6 +48,7 @@ namespace BLL
             if (Tool.IsNum(id))
             {
                 foreach (MyFileInfo info in list)
+
                 {
                     if (info.FileName.Contains(id) || info.Directory.Contains(id))
                     {

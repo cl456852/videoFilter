@@ -56,13 +56,14 @@ namespace BLL
                 html += "<a href=\"https://www.google.com.tw/search?as_st=y&tbm=isch&hl=zh-CN&as_q=" + name + "&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=&safe=images&tbs=iar:t#imgrc=l5VFSis1_tEGOM:\"/>" + name + "</a><br>"; 
                // html += "<a href=\"https://www.google.com.tw/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + name + "\"/>" + name + "</a><br>";
             html += size + "<br>";
-            html += "<a href=\"http://www.javbus.com/" + letter + "-" + number + "\">" + vid + "</a><br>\n";
+            html += "<a href=\"http://www.javbus.com/" + letter + "-" + number + "\">javbus:" + vid + "</a><br>\n";
+            html+= "<a href=\"http://javpop.com/index.php?s=" + letter + "-" + number + "\">javpop:" + vid + "</a><br>\n";
             //if (Config.isKiki && getKiki)
             //{
             //    html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
             //}
-            html+= "<a href=\"https://btdig.com/search?q=" +letter +"+"+number+ "\"/>" + vid + "</a><br>\n";
-            html += "<a href=\"https://javdb.com/search?f=all&q=" + letter + number + "\"/>" + vid + "</a><br>\r\n";
+            html += "<a href=\"https://btdig.com/search?q=" +letter +"+"+number+ "\"/>btdig:" + vid + "</a><br>\n";
+            html += "<a href=\"https://javdb.com/search?f=all&q=" + letter + number + "\"/>javdb:" + vid + "</a><br>\r\n";
 
             //html += "<a href=\"https://btdb.io/?s=" + letter + "%20" + number + "\"/>" + vid + "</a><br>\n";
             if (his.IfExistSmaller)

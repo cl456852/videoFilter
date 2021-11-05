@@ -35,21 +35,33 @@ namespace BLL
                 MatchCollection mc = sizeRegex.Matches(magHtml);
                 foreach (Match m in mc)
                 {
-                    string sizeDigit = m.Value.Replace("&nbsp;( ", "");
-                    if (sizeDigit.EndsWith("GB"))
+                    string sizeDigit = m.Value.Replace("&nbsp;( ", "").Replace(")", "").Trim();
+                    try
                     {
-                        sizeDigit = sizeDigit.Replace("GB", "");
-                        size = Convert.ToDouble(sizeDigit) * 1024;
 
+                        sizeDigit = sizeDigit.Split(',')[0];
+                        if (sizeDigit.EndsWith("GB"))
+                        {
+                            sizeDigit = sizeDigit.Replace("GB", "");
+                            size = Convert.ToDouble(sizeDigit) * 1024;
+
+                        }
+                        else if (sizeDigit.EndsWith("MB") || sizeDigit.EndsWith("KB"))
+                            size = Convert.ToDouble(sizeDigit.Replace("MB", "").Replace("KB", ""));
+                        else
+                            size = 0;
+                        his.Size = his.Size > size ? his.Size : size;
                     }
-                    else
-                        size = Convert.ToDouble(sizeDigit.Replace("MB", "").Replace("KB", ""));
-                    his.Size = his.Size > size ? his.Size : size;
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("分析文件异常" + e.Message + path+"    "+ sizeDigit);
+                    }
                 }
                 list.Add(his);
             }
             catch (Exception e)
             {
+
                 Console.WriteLine("分析文件异常" + e.Message + path);
             }
 
