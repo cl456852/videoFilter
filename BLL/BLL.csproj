@@ -16,7 +16,7 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -63,6 +63,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -76,9 +77,11 @@
     <Compile Include="Analysis.cs" />
     <Compile Include="BailuAnalysis.cs" />
     <Compile Include="BaseAnalysis.cs" />
+    <Compile Include="Bo99Analysis.cs" />
     <Compile Include="BtdiggAnalysis.cs" />
     <Compile Include="FileBLL.cs" />
     <Compile Include="Filter.cs" />
+    <Compile Include="Hdd600.cs" />
     <Compile Include="HelloJavAnalysis.cs" />
     <Compile Include="IAnalysis.cs" />
     <Compile Include="JavBusAnalysis.cs" />

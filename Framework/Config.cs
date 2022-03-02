@@ -16,5 +16,7 @@ namespace Framework
         public static bool isXieZhen = false;
 
         public static bool isKiki = true;
+
+        public static int timeSpan = 6;
     }
 }

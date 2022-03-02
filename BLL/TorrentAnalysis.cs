@@ -63,7 +63,7 @@ namespace BLL
                         Console.WriteLine(s);
                         continue;
                     }
-                    his.Html = s+"<br>";
+                    his.Html = "<iframe src=\"https://www.javbus.com/"+his.Vid+"\" height=\"2000\" width=\"1200\" frameborder=\"0\" scrolling=\"0\"></iframe><br>"+ s+"<br>";
                     his.IsCHeckHisSize = ifCheckHis;
                     his.HisTimeSpan = 999;
                     arrayList.Add(his);

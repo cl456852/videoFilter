@@ -76,8 +76,12 @@ namespace BLL
             ArrayList smallerList = new ArrayList();
             string resultHTML = "<html><body>";
             String[] path = Directory.GetFiles(directoryStr, "*", SearchOption.TopDirectoryOnly);
+            int count = path.Length;
+            int i = 0;
             foreach (String p in path)
             {
+
+                Console.WriteLine(count - i++);
                 Console.WriteLine(p);
                 StreamReader sr = new StreamReader(p);
                 string content = sr.ReadToEnd();
@@ -91,6 +95,7 @@ namespace BLL
                 foreach (His his in list)
                 {
                     his.Vid = his.Vid.Replace("-", "").Replace("_", "");
+                    his.HisTimeSpan = Config.timeSpan;
                     string allId = his.Vid;
                     string[] vids = his.Vid.Split('#');
                     bool isValid = true;

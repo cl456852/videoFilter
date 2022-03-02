@@ -58,6 +58,7 @@ namespace UI1
 
         private void Insert_Click(object sender, EventArgs e)
         {
+            DoConfig();
             fb.process(textBox1.Text.Replace("\\", "\\\\"),new Sis001Analysis(),checkBox1.Checked);
 
         }
@@ -91,6 +92,7 @@ namespace UI1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            DoConfig();
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new JavBusAnalysis(), checkBox1.Checked);
         }
 
@@ -111,6 +113,7 @@ namespace UI1
 
         private void button1_Click_2(object sender, EventArgs e)
         {
+            DoConfig();
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new JavTorrentsAnalysis(), checkBox1.Checked);
 
         }
@@ -181,6 +184,7 @@ namespace UI1
 
         private void button9_Click(object sender, EventArgs e)
         {
+            DoConfig();
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new _52iv(), checkBox1.Checked);
 
         }
@@ -207,7 +211,14 @@ namespace UI1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            DoConfig();
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new JavDBAnalysis(), checkBox1.Checked);
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            DoConfig();
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new Hdd600(), checkBox1.Checked);
         }
 
 
@@ -254,6 +265,15 @@ namespace UI1
         //    }
         //}
 
+        private void DoConfig()
+        {
+            Config.timeSpan =Convert.ToInt32( textBox2.Text);
+        }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            Config.isCheck168xC = checkBox3.Checked;
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new Bo99Analysis(), checkBox1.Checked);
+        }
     }
 }

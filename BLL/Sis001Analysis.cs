@@ -85,7 +85,8 @@ namespace BLL
                 His his = new His();
                 his.Vid = id1;
                 his.Size = Convert.ToDouble(sizeRegex.Match(path).Value.Replace("size^^^", "").Replace(".htm", ""));
-                his.Html = content.Split(new string[] { "count_add_one", "查看评分记录" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                //his.Html = content.Split(new string[] { "count_add_one", "查看评分记录" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                his.Html = content;
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Split(new string[] { "SIZE^^^" }, StringSplitOptions.RemoveEmptyEntries)[0];
                 //if(his.Name.StartsWith("[FHD"))
                 //{
