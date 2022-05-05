@@ -14,13 +14,13 @@ namespace BLL
         Regex reg1 = new Regex("[A-Z]");
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
         Regex idRegex1 = new Regex("[A-Z]{1,}[0-9]{1,}");
-        Regex sizeRegex = new Regex("容量.*<|影片大小.*?<");
+        Regex sizeRegex = new Regex(@"[1-9][0-9]*([\.][0-9]{1,2})?(G|M)<");
         //Regex picRegex = new Regex("src=\"http.*?\"");
         Regex picRegex = new Regex(" file=\".*?\"");
         //https://www.rysuanaaser.com/tupian/down.php?module=forum&amp;attachment=202108/25/110333wu4ekku3ik3ligjj.attach&amp;filename=venx-068.2021.08.14.4k.x264.acc-JapornX.mp4.torrent&amp;filesize=41522&amp;dateline=1629857012" target="_blank">venx-068.2021.08.14.4k.x264.acc-JapornX.mp4.torrent</a>
         //https://www.rysuanaaser.com/tupian/down.php?module=forum&amp;attachment=202108/28/123747iikwkkv669vkzw3v.attach&amp;filename=mcsr-448.torrent&amp;filesize=36639&amp;dateline=1630125467
         //Regex torrentRegex = new Regex("<a href=\"https://www.rysuanaaser.com.*?\"");
-        Regex torrentRegex = new Regex("forum.php\\?mod=attachment&amp;aid=.*?\"");
+        Regex torrentRegex = new Regex("magnet:\\?xt=.*?<");
         
         public override ArrayList alys(string content, string path, string vid, bool isCheckHis)
         {
@@ -71,7 +71,8 @@ namespace BLL
 
                 his.Name = Path.GetFileNameWithoutExtension(path.ToUpper()).Replace(mc[0].Value, "");
 
-                string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("</font>","").Replace("<", "").Replace(":","").Replace("：","").Replace("影片大小】","").Replace("：","");
+                //string sizeStr = sizeRegex.Match(content).Value.Replace("容量", "").Replace("</font>","").Replace("<", "").Replace(":","").Replace("：","").Replace("影片大小】","").Replace("：","").Replace("】","").Replace("影片大小&nbsp;&nbsp;", "");
+                string sizeStr = sizeRegex.Match(content).Value.Replace("<","");
                 if (sizeStr != "")
                 {
 
@@ -79,7 +80,7 @@ namespace BLL
                     if (sizeStr.ToUpper().Contains("G"))
                     {
                         sizeStr = sizeStr.ToUpper().Replace("GB", "").Replace("G","");
-                        his.Size = Convert.ToDouble(sizeStr) * 1024;
+                        his.Size = Convert.ToDouble(sizeStr) * 1024; 
                     }
                     else
                     {
@@ -98,7 +99,7 @@ namespace BLL
                     //    break;
                     //}
 
-                    torrentLink= "https://www.sehuatang.net/"+ matchCollection[i].Value.Replace("<a href=\"", "").Replace("\"", "");
+                    torrentLink= matchCollection[i].Value.Replace("<", "");
                 }
                 
                 
@@ -114,8 +115,9 @@ namespace BLL
                 resList.Add(his);
 
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 String unknownPath = Path.Combine(Path.GetDirectoryName(path), "168xUnknown");
                 if (!Directory.Exists(unknownPath))
                     Directory.CreateDirectory(unknownPath);
