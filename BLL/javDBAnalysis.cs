@@ -12,8 +12,10 @@ namespace BLL
     public class JavDBAnalysis : BaseAnalysis
     {
         Regex imgRegex = new Regex("<img src=\".*?\" class=\"video-cover\">");
-        Regex magRegex = new Regex("<div id=\"magnets-content\">.*?</div>",RegexOptions.Singleline);
-        Regex sizeRegex = new Regex("\\&nbsp;\\( .*");
+        //<div id="magnets-content" class="magnet-links">.*?</article>
+        //<div id="magnets-content" class="magnet-links">.*?</article>
+        Regex magRegex = new Regex("<div id=\"magnets-content\" class=\"magnet-links\">.*?</article>",RegexOptions.Singleline);
+        Regex sizeRegex = new Regex("<span class=\"meta\">.*?</span>", RegexOptions.Singleline);
 
         public override ArrayList alys(string content, string path, string path1, bool ifCheckHis) 
         {
@@ -35,7 +37,7 @@ namespace BLL
                 MatchCollection mc = sizeRegex.Matches(magHtml);
                 foreach (Match m in mc)
                 {
-                    string sizeDigit = m.Value.Replace("&nbsp;( ", "").Replace(")", "").Trim();
+                    string sizeDigit = m.Value.Replace("<span class=\"meta\">","").Replace("</span>", "").Trim();
                     try
                     {
 
