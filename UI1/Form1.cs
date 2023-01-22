@@ -275,5 +275,10 @@ namespace UI1
             Config.isCheck168xC = checkBox3.Checked;
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new Bo99Analysis(), checkBox1.Checked);
         }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new Akiba(), checkBox1.Checked);
+        }
     }
 }
