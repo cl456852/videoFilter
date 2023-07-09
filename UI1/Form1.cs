@@ -121,7 +121,7 @@ namespace UI1
         private void button6_Click(object sender, EventArgs e)
         {
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new YouivAnalysis(), checkBox1.Checked);
-            addKiki();
+            //addKiki();
         }
 
         MegFinder megFinder;

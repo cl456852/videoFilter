@@ -62,7 +62,7 @@ namespace BLL
         {
             string imgUrl = "http://www.141jav.com/movies/" + imageRex.Match(his.OriginalHtml).Value.Replace("movies/", "");
             
-            his.Html = "<img src=\"" + imgUrl + "\"/><br>" + "<a href=\"https://www.google.com.tw/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + his.Vid + "\"/>"+his.Vid+"</a>" + "<br>" + size + "<br>" + "<br>" + his.Actress + "<br>\r\n";
+            his.Html = "<img src=\"" + imgUrl + "\"/><br>" + "<a href=\"https://www.google.com/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + his.Vid + "\"/>"+his.Vid+"</a>" + "<br>" + size + "<br>" + "<br>" + his.Actress + "<br>\r\n";
             string[] searchStr = Tool.getId(his.Vid.ToLower());
             //https://torrentproject.se/?t=XRW+017
             his.Html += "<a href=\"https://torrentproject.se/?t=" + searchStr[0] + "+" + searchStr[1] + "\"/>" + his.Vid + "</a><br>\r\n";

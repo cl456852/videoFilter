@@ -51,7 +51,7 @@ namespace BLL
             {
                 
                 // zoomfile="./data/attachment/forum/201803/04/225623iycsyb3petgs9z7j.jpg"
-                string picUrl ="https://youiv.tv"+ m.Value.Replace("zoomfile=\".", "").Replace("\"","");
+                string picUrl ="https://youiv.tv/"+ m.Value.Replace("zoomfile=\"", "").Replace("\"","");
                 his.Html = "<img src=\"" + picUrl + "\"/><br>";
             }
             his.HisTimeSpan = 999;

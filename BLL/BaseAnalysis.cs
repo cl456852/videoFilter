@@ -51,11 +51,12 @@ namespace BLL
             //html += "<a href=\"http://javscreens.com/" + vid.ToLower()[0]+"/"+idSplit[0] +"-"+idSplit[1]+ ".html\"/>" + vid + "</a><br>";
             //http://video-jav.net/wp-content/uploads/NMK-030_Video-JAV.net_.mp4.scrlist.jpg
             //html += "<a href=\"http://video-jav.net/wp-content/uploads/" + idSplit[0].ToUpper() + "-" + idSplit[1] + "_Video-JAV.net_.mp4.scrlist.jpg\"/>" +vid+"</a><br>";
+            //html += "<iframe src=\"https://btdig.com/search?q=" +letter +"+"+number+ "\" width=\"800\" height=\"700\"></iframe > <br>\n";
             html += "<iframe src=\"http://javpop.com/index.php?s=" + letter + "-" + number + "\"width=\"200\" height=\"500\"></iframe > <br>\n";
-            html += "<a href=\"https://www.google.com.tw/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + vid + "\"/>" + vid + "</a><br>";
+            html += "<a href=\"https://www.google.com/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + vid + "\"/>" + vid + "</a><br>";
             if (!string.IsNullOrEmpty(name))
-                html += "<a href=\"https://www.google.com.tw/search?as_st=y&tbm=isch&hl=zh-CN&as_q=" + name + "&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=&safe=images&tbs=iar:t#imgrc=l5VFSis1_tEGOM:\"/>" + name + "</a><br>"; 
-               // html += "<a href=\"https://www.google.com.tw/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + name + "\"/>" + name + "</a><br>";
+                html += "<a href=\"https://www.google.com/search?as_st=y&tbm=isch&hl=zh-CN&as_q=" + name + "\"/>" + name + "</a><br>"; 
+               // html += "<a href=\"https://www.google.com/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + name + "\"/>" + name + "</a><br>";
             html += size + "<br>";
             html += "<a href=\"http://www.javbus.com/" + letter + "-" + number + "\">javbus:" + vid + "</a><br>\n";
             html+= "<a href=\"http://javpop.com/index.php?s=" + letter + "-" + number + "\">javpop:" + vid + "</a><br>\n";
