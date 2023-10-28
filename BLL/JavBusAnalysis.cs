@@ -13,7 +13,7 @@ namespace BLL
         Regex imgRegex = new Regex("/pics/cover/.*?\\.jpg");
         Regex sizeRegex = new Regex(@"\s[1-9]([^\s])*?[0-9]GB|\s[1-9]([^\s])*?[0-9]MB");
         Regex nameRegex = new Regex("<h3>.*</h3>");
-
+        private Regex magnetTableRegex = new Regex("<table id=\"magnet-table(.|\n)*?<\\/table>");
         public override ArrayList alys(string content, string path, string vid, bool isCheckHis)
         {
             ArrayList list = new ArrayList();
@@ -22,7 +22,7 @@ namespace BLL
                 if (path.EndsWith("_magenet") || Path.GetFileNameWithoutExtension(path).StartsWith("http^__www.javbus.com"))
                     return new ArrayList();
         
-                string id = Path.GetFileNameWithoutExtension(path);
+                string id = Path.GetFileNameWithoutExtension(path).Split(new[]{"$$$"}, StringSplitOptions.None)[0];
                 string img ="https://javbus.com"+ imgRegex.Match(content).Value;
                 His his = new His();
                 string[] strings = id.Split('-');
@@ -34,8 +34,8 @@ namespace BLL
                 {
                     his.Vid = strings[0] + strings[1];
                 }
-                StreamReader sr = new StreamReader(path + "_magenet");
-                string magContent = sr.ReadToEnd();
+                
+                string magContent = magnetTableRegex.Match(content).Value;
                 MatchCollection mc = sizeRegex.Matches(magContent);
                 double size = 0;
                 foreach (Match match in mc)
