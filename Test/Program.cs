@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using DB;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Net;
 
 namespace Test
 {
@@ -20,7 +21,7 @@ namespace Test
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.findUrl();
+            p.request();
         }
 
         void jsTest()
@@ -243,6 +244,20 @@ namespace Test
             {
                 Console.WriteLine(s);
             }
+        }
+
+        public void request()
+        {
+            HttpWebRequest request = null;
+            request = (HttpWebRequest)WebRequest.Create("http://javpop.com/index.php?s=ALDN-260");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream streamReceive = response.GetResponseStream();
+            StreamReader streamReader = new StreamReader(streamReceive);
+            string str = streamReader.ReadToEnd();
+            Regex regex = new Regex("<a href=\"(.*?html)\" title");
+            Match match = regex.Match(str);
+             
+            Console.WriteLine(match.Groups[1].Value);
         }
 
     }
