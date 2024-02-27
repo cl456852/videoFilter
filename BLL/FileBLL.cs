@@ -5,6 +5,7 @@ using DAL;
 using System.Linq;
 using System.IO;
 using System.Collections;
+using System.Collections.Concurrent;
 using MODEL;
 using System.Text.RegularExpressions;
 using BLL;
@@ -20,7 +21,7 @@ namespace BLL
 
 
         Filter filter;
-
+        private BlockingQueue<string> queue = new BlockingQueue<string>();
         public FileBLL()
         {
             filter = new Filter();
@@ -60,7 +61,7 @@ namespace BLL
                 Thread.Sleep(30000);
             }
         }
-
+    
         public void process(string directoryStr, IAnalysis ana, bool ifCheckHis)
         {
             Thread th = new Thread(curlCheck);
@@ -69,92 +70,49 @@ namespace BLL
             string invalidHtmlHis = "<html><body>";
             string invalidHTML="<html><body>";
             string invalidHTMLSmaller = "<html><body>";
-            string blackListHTML= "<html><body>";
-            ArrayList hisList = new ArrayList();
-            ArrayList hisInvalidLIst = new ArrayList();
-
-            ArrayList smallerList = new ArrayList();
             string resultHTML = "<html><body>";
+            ConcurrentBag<His> resultList = new ConcurrentBag<His>();
+            ConcurrentBag<His> hisInvalidList = new ConcurrentBag<His>();
+            ConcurrentBag<His> invalidList = new ConcurrentBag<His>();
+            ConcurrentBag<His> smallerList = new ConcurrentBag<His>();
+            Object lockObj = new Object();
+            
             String[] path = Directory.GetFiles(directoryStr, "*", SearchOption.TopDirectoryOnly);
             int count = path.Length;
             int i = 0;
             foreach (String p in path)
             {
 
-                Console.WriteLine(count - i++);
-                Console.WriteLine(p);
-                StreamReader sr = new StreamReader(p);
-                string content = sr.ReadToEnd();
-
-                sr.Close();
-                string[] strs = Path.GetFileNameWithoutExtension(p).Split('_');
-                string vid="";
-                if (strs.Length > 4)
-                    vid = strs[4];
-                ArrayList list = ana.alys(content, p, vid, ifCheckHis);
-                foreach (His his in list)
-                {
-                    his.Vid = his.Vid.Replace("-", "").Replace("_", "");
-                    his.HisTimeSpan = Config.timeSpan;
-                    string allId = his.Vid;
-                    string[] vids = his.Vid.Split('#');
-                    bool isValid = true;
-        
-                    foreach(string id in vids)
-                    {
-                        his.Vid = id;
-                        if (Config.isXieZhen)
-                        {
-                            isValid= filter.checkXieZhen(his);
-
-                        }
-                        else
-                        {
-                            isValid = filter.checkValid(his);
-                            if (!isValid)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    if (isValid)
-                    {
-                        foreach(string id in vids)
-                        {
-                            his.Vid = id;
-                            his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, true, his);
-                        }
-                        if(his.IfExistSmaller)
-                        {
-                            smallerList.Add(his);
-                        }
-                        else
-                            hisList.Add(his);
-                    }
-                    else
-                    {
-                        his.Html += BaseAnalysis.getSearchHtml(his.Vid, his.Size, his.Name, false,his);
-                        if (his.FailReason == "file")
-                            invalidHTML += his.Html;
-                        else if (his.FailReason == "his")
-                            hisInvalidLIst.Add(his);
-                
-                    }
-
-                    if (vids.Length > 1)
-                    {
-
-                        Console.WriteLine(allId);
-                        Console.WriteLine(isValid);
-                        Console.WriteLine(his.FailReason);
-                    }
-                }
-
+                queue.Enqueue(p);
             }
-            SortedDictionary<String, His> dic = Sort(hisList);
-            SortedDictionary<String, His> invalidDic = Sort(hisInvalidLIst);
+
+            using (CountdownEvent countdown = new CountdownEvent(queue.Count))
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    AsynObj asynObj = new AsynObj
+                    {
+                        LockObj = lockObj,
+                        Ana = ana,
+                        Queue = queue,
+                        IfCheckHis = ifCheckHis,
+                        CountdownEvent = countdown,
+                        ResultList = resultList,
+                        SmallerList = smallerList,
+                        InvalidList = invalidList,
+                        HisInvalidList = hisInvalidList
+                    };
+                    AnalyzerWorker analyzerWorker = new AnalyzerWorker();
+                    ThreadPool.QueueUserWorkItem(analyzerWorker.Work, asynObj);
+                }
+                countdown.Wait();
+            }
+            
+            SortedDictionary<String, His> dic = Sort(resultList);
+            SortedDictionary<String, His> hisInvalidDic = Sort(hisInvalidList);
             SortedDictionary<String, His> smallerDic = Sort(smallerList);
-            foreach (His his in invalidDic.Values)
+            SortedDictionary<String, His> invalidDic = Sort(invalidList);
+            foreach (His his in hisInvalidDic.Values)
             {
                 invalidHtmlHis += his.Html;
             }
@@ -172,21 +130,23 @@ namespace BLL
                if (his.HtmPath != "")
                    Tool.MoveFile("result", his.HtmPath);
             }
+            foreach (His his in invalidDic.Values)
+            {
+                invalidHTML += his.Html;
+            }
             resultHTML += "</body></html>";
             invalidHTML += "</body></html>";
             invalidHtmlHis += "</body></html>";
-            blackListHTML+= "</body></html>";
             invalidHTMLSmaller+= "</body></html>";
             Tool.WriteFile(Path.Combine(directoryStr, "result.htm"), resultHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "invalid.htm"), invalidHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "invalidHis.htm"), invalidHtmlHis);
-            Tool.WriteFile(Path.Combine(directoryStr, "blackList.htm"), blackListHTML);
             Tool.WriteFile(Path.Combine(directoryStr, "Smaller.htm"), invalidHTMLSmaller);
 
         }
 
 
-        SortedDictionary<String, His> Sort(ArrayList hisList)
+        SortedDictionary<String, His> Sort(ConcurrentBag<His> hisList)
         {
             SortedDictionary<String, His> dic = new SortedDictionary<string, His>();
             foreach (His his in hisList)

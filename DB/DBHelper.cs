@@ -37,10 +37,11 @@ namespace DB
         {
             conn = new SqlConnection(connstr);
             conn.Open();
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            SqlDataReader sda = cmd.ExecuteReader();
-
-            //conn.Close();
+            SqlDataReader sda;
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                 sda = cmd.ExecuteReader();
+            }
 
             return sda;
         }
