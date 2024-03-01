@@ -60,7 +60,6 @@ namespace DAL
                 flag = true;
             sdr.Close();
             sdr.Dispose();
-            DBHelper.conn.Close();
             return flag;
         }
 
@@ -149,7 +148,6 @@ namespace DAL
             }
             sdr.Close();
             sdr.Dispose();
-            DBHelper.conn.Close();
             //DBHelper.conn.Dispose();
             return MyFileInfoList;
         }
@@ -169,7 +167,6 @@ namespace DAL
             maxcd = (int)sdr[0];
             sdr.Close();
             sdr.Dispose();
-            DBHelper.conn.Close();
             return maxcd;
         }
 

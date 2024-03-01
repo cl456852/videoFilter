@@ -24,6 +24,7 @@ namespace BLL
         private BlockingQueue<string> queue = new BlockingQueue<string>();
         public FileBLL()
         {
+            DBHelper.OpenConnection();
             filter = new Filter();
         }
 
@@ -88,7 +89,7 @@ namespace BLL
 
             using (CountdownEvent countdown = new CountdownEvent(queue.Count))
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 15; j++)
                 {
                     AsynObj asynObj = new AsynObj
                     {

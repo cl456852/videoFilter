@@ -91,6 +91,7 @@ namespace BLL
                 }
                 finally
                 {
+                    Console.WriteLine(asynObj.Queue.Count());
                     lock (asynObj.lockObj)
                     {
 
