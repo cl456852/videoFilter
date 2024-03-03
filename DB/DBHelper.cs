@@ -14,7 +14,7 @@ namespace DB
         static string searchHisSql = "select * from his1 where LOWER(vid)=LOWER('{0}') and size*1.7>{1} and DATEDIFF(M,createtime,GETDATE())<{2}";
         static string searchHisSqlWithoutSize = "select * from his1 where LOWER(vid)=LOWER('{0}') and DATEDIFF(M,createtime,GETDATE())<{1}";
         static string insertHisSql = "insert into his1 values('{0}',{1},'{2}',{3},'{4}',getdate())";
-        public static string connstr = @"server=localhost;uid=sa;pwd=iamjack'scolon;database=cd;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Timeout=30;MultipleActiveResultSets=true;";
+        public static string connstr = @"server=localhost;uid=sa;pwd=iamjack'scolon;database=cd;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Timeout=60;MultipleActiveResultSets=true;";
         //static string connstr = "server=MICROSOF-8335F8\\SQLEXPRESS;uid=sa;pwd=a;database=cd";
         public static SqlConnection conn = new SqlConnection(connstr);
         private static readonly object _lock = new object();

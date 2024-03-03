@@ -120,7 +120,7 @@ namespace UI1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            fb.process(textBox1.Text.Replace("\\", "\\\\"), new YouivAnalysis(), checkBox1.Checked);
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new YouIV(), checkBox1.Checked);
             //addKiki();
         }
 
@@ -277,6 +277,11 @@ namespace UI1
         }
 
         private void button16_Click(object sender, EventArgs e)
+        {
+            fb.process(textBox1.Text.Replace("\\", "\\\\"), new Akiba(), checkBox1.Checked);
+        }
+
+        private void button17_Click(object sender, EventArgs e)
         {
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new Akiba(), checkBox1.Checked);
         }

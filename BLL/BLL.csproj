@@ -90,7 +90,7 @@
     <Compile Include="analyzer\Sis001Analysis.cs" />
     <Compile Include="analyzer\ThzAnalysis.cs" />
     <Compile Include="analyzer\TorrentAnalysis.cs" />
-    <Compile Include="analyzer\YouivAnalysis.cs" />
+    <Compile Include="analyzer\YouIV.cs" />
     <Compile Include="analyzer\_141javNew.cs" />
     <Compile Include="AsynObj.cs" />
     <Compile Include="FileBLL.cs" />

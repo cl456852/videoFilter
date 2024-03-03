@@ -89,7 +89,7 @@ namespace BLL
 
             using (CountdownEvent countdown = new CountdownEvent(queue.Count))
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < 5; j++)
                 {
                     AsynObj asynObj = new AsynObj
                     {
