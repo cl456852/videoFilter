@@ -94,6 +94,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{b5524285-eca1-49f6-8755-96298ff31d4c}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{5309E5B6-D7F7-4C9A-8AD0-AF9638439E58}</Project>
       <Name>MODEL</Name>

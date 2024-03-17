@@ -168,7 +168,7 @@ namespace UI1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Config.isCheck168xC = checkBox3.Checked;
+            
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new _168x(), checkBox1.Checked);
         }
 
@@ -204,7 +204,7 @@ namespace UI1
 
         private void button12_Click(object sender, EventArgs e)
         {
-            Config.isCheck168xC = checkBox3.Checked;
+            
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new _456kAnalysis(), checkBox1.Checked);
 
         }
@@ -272,7 +272,7 @@ namespace UI1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            Config.isCheck168xC = checkBox3.Checked;
+            
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new Bo99Analysis(), checkBox1.Checked);
         }
 
@@ -284,6 +284,31 @@ namespace UI1
         private void button17_Click(object sender, EventArgs e)
         {
             fb.process(textBox1.Text.Replace("\\", "\\\\"), new Akiba(), checkBox1.Checked);
+        }
+
+        private void javPopCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.javPop= javPopCheck.Checked;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ifCheckHisSize = checkBox1.Checked;
+        }
+
+        private void ifOnlyFindSmallerCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ifOnlyFindSmaller = ifOnlyFindSmallerCheckBox.Checked;
+        }
+
+        private void ifBtDig_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.BtDig = ifBtDig.Checked;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.isCheck168xC = checkBox3.Checked;
         }
     }
 }

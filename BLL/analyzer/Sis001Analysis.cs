@@ -126,7 +126,6 @@ namespace BLL
                     }
                 }
                 his.HisTimeSpan = 999;
-                his.IsCHeckHisSize = isCheckHis;
                 resList.Add(his);
                 
             }

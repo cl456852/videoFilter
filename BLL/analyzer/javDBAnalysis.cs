@@ -25,7 +25,6 @@ namespace BLL
 
 
                 His his = new His();
-                his.IsCHeckHisSize = ifCheckHis;
                 ArrayList resList = new ArrayList();
                 his.Vid = Path.GetFileName(path).Split(new string[] { "$$$" }, StringSplitOptions.None)[0];
                 his.Name = Path.GetFileNameWithoutExtension(path).ToString().Replace("$$$", "");

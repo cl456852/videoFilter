@@ -78,7 +78,6 @@ namespace BLL
                     his.Html += "<a href=\"" + torrentLink + "><img src=\"" + m.Value.Replace("file=\"", "") + " /></a><br>";
                 }
                 his.HisTimeSpan = 999;
-                his.IsCHeckHisSize = ifCheckHis;
                 resList.Add(his);
             }
             catch (Exception e)

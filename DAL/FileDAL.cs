@@ -123,7 +123,7 @@ namespace DAL
                  sql = "select * from [cdfile],[files] where [cdfile].fileId=[files].fileId order by files."+sortBy;
             }
             else
-                sql = "select * from  [files] where  ([files].length>=400 or [files].fileName like '%.mds')";
+                sql = "select * from  [files] where  ([files].length>=400 or [files].fileName like '%.mds') order by length desc";
             List<MyFileInfo> MyFileInfoList=new List<MyFileInfo>();
            
             SqlDataReader sdr= DBHelper.SearchSql(sql);

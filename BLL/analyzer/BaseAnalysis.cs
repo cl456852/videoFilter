@@ -53,11 +53,21 @@ namespace BLL
             //http://video-jav.net/wp-content/uploads/NMK-030_Video-JAV.net_.mp4.scrlist.jpg
             //html += "<a href=\"http://video-jav.net/wp-content/uploads/" + idSplit[0].ToUpper() + "-" + idSplit[1] + "_Video-JAV.net_.mp4.scrlist.jpg\"/>" +vid+"</a><br>";
             //html += "<iframe src=\"https://btdig.com/search?q=" +letter +"+"+number+ "\" width=\"800\" height=\"700\"></iframe > <br>\n";
-            string javpop= GetJavpop(letter + "-" + number);
-            if (!string.IsNullOrEmpty(javpop))
+            if (Config.javPop&&getKiki)
             {
-                html += "<iframe src=\"" + GetJavpop(letter + "-" + number) +
-                        "\"width=\"800\" height=\"2200\"></iframe > <br>\n";
+                string javpop = WebRequest("http://javpop.com/index.php?s="+letter + "-" + number);
+                if (!string.IsNullOrEmpty(javpop))
+                {
+                    html += "<iframe src=\"" + javpop +
+                            "\"width=\"800\" height=\"2200\"></iframe > <br>\n";
+                }
+            }
+            
+            if (Config.BtDig)
+            {
+                html += "<iframe src=\"" + "https://btdig.com/search?q="+letter + "+" + number +
+                            "\"width=\"800\" height=\"2200\"></iframe > <br>\n";
+
             }
 
             html += "<a href=\"https://www.google.com/search?um=1&newwindow=1&safe=off&hl=zh-CN&biw=1362&bih=839&dpr=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=QKr6U8KMKtOWaqbigogK&q=" + vid + "\"/>" + vid + "</a><br>";
@@ -175,10 +185,10 @@ namespace BLL
             return line;
         }
 
-        private static string GetJavpop(string id)
+        private static string WebRequest(string url)
         {
             HttpWebRequest request = null;
-            request = (HttpWebRequest)WebRequest.Create("http://javpop.com/index.php?s="+id);
+            request = (HttpWebRequest)System.Net.WebRequest.Create(url);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream streamReceive = response.GetResponseStream();
             StreamReader streamReader = new StreamReader(streamReceive);

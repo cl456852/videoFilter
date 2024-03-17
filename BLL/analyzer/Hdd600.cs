@@ -14,47 +14,51 @@ namespace BLL
         
         Regex sizeRegex = new Regex(@"([1-9][\d]*|0)(\.[\d]+)?(GiB|GB)");
         Regex sizeRegexMB = new Regex(@"([1-9][\d]*|0)(\.[\d]+)?(MiB|MB)");
-
+        Regex vidRegex = new Regex(@"[A-Za-z]{1,6}\d{5}");
         public override ArrayList alys(string content, string path, string vid, bool ifCheckHis)
         {
             ArrayList list = new ArrayList();
             His his = new His();
             try {
                 string fileName = Path.GetFileNameWithoutExtension(path);
-                string[] strs = fileName.Split(new string[2] { "(", ")" }, StringSplitOptions.None);
-                if (!fileName.StartsWith("("))
+                
+                int index = fileName.IndexOf('['); // Find the index of the first '['
+
+                if (index != -1) // Check if '[' was found
                 {
-                    his.Vid = strs[0];
+                    his.Vid= fileName.Substring(0, index).Trim(); // Extract substring before '['
                 }
                 else
                 {
+                    
+                    his.Vid = vidRegex.Match(fileName).Value;
+                    string letters = "";
+                    string numbers = "";
 
-                    string id = strs[strs.Length - 2];
-                    string number = "";
-                    string idStr = "";
-                    bool hasChar = false;
-                    for (int i=id.Length-1;i>=0;i--)
+                    foreach (char c in his.Vid)
                     {
-                        if (char.IsDigit(id[i]))
+                        if (Char.IsLetter(c))
                         {
-                            if (hasChar)
-                                break;
-                            else
-                                number += id[i];
+                            letters += c;
                         }
-                        else
+                        else if (Char.IsDigit(c))
                         {
-                            idStr += id[i];
-                            hasChar = true;
+                            numbers += c;
                         }
                     }
-                    idStr = string.Concat(Enumerable.Reverse(idStr));
-                    number= string.Concat(Enumerable.Reverse(number));
-                    if (number.Length >= 5 && number[0] == '0' && number[1] == '0')
+                    if (numbers.StartsWith("0000"))
                     {
-                        number = number.Substring(2);
+                        numbers = numbers.Replace("0000", "00");
                     }
-                    his.Vid = idStr + number;
+                    else if(numbers.StartsWith("00"))
+                    {
+                        numbers = numbers.Substring(2);
+                    }
+                    else if(numbers.StartsWith("0"))
+                    {
+                        numbers = numbers.Substring(1);
+                    }
+                    his.Vid = letters + numbers;
                 }
                 if(his.Vid=="")
                 {
@@ -72,7 +76,8 @@ namespace BLL
                 else
                 {
                     sizeStr = sizeRegexMB.Match(content).Value.ToUpper().Replace("MIB", "").Replace("MB", "");
-                    his.Size = Convert.ToDouble(sizeStr);
+                    if (sizeStr != "")
+                        his.Size = Convert.ToDouble(sizeStr);
                 }
                 his.Html = Regex.Match(content, "<tbody><tr><td class=\"t_f\" id=\"postmessage.*?</tbody>", RegexOptions.Singleline).Value+"<br>\n";
                 list.Add(his);

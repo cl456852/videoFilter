@@ -87,7 +87,6 @@ namespace BLL
                 }
                 his.Html= his.Html.Replace("onclick=\"", "");
                 his.HisTimeSpan = 10;
-                his.IsCHeckHisSize = isCheckHis;
                 resList.Add(his);
             }
             catch (Exception e)

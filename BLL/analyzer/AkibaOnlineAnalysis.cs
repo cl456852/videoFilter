@@ -64,7 +64,6 @@ namespace BLL
                     his.Html = his.Html.Replace(match.Value, match.Value.Replace("href=\"", "href=\"https://www.akiba-online.com/"));
                 }
             }
-            his.IsCHeckHisSize=isCheckHis;
             resList.Add(his);
             return resList;
         }

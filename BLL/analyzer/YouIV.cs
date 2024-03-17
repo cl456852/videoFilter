@@ -37,7 +37,6 @@ namespace BLL
                 {
                     Console.WriteLine(path + "  获取图片失败" +e.ToString());
                 }
-                his.IsCHeckHisSize = ifCheckHis;
                 resList.Add(his);
             }
             catch(Exception e)

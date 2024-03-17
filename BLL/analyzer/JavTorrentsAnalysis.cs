@@ -59,7 +59,6 @@ namespace BLL
                 his.Size = size;
                 his.HisTimeSpan = 12;
                 his.Html = "<img src=\"" + imgUrl + "\"/><br>";
-                his.IsCHeckHisSize = ifCheckHis;
                 his.Name = path.Split(new char[] { ']', '.' })[1];
                 resList.Add(his);
             } catch(Exception e)

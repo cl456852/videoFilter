@@ -13,11 +13,12 @@ namespace BLL
         public void Work(object state)
         {
             AsynObj asynObj = (AsynObj)state;
+            Filter filter = new Filter();
             while (asynObj.Queue.Count() > 0)
             {
                 try
                 {
-                    Filter filter = new Filter();
+                    
                     string path = asynObj.Queue.Dequeue();
                     Console.WriteLine(path);
                     StreamReader sr = new StreamReader(path);

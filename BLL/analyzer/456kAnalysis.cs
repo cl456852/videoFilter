@@ -59,7 +59,6 @@ namespace BLL
                 }
 
                 his.HisTimeSpan = 999;
-                his.IsCHeckHisSize = ifCheckHis;
                 resList.Add(his);
             }catch (Exception e)
             {

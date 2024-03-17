@@ -53,6 +53,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
+            this.javPopCheck = new System.Windows.Forms.CheckBox();
+            this.ifOnlyFindSmallerCheckBox = new System.Windows.Forms.CheckBox();
+            this.ifBtDig = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // Insert
@@ -125,6 +128,7 @@
             this.checkBox1.TabIndex = 11;
             this.checkBox1.Text = "ifCheckHisSize";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button1
             // 
@@ -210,6 +214,7 @@
             this.checkBox3.TabIndex = 19;
             this.checkBox3.Text = "isCheck168xC";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // button9
             // 
@@ -314,11 +319,52 @@
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
+            // javPopCheck
+            // 
+            this.javPopCheck.AutoSize = true;
+            this.javPopCheck.Checked = true;
+            this.javPopCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.javPopCheck.Location = new System.Drawing.Point(1111, 376);
+            this.javPopCheck.Margin = new System.Windows.Forms.Padding(2);
+            this.javPopCheck.Name = "javPopCheck";
+            this.javPopCheck.Size = new System.Drawing.Size(60, 16);
+            this.javPopCheck.TabIndex = 30;
+            this.javPopCheck.Text = "javPop";
+            this.javPopCheck.UseVisualStyleBackColor = true;
+            this.javPopCheck.CheckedChanged += new System.EventHandler(this.javPopCheck_CheckedChanged);
+            // 
+            // ifOnlyFindSmallerCheckBox
+            // 
+            this.ifOnlyFindSmallerCheckBox.AutoSize = true;
+            this.ifOnlyFindSmallerCheckBox.Location = new System.Drawing.Point(1111, 396);
+            this.ifOnlyFindSmallerCheckBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ifOnlyFindSmallerCheckBox.Name = "ifOnlyFindSmallerCheckBox";
+            this.ifOnlyFindSmallerCheckBox.Size = new System.Drawing.Size(126, 16);
+            this.ifOnlyFindSmallerCheckBox.TabIndex = 31;
+            this.ifOnlyFindSmallerCheckBox.Text = "ifOnlyFindSmaller";
+            this.ifOnlyFindSmallerCheckBox.UseVisualStyleBackColor = true;
+            this.ifOnlyFindSmallerCheckBox.CheckedChanged += new System.EventHandler(this.ifOnlyFindSmallerCheckBox_CheckedChanged);
+            // 
+            // ifBtDig
+            // 
+            this.ifBtDig.AutoSize = true;
+            this.ifBtDig.Location = new System.Drawing.Point(1111, 418);
+            this.ifBtDig.Margin = new System.Windows.Forms.Padding(2);
+            this.ifBtDig.Name = "ifBtDig";
+            this.ifBtDig.Size = new System.Drawing.Size(66, 16);
+            this.ifBtDig.TabIndex = 32;
+            this.ifBtDig.Text = "ifBtDig";
+            this.ifBtDig.UseVisualStyleBackColor = true;
+            this.ifBtDig.CheckedChanged += new System.EventHandler(this.ifBtDig_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1282, 472);
+            this.Controls.Add(this.ifBtDig);
+            this.Controls.Add(this.ifOnlyFindSmallerCheckBox);
+            this.Controls.Add(this.javPopCheck);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.label1);
@@ -351,6 +397,12 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.CheckBox ifBtDig;
+
+        private System.Windows.Forms.CheckBox ifOnlyFindSmallerCheckBox;
+
+        private System.Windows.Forms.CheckBox javPopCheck;
 
         #endregion
         private System.Windows.Forms.Button Insert;

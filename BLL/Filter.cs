@@ -26,6 +26,7 @@ namespace BLL
                 string fileName = Path.GetFileNameWithoutExtension(list[i].FileName);
                 if (!fiterListRegex.IsMatch(fileName) && !fiterListRegex.IsMatch(list[i].Directory))
                     list.Remove(list[i]);
+
             }
         }
 
@@ -102,9 +103,6 @@ namespace BLL
                 Regex r = new Regex("[^a-z]" + searchStr[0] + @"(\s){0,3}[-_]?(\s){0,3}(0){0,3}" + searchStr[1] + "[^0-9]|^" + searchStr[0] + @"(\s){0,3}[-_]?(\s){0,3}(0){0,3}" + searchStr[1] + "$|[^a-z]" + searchStr[0] + @"(\s){0,3}[-_]?(\s){0,3}(0){0,3}" + searchStr[1] + "$|^" + searchStr[0] + @"(\s){0,3}[-_]?(\s){0,3}(0){0,3}" + searchStr[1] + "[^0-9]");
                 for (int i = 0; i < list.Count; i++)
                 {
-
-                    flag = true;
-
                     string fileName = Path.GetFileNameWithoutExtension(list[i].FileName.ToLower()).Replace("_","-");
                     string directoryName = list[i].Directory.ToLower();
                     string extension = list[i].Extension;
@@ -147,19 +145,23 @@ namespace BLL
                         his.Is168xC = true;
                         return true;
                     }
+                    
                 }
             }
 
-            if (flag)
+            if (!his.IfExistSmaller || !Config.ifOnlyFindSmaller)
             {
-                //if (!his.IfExistSmaller)  //如果有小文件 说明要下载,
-                //{                         //改为SMALLER也要CHECKHIS
+                if (flag)
+                {
+                    //if (!his.IfExistSmaller)  //如果有小文件 说明要下载,
+                    //{                         //改为SMALLER也要CHECKHIS
                     flag = checkHis(his);
                     if (!flag)
                         his.FailReason = "his";
-                //}
-            } 
-          
+                    //}
+                }
+            }
+
 
 
 

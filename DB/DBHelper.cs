@@ -6,13 +6,15 @@ using System.Data;
 using System.Threading;
 using MODEL;
 using BLL;
+using Framework;
+
 namespace DB
 {
     public class DBHelper
     {
         
-        static string searchHisSql = "select * from his1 where LOWER(vid)=LOWER('{0}') and size*1.7>{1} and DATEDIFF(M,createtime,GETDATE())<{2}";
-        static string searchHisSqlWithoutSize = "select * from his1 where LOWER(vid)=LOWER('{0}') and DATEDIFF(M,createtime,GETDATE())<{1}";
+        static string searchHisSql = "select count(*) from his1 where vid='{0}' and size>{1} and createtime>'{2}'";
+        static string searchHisSqlWithoutSize = "select count(*) from his1 where vid='{0}' and createtime>'{1}'";
         static string insertHisSql = "insert into his1 values('{0}',{1},'{2}',{3},'{4}',getdate())";
         public static string connstr = @"server=localhost;uid=sa;pwd=iamjack'scolon;database=cd;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Timeout=60;MultipleActiveResultSets=true;";
         //static string connstr = "server=MICROSOF-8335F8\\SQLEXPRESS;uid=sa;pwd=a;database=cd";
@@ -82,26 +84,28 @@ namespace DB
         {
             int res=0;
             string sql = "";
-
-            if (his.IsCHeckHisSize && his.Size > 0)
+            if (Config.ifCheckHisSize && his.Size > 0)
             {
 
-                sql = string.Format(searchHisSql, his.Vid, his.Size, his.HisTimeSpan);
+                sql = string.Format(searchHisSql, his.Vid.ToUpper(), his.Size/1.7, DateTime.Now.AddMonths(-his.HisTimeSpan));
             }
             else
             {
-                sql = string.Format(searchHisSqlWithoutSize, his.Vid, his.HisTimeSpan);
+                sql = string.Format(searchHisSqlWithoutSize, his.Vid.ToUpper(), DateTime.Now.AddMonths(-his.HisTimeSpan));
             }
 
 
             SqlCommand sc = new SqlCommand(sql, conn);
             try
             {
+                if(conn.State==ConnectionState.Closed)
+                    OpenConnection();
                 res = Convert.ToInt32(sc.ExecuteScalar());
             } 
             catch(Exception e)
             {
-                searchHis(his);
+                Console.WriteLine(sql);
+                Console.WriteLine(e.ToString());
             }
 
             return res;
@@ -118,7 +122,8 @@ namespace DB
                     his.Actress = his.Actress.Substring(0, 248);
                 sql = string.Format(insertHisSql, his.Vid, his.Size, his.Actress.Replace("'", "''"), his.FileCount, his.Files.Replace("'", "''"));
 
-
+                if(conn.State==ConnectionState.Closed)
+                    OpenConnection();
                 SqlCommand sc = new SqlCommand(sql, conn);
                 sc.CommandTimeout = 120000;
                 sc.ExecuteNonQuery();

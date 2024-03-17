@@ -104,15 +104,6 @@ namespace BLL
             get { return torrentPath; }
             set { torrentPath = value; }
         }
-
-        private bool isCHeckHisSize=true;
-
-        public bool IsCHeckHisSize
-        {
-            get { return isCHeckHisSize; }
-            set { isCHeckHisSize = value; }
-        }
-
         private string failReason = "";
 
         public string FailReason

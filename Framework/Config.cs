@@ -18,5 +18,13 @@ namespace Framework
         public static bool isKiki = true;
 
         public static int timeSpan = 6;
+        
+        public static bool javPop = true;
+        
+        public static bool ifCheckHisSize = true;
+
+        public static bool ifOnlyFindSmaller = false;
+
+        public static bool BtDig = false;
     }
 }
