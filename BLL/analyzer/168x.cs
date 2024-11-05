@@ -14,7 +14,7 @@ namespace BLL
         Regex reg1 = new Regex("[A-Z]");
         Regex idRegex = new Regex("[A-Z]{1,}-[0-9]{1,}");
         Regex idRegex1 = new Regex("[A-Z]{1,}[0-9]{1,}");
-        Regex sizeRegex = new Regex(@"[1-9][0-9]*([\.][0-9]{1,2})?(G|M|GB|MB)<");
+        Regex sizeRegex = new Regex(@"(\d+\.?\d*)(GB)");
         //Regex picRegex = new Regex("src=\"http.*?\"");
         Regex picRegex = new Regex(" file=\".*?\"");
         //https://www.rysuanaaser.com/tupian/down.php?module=forum&amp;attachment=202108/25/110333wu4ekku3ik3ligjj.attach&amp;filename=venx-068.2021.08.14.4k.x264.acc-JapornX.mp4.torrent&amp;filesize=41522&amp;dateline=1629857012" target="_blank">venx-068.2021.08.14.4k.x264.acc-JapornX.mp4.torrent</a>
