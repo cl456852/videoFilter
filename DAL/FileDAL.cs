@@ -71,45 +71,6 @@ namespace DAL
             res= DBHelper.ExecuteSql(sql);
             return res;
         }
-        //public static bool Validate(MyFileInfo fi)
-        //{
-        //    if (fi.Directory.Name != fi.Directory.Root.Name)
-        //        return false;
-        //    else
-        //        return true;
-        //}
-
-        //public static bool Check(MyFileInfo fi)
-        //{
-        //    bool flag=true;
-        //    string name=fi.Name.Substring(0,fi.Name.LastIndexOf("."));
-        //    string directory=fi.Directory.Name;
-        //    Regex   r1=new   Regex("^[0-9]+$");   
-        //    Match   m1=r1.Match(name);
-        //    Console.WriteLine(fi.Extension);
-
-           
-        //    if (!(name.Length < 4 && m1.Success))
-        //    {
-        //        if (name.Length > 7)
-        //            name = name.Substring(name.Length - 6);
-        //        else if (name.Length > 6)
-        //            name = name.Substring(name.Length - 5);
-
-
-        //        if (directory.Length > 7)
-        //            directory = directory.Substring(name.Length - 6);
-        //        else if (directory.Length > 6)
-        //            directory = directory.Substring(name.Length - 5);
-        //        string sql = "select * from files where [fileName] like '%" + name + "%' or [directoryName] like '%"+directory+"%' or [fileName] like '%"+directory+"%' or [directoryName] like '%"+name+"'";
-                
-        //        Console.WriteLine(sql);
-        //        if (DBHelper.ExecuteSql(sql) <= 0)
-        //            flag = false;
-                
-        //    }
-        //    return flag;
-        //}
 
         public static List<MyFileInfo> selectMyFileInfo(string sortBy)
         {

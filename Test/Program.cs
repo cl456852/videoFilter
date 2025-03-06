@@ -21,7 +21,7 @@ namespace Test
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.request();
+            p.updateVid();
         }
 
         void jsTest()
@@ -98,6 +98,7 @@ namespace Test
                             if(number.Length>8)
                                 continue;
                             myFileInfo.Vid = vid;
+                            Console.WriteLine(vid);
                             FileDAL.UpdateVid(myFileInfo);
                        
                     }
