@@ -71,6 +71,7 @@
     <Compile Include="analyzer\141javAnalysis.cs" />
     <Compile Include="analyzer\168x.cs" />
     <Compile Include="analyzer\168xXieZhen.cs" />
+    <Compile Include="analyzer\169bt.cs" />
     <Compile Include="analyzer\18javAnaysis.cs" />
     <Compile Include="analyzer\456kAnalysis.cs" />
     <Compile Include="analyzer\52iv.cs" />

@@ -30,6 +30,7 @@ namespace UI1
                 { "_52iv", "52iv" },
                 { "JavDBAnalysis", "JavDB" },
                 { "Hdd600", "Hdd600" },
+                {"_169bt", "169bt"}
                 
             };
             comboBox1.DataSource = new BindingSource(items, null);
