@@ -46,23 +46,23 @@ namespace BLL
                     isEndofLetter = true;
                 }
             }
-            //http://javscreens.com/d/div-235.html
-            string[] idSplit = Tool.getId(vid.ToLower());
-
-            //html += "<a href=\"http://javscreens.com/" + vid.ToLower()[0]+"/"+idSplit[0] +"-"+idSplit[1]+ ".html\"/>" + vid + "</a><br>";
-            //http://video-jav.net/wp-content/uploads/NMK-030_Video-JAV.net_.mp4.scrlist.jpg
-            //html += "<a href=\"http://video-jav.net/wp-content/uploads/" + idSplit[0].ToUpper() + "-" + idSplit[1] + "_Video-JAV.net_.mp4.scrlist.jpg\"/>" +vid+"</a><br>";
-            //html += "<iframe src=\"https://btdig.com/search?q=" +letter +"+"+number+ "\" width=\"800\" height=\"700\"></iframe > <br>\n";
-            if (Config.javPop&&getKiki)
+            try
             {
-                string javpop = WebRequest("http://javpop.com/index.php?s="+letter + "-" + number);
-                if (!string.IsNullOrEmpty(javpop))
+                if (Config.javPop && getKiki)
                 {
-                    html += "<iframe src=\"" + javpop +
-                            "\"width=\"800\" height=\"2200\"></iframe > <br>\n";
+                    string javpop = WebRequest("http://javpop.com/index.php?s=" + letter + "-" + number);
+                    if (!string.IsNullOrEmpty(javpop))
+                    {
+                        html += "<iframe src=\"" + javpop +
+                                "\"width=\"800\" height=\"2200\"></iframe > <br>\n";
+                    }
                 }
             }
-            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             if (Config.BtDig)
             {
                 html += "<iframe src=\"" + "https://btdig.com/search?q="+letter + "+" + number +
