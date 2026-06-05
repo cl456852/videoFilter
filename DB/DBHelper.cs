@@ -13,7 +13,7 @@ namespace DB
     public class DBHelper
     {
         
-        static string searchHisSql = "select count(*) from his1 where vid='{0}' and size>{1} and createtime>'{2}'";
+        static string searchHisSql = "select count(*) from his1 where vid='{0}' and (size=0 or size>{1}) and createtime>'{2}'";
         static string searchHisSqlWithoutSize = "select count(*) from his1 where vid='{0}' and createtime>'{1}'";
         static string insertHisSql = "insert into his1 values('{0}',{1},'{2}',{3},'{4}',getdate())";
         public static string connstr = @"server=localhost;uid=sa;pwd=iamjack'scolon;database=cd;Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Timeout=60;MultipleActiveResultSets=true;";
