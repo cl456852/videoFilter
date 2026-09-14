@@ -65,7 +65,7 @@ namespace BLL
 
             if (Config.BtDig)
             {
-                html += "<iframe src=\"" + "https://btdig.com/search?q="+letter + "+" + number +
+                html += "<iframe src=\"" + "https://bt4gprx.com/search?q="+letter + "+" + number +
                             "\"width=\"800\" height=\"2200\"></iframe > <br>\n";
 
             }
@@ -81,7 +81,7 @@ namespace BLL
             //{
             //    html += "<a href=\"" + KikiBt(letter + " " + number) + "\"/>" + vid + "</a><br>\n";
             //}
-            html += "<a href=\"https://btdig.com/search?q=" +letter +"+"+number+ "\"/>btdig:" + vid + "</a><br>\n";
+            html += "<a href=\"https://bt4gprx.com/search?q=" +letter +"+"+number+ "\"/>btdig:" + vid + "</a><br>\n";
             html += "<a href=\"https://javdb.com/search?f=all&q=" + letter + number + "\"/>javdb:" + vid + "</a><br>\r\n";
 
             //html += "<a href=\"https://btdb.io/?s=" + letter + "%20" + number + "\"/>" + vid + "</a><br>\n";
